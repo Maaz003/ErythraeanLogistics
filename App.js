@@ -20,8 +20,7 @@ import SplashScreen from 'react-native-splash-screen';
 import Toast from 'react-native-toast-message';
 import {Provider} from 'react-redux';
 import {toastConfig} from './src/components/utils/Validators';
-// import i18n from './src/translations/i18n';
-// import LocalNotification from '@components/utils/Notification';
+// import LocalNotification from '@components/utils/Notification';//
 
 function App() {
   const config = {

@@ -5,22 +5,18 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import {LogBox, SafeAreaView} from 'react-native';
 import {NativeBaseProvider, extendTheme} from 'native-base';
 import AppNavigation from './src/navigation/AppNavigation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {I18nextProvider} from 'react-i18next';
+
 import 'react-native-gesture-handler';
 import {persistStore} from 'redux-persist';
-// import {Notifications} from 'react-native-notifications';
 import {PersistGate} from 'redux-persist/integration/react';
 import store from './src/store/index';
-import SplashScreen from 'react-native-splash-screen';
 import Toast from 'react-native-toast-message';
 import {Provider} from 'react-redux';
 import {toastConfig} from './src/components/utils/Validators';
-// import LocalNotification from '@components/utils/Notification';//
 
 function App() {
   const config = {
@@ -29,19 +25,6 @@ function App() {
 
   const extendedTheme = extendTheme({config});
 
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  //   async function loadLanguage() {
-  //     try {
-  //       const language = await AsyncStorage.getItem('appLanguage');
-  //       if (language) {
-  //         await i18n.changeLanguage(language);
-  //       }
-  //     } catch (error) {}
-  //   }
-  //   loadLanguage();
-  // }, []);
-
   LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
   LogBox.ignoreLogs(['EventEmitter.removeListener']); //X Ignore log notification by message
   LogBox.ignoreLogs([
@@ -49,8 +32,6 @@ function App() {
   ]); //X Ignore log notification by message
   LogBox.ignoreAllLogs(); //Ignore all log notifications
   const persistor = persistStore(store);
-
-  // console.error = error => error.apply;
 
   const AppWrapper = () => {
     const notificationAction = remoteMessage => {};
@@ -117,9 +98,7 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <NativeBaseProvider theme={extendedTheme}>
           <SafeAreaView style={{flex: 1}}>
-            {/* <I18nextProvider i18n={i18n}> */}
-              <AppWrapper />
-            {/* </I18nextProvider> */}
+            <AppWrapper />
           </SafeAreaView>
         </NativeBaseProvider>
       </PersistGate>

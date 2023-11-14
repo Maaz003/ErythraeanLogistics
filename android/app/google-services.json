@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1032247355679",
+    "project_id": "erythraeanlogistics-a94fc",
+    "storage_bucket": "erythraeanlogistics-a94fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032247355679:android:259da73680c16b7980682a",
+        "android_client_info": {
+          "package_name": "com.erythraeanlogistics"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-nxnqMljK638A0A5krVWB-UEsZfJ6kkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

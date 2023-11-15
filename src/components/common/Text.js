@@ -78,61 +78,21 @@ export const FONTSSTYLE = {
   UbuntuRegular: {
     fontFamily: 'Ubuntu-Regular',
   },
-
-  //POPPINSS FAMILY
-  PoppinsBlack: {
-    fontFamily: 'Poppins-Black',
+  //Rajdani Font
+  RajdhaniBold: {
+    fontFamily: 'Rajdhani-Bold',
   },
-  PoppinsBlackItalic: {
-    fontFamily: 'Poppins-BlackItalic',
+  RajdhaniLight: {
+    fontFamily: 'Rajdhani-Light',
   },
-  PoppinsThin: {
-    fontFamily: 'Poppins-Thin',
+  RajdhaniMedium: {
+    fontFamily: 'Rajdhani-Medium',
   },
-  PoppinsThinItalic: {
-    fontFamily: 'Poppins-ThinItalic',
+  RajdhaniRegular: {
+    fontFamily: 'Rajdhani-Regular',
   },
-  PoppinsLight: {
-    fontFamily: 'Poppins-Light',
-  },
-  PoppinsLightItalic: {
-    fontFamily: 'Poppins-LightItalic',
-  },
-  PoppinsExtraLight: {
-    fontFamily: 'Poppins-ExtraLight',
-  },
-  PoppinsExtraLightItalic: {
-    fontFamily: 'Poppins-ExtraLightItalic',
-  },
-  PoppinsBold: {
-    fontFamily: 'Poppins-Bold',
-  },
-  PoppinsBoldItalic: {
-    fontFamily: 'Poppins-BoldItalic',
-  },
-  PoppinsSemiBold: {
-    fontFamily: 'Poppins-SemiBold',
-  },
-  PoppinsSemiBoldItalic: {
-    fontFamily: 'Poppins-SemiBoldItalic',
-  },
-  PoppinsExtraBold: {
-    fontFamily: 'Poppins-ExtraBold',
-  },
-  PoppinsExtraBoldItalic: {
-    fontFamily: 'Poppins-ExtraBoldItalic',
-  },
-  PoppinsMedium: {
-    fontFamily: 'Poppins-Medium',
-  },
-  PoppinsMediumItalic: {
-    fontFamily: 'Poppins-MediumItalic',
-  },
-  PoppinsRegular: {
-    fontFamily: 'Poppins-Regular',
-  },
-  PoppinsItalic: {
-    fontFamily: 'Poppins-Italic',
+  RajdhaniSemiBold: {
+    fontFamily: 'Rajdhani-SemiBold',
   },
 };
 
@@ -153,6 +113,8 @@ const Text = props => {
     onPress,
     fontSize,
     lineHeight,
+    alignSelf,
+    gutterLeft = 0,
   } = props;
   return (
     <Textc
@@ -160,6 +122,7 @@ const Text = props => {
         {
           marginTop: R.unit.scale(gutterTop),
           marginBottom: R.unit.scale(gutterBottom),
+          marginLeft: R.unit.scale(gutterLeft),
           color: color,
           textAlign: align,
           textTransform: transform,
@@ -167,6 +130,7 @@ const Text = props => {
           top: top,
           lineHeight: lineHeight,
           includeFontPadding: false,
+          alignSelf: alignSelf,
         },
         fontSize && {
           fontSize: fontSize,

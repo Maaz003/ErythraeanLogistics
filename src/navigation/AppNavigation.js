@@ -6,7 +6,7 @@ import AuthStack from './authStack';
 const AppNavigation = () => {
   const auth = useSelector(state => state.auth);
   const isLogin = auth?.isAuth;
-  return isLogin ? <AppStack /> : <AuthStack />;
-  // return <AppStack />;
+  // return isLogin ? <AppStack /> : <AuthStack />;
+  return <AppStack />;
 };
 export default AppNavigation;

@@ -1,126 +1,103 @@
 import React from 'react';
-import {Platform, StyleSheet, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useSelector} from 'react-redux';
-import {navigationRef} from '@navRef';
-import R from '@components/utils/R';
-import Icon from '@components/common/Icon';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Image, View, Dimensions, Platform, Text} from 'react-native';
+import {Images} from '../../assets/Images/index';
 
-//MEMBER STACK
-import CoachesScreen from '@containers/appContainer/CoachesScreen';
+//Screens
+import CoachesScreen from '../../containers/appContainer/CoachesScreen/index';
+import Home from '../../containers/appContainer/Home/index';
 
-//CHATS STACK
-import ChatsListScreen from '@containers/appContainer/ChatModule/ChatsListScreen';
-import ChatScreen from '@containers/appContainer/ChatModule/ChatScreen';
+// dimenstion
+const {width, height} = Dimensions.get('window');
 
-const AppStack = ({navigation}) => {
-  const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-  const animationConfig = {
-    gestureDirection: 'horizontal',
-    animation: 'slide_from_right',
-    animationDuration: 200,
-  };
-  //COMPANY TAB
-  const AppTabNvigation = () => {
+const TabImage =
+  name =>
+  ({focused}) => {
     return (
-      <NavigationContainer ref={navigationRef}>
-        <Tab.Navigator
-          initialRouteName={'HomeTab'}
-          screenOptions={{
-            headerShown: false,
-            tabBarVisible: true,
-          }}
-          tabBarOptions={{
-            showLabel: false,
-            style: styles.tabContainer,
-          }}>
-          <Tab.Screen
-            name="CommunityTab"
-            component={CommunityStackNavigator}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View style={[styles.tab, focused && styles.focusedTab]}>
-                  <Icon
-                    name={'groups'}
-                    type={'MaterialIcons'}
-                    color={focused ? R.color.primaryColor1 : R.color.gray}
-                    size={35}
-                  />
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="ChatTab"
-            component={ChatStackNavigator}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View style={[styles.tab, focused && styles.focusedTab]}>
-                  <Icon
-                    name={'chat'}
-                    type={'MaterialIcons'}
-                    color={focused ? R.color.primaryColor1 : R.color.gray}
-                    size={25}
-                  />
-                </View>
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    );
-  };
-
-  const CommunityStackNavigator = props => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName={'Coaches'}>
-        <Stack.Screen name="Coaches" component={CoachesScreen} />
-      </Stack.Navigator>
-    );
-  };
-
-  const ChatStackNavigator = props => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
+      <View
+        style={{
+          width: width * 0.16,
+          height: height * 0.06,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
-        <Stack.Screen name="ChatsList" component={ChatsListScreen} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
-      </Stack.Navigator>
+        <Image
+          source={Images[(!focused ? 'Un' : '') + name]}
+          style={{
+            width: width * 0.05,
+            height: width * 0.05,
+            tintColor: !focused ? 'black' : 'blue',
+          }}
+          resizeMode="contain"
+        />
+        <Text
+          style={{
+            fontSize: width * 0.03,
+            marginTop: height * 0.005,
+            color: !focused ? 'black' : 'blue',
+          }}>
+          {name}
+        </Text>
+      </View>
     );
   };
 
-  return <AppTabNvigation />;
+export function HomeTab() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="Home" component={Home} />
+    </Stack.Navigator>
+  );
+}
+
+export function CoachesScreenTab() {
+  return (
+    <Stack.Navigator
+      initialRouteName="CoachesScreen"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="CoachesScreen" component={CoachesScreen} />
+    </Stack.Navigator>
+  );
+}
+
+export const BottomNavigator = ({}) => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+
+        tabBarStyle: {
+          height: Platform.OS === 'ios' ? height * 0.1 : height * 0.09,
+          backgroundColor: 'white',
+        },
+      }}>
+      <Tab.Screen
+        name="Home"
+        options={{
+          tabBarIcon: TabImage('Home'),
+        }}
+        component={HomeTab}
+      />
+      <Tab.Screen
+        name="CoachesScreen"
+        options={{
+          tabBarIcon: TabImage('Home'),
+        }}
+        component={CoachesScreenTab}
+      />
+    </Tab.Navigator>
+  );
 };
-export default AppStack;
-
-const styles = StyleSheet.create({
-  tabContainer: {
-    backgroundColor: R.color.primaryColor1,
-
-    paddingBottom: 0,
-    marginBottom: 0,
-    height: R.unit.scale(70),
-  },
-  tab: {
-    alignItems: 'center',
-    width: R.unit.width(0.16),
-    height: 50,
-    justifyContent: 'center',
-  },
-  focusedTab: {
-    backgroundColor: R.color.white,
-    width: R.unit.width(0.16),
-    borderRadius: R.unit.scale(10),
-    // height: 50,
-  },
-});

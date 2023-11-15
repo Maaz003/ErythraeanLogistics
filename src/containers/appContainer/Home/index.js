@@ -14,7 +14,7 @@ const CoachesScreen = props => {
   return (
     <ScreenBoiler isSubHeader mainHeading={'List'} isBack={false}>
       <FixedContainer>
-        <Text>Coaches</Text>
+        <Text>Home</Text>
       </FixedContainer>
     </ScreenBoiler>
   );

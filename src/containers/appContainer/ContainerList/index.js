@@ -8,7 +8,7 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 // import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 // import HorizontalCard from '@components/view/cards/HorizontalCard';
 
-const Orders = props => {
+const ContainerList = props => {
   return (
     <ScreenBoiler>
       <Text
@@ -19,12 +19,12 @@ const Orders = props => {
         gutterTop={10}
         gutterBottom={10}
         gutterLeft={10}>
-        Order
+        Container List
       </Text>
     </ScreenBoiler>
   );
 };
 
-export default Orders;
+export default ContainerList;
 
 const styles = StyleSheet.create({});

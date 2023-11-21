@@ -1,8 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 // //Screens
-import CoachesScreen from '../../containers/appContainer/CoachesScreen/index';
-import BottomTab1 from '../../containers/appContainer/Home/index';
+import Home from '../../containers/appContainer/Home/index';
+import ContainerList from '../../containers/appContainer/ContainerList/index';
+import Order from '../../containers/appContainer/Order/index';
+import Settings from '../../containers/appContainer/Settings/index';
+import TowFreight from '../../containers/appContainer/TowFreight/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -74,57 +77,60 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
   );
 };
 
-const HomeScreen = () => (
+const HomeScreens = () => (
   <Stack.Navigator
-    initialRouteName="BottomTab1"
+    initialRouteName="Home"
     screenOptions={{
       headerShown: false,
     }}>
-    <Stack.Screen name="BottomTab1" component={BottomTab1} />
-  </Stack.Navigator>
-);
-const DashboardScreen = () => (
-  <Stack.Navigator
-    initialRouteName="BottomTab1"
-    screenOptions={{
-      headerShown: false,
-    }}>
-    <Stack.Screen name="BottomTab1" component={BottomTab1} />
-  </Stack.Navigator>
-);
-const AnalyticsScreen = () => (
-  <Stack.Navigator
-    initialRouteName="BottomTab1"
-    screenOptions={{
-      headerShown: false,
-    }}>
-    <Stack.Screen name="BottomTab1" component={BottomTab1} />
-  </Stack.Navigator>
-);
-const SettingScreen = () => (
-  <Stack.Navigator
-    initialRouteName="BottomTab1"
-    screenOptions={{
-      headerShown: false,
-    }}>
-    <Stack.Screen name="BottomTab1" component={BottomTab1} />
+    <Stack.Screen name="Home" component={Home} />
   </Stack.Navigator>
 );
 
-const ProfileScreen = () => (
+const ContainerListScreens = () => (
   <Stack.Navigator
-    initialRouteName="BottomTab1"
+    initialRouteName="ContainerList"
     screenOptions={{
       headerShown: false,
     }}>
-    <Stack.Screen name="BottomTab1" component={BottomTab1} />
+    <Stack.Screen name="ContainerList" component={ContainerList} />
+  </Stack.Navigator>
+);
+
+const OrderScreens = () => (
+  <Stack.Navigator
+    initialRouteName="Order"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="Order" component={Order} />
+  </Stack.Navigator>
+);
+
+const SettingsScreens = () => (
+  <Stack.Navigator
+    initialRouteName="Settings"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="Settings" component={Settings} />
+  </Stack.Navigator>
+);
+
+const TowFreightScreens = () => (
+  <Stack.Navigator
+    initialRouteName="TowFreight"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="TowFreight" component={TowFreight} />
   </Stack.Navigator>
 );
 
 export const BottomNavigator = ({}) => {
   return (
     <Tab.Navigator
-      initialRouteName="BottomTab3"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
@@ -133,11 +139,11 @@ export const BottomNavigator = ({}) => {
         },
       }}
       tabBar={props => <CustomTabBar {...props} />}>
-      <Tab.Screen name="BottomTab1" component={HomeScreen} />
-      <Tab.Screen name="BottomTab2" component={ProfileScreen} />
-      <Tab.Screen name="BottomTab3" component={SettingScreen} />
-      <Tab.Screen name="BottomTab4" component={DashboardScreen} />
-      <Tab.Screen name="BottomTab5" component={AnalyticsScreen} />
+      <Tab.Screen name="Order" component={OrderScreens} />
+      <Tab.Screen name="ContainerList" component={ContainerListScreens} />
+      <Tab.Screen name="Home" component={HomeScreens} />
+      <Tab.Screen name="TowFreight" component={TowFreightScreens} />
+      <Tab.Screen name="Settings" component={SettingsScreens} />
       {/* Add more screens as needed */}
     </Tab.Navigator>
   );

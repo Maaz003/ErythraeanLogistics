@@ -9,7 +9,7 @@ function SplashScreen({navigation, ...props}) {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('LoginScreen');
-    }, 3000);
+    }, 5000);
   }, []);
 
   return (
@@ -20,7 +20,7 @@ function SplashScreen({navigation, ...props}) {
           style={styles.ImageBackgroundStyle}>
           <View style={styles.appImageContainer}>
             <Image
-              source={R.image.AppName()}
+              source={R.image.AppIconWhite()}
               style={R.styles.img}
               resizeMode={'contain'}
             />
@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
   },
 
   appImageContainer: {
-    width: R.unit.width(0.8),
-    height: R.unit.height(0.15),
-    marginTop: R.unit.height(0.06),
+    width: R.unit.width(0.4),
+    height: R.unit.width(0.4),
   },
 });

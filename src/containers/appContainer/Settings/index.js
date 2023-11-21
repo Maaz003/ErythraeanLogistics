@@ -9,7 +9,7 @@ import ActionButton from '@components/common/ActionButton';
 // import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 // import HorizontalCard from '@components/view/cards/HorizontalCard';
 
-const Settings = props => {
+const Settings = ({navigation, ...props}) => {
   return (
     <ScreenBoiler>
       <View style={styles.mainCont}>
@@ -19,6 +19,9 @@ const Settings = props => {
           marginTop={0.04}
           isImage={true}
           image={R.image.Calculator()}
+          onPress={() => {
+            navigation.navigate('AccountSetting');
+          }}
         />
         <ActionButton
           title={'Sub Bidder'}
@@ -26,6 +29,9 @@ const Settings = props => {
           marginTop={0.04}
           isImage={true}
           image={R.image.User()}
+          onPress={() => {
+            navigation.navigate('SubBidderList');
+          }}
         />
       </View>
     </ScreenBoiler>

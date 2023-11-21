@@ -6,6 +6,8 @@ import ContainerList from '../../containers/appContainer/ContainerList/index';
 import Order from '../../containers/appContainer/Order/index';
 import Settings from '../../containers/appContainer/Settings/index';
 import TowFreight from '../../containers/appContainer/TowFreight/index';
+import SubBidderList from '../../containers/appContainer/SubBidderList/index';
+import AccountSetting from '../../containers/appContainer/AccountSetting/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -114,6 +116,8 @@ const SettingsScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="Settings" component={Settings} />
+    <Stack.Screen name="SubBidderList" component={SubBidderList} />
+    <Stack.Screen name="AccountSetting" component={AccountSetting} />
   </Stack.Navigator>
 );
 

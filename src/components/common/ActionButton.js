@@ -9,6 +9,7 @@ const AddButton = ({
   title,
   isImage,
   image,
+  width = 0.85,
   ...props
 }) => {
   return (
@@ -17,7 +18,11 @@ const AddButton = ({
       onPress={onPress}
       style={[
         styles.mainCont,
-        {backgroundColor: bgColor, marginTop: R.unit.height(marginTop)},
+        {
+          backgroundColor: bgColor,
+          marginTop: R.unit.height(marginTop),
+          width: R.unit.width(width),
+        },
       ]}>
       {isImage && (
         <View style={styles.imgStyleCont}>
@@ -33,7 +38,6 @@ export default AddButton;
 
 const styles = StyleSheet.create({
   mainCont: {
-    width: R.unit.width(0.85),
     paddingVertical: R.unit.height(0.02),
     flexDirection: 'row',
     justifyContent: 'center',

@@ -18,10 +18,13 @@ const Index = ({
   keyboardType,
   Icon,
   iconOnPress,
+  width = 0.85,
+  height,
   ...props
 }) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {width: R.unit.width(width), height: height}]}>
       <TextInput
         editable={editable}
         value={value}
@@ -46,12 +49,12 @@ export default Index;
 
 const styles = StyleSheet.create({
   container: {
-    width: R.unit.width(0.85),
+    // width: R.unit.width(0.85),
     paddingVertical: R.unit.height(0.015),
     borderColor: '#D9D9D9',
     borderWidth: 0.7,
     borderRadius: R.unit.width(0.02),
-    marginTop: R.unit.height(0.027),
+    marginTop: R.unit.height(0.015),
     flexDirection: 'row',
   },
 

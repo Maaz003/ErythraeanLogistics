@@ -111,6 +111,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   scrollCont: {
-    paddingBottom: R.unit.height(0.07),
+    paddingBottom: R.unit.height(0.15),
   },
 });

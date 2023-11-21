@@ -71,6 +71,7 @@ const TowFreight = ({navigation, ...props}) => {
           onChange={onChange}
           show={show}
           showDatePicker={showDatePicker}
+          text={'Loading Date'}
         />
         <FlatList
           data={[1, 2, 3, 4, 5, 6]}

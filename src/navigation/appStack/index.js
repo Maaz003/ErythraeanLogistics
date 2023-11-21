@@ -8,8 +8,8 @@ import Settings from '../../containers/appContainer/Settings/index';
 import TowFreight from '../../containers/appContainer/TowFreight/index';
 import SubBidderList from '../../containers/appContainer/SubBidderList/index';
 import AccountSetting from '../../containers/appContainer/AccountSetting/index';
-import Notification from '../../containers/appContainer/Notification/index';
 import CreateUser from '../../containers/appContainer/CreateUser/index';
+import CreateNewOrder from '../../containers/appContainer/CreateNewOrder/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -88,7 +88,7 @@ const HomeScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="Home" component={Home} />
-    <Stack.Screen name="Notification" component={Notification} />
+    <Stack.Screen name="CreateNewOrder" component={CreateNewOrder} />
   </Stack.Navigator>
 );
 
@@ -99,7 +99,6 @@ const ContainerListScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="ContainerList" component={ContainerList} />
-    <Stack.Screen name="Notification" component={Notification} />
   </Stack.Navigator>
 );
 
@@ -110,7 +109,6 @@ const OrderScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="Order" component={Order} />
-    <Stack.Screen name="Notification" component={Notification} />
   </Stack.Navigator>
 );
 
@@ -123,7 +121,6 @@ const SettingsScreens = () => (
     <Stack.Screen name="Settings" component={Settings} />
     <Stack.Screen name="SubBidderList" component={SubBidderList} />
     <Stack.Screen name="AccountSetting" component={AccountSetting} />
-    <Stack.Screen name="Notification" component={Notification} />
     <Stack.Screen name="CreateUser" component={CreateUser} />
   </Stack.Navigator>
 );

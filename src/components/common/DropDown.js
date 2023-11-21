@@ -16,7 +16,7 @@ const DropDown = ({placeholderText, data, value, onChange, ...props}) => {
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={'Select item'}
+        placeholder={placeholderText}
         value={value}
         onChange={onChange}
       />
@@ -30,14 +30,14 @@ const styles = StyleSheet.create({
   //dropDown
   dropDownCont: {
     // backgroundColor: 'red',
-    marginVertical: R.unit.height(0.015),
+    marginVertical: R.unit.height(0.01),
     width: R.unit.width(0.95),
     alignSelf: 'center',
   },
   dropdown: {
     // backgroundColor: 'red',
     height: R.unit.height(0.075),
-    borderColor: 'gray',
+    borderColor: '#D9D9D9',
     borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 8,

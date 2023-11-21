@@ -7,9 +7,10 @@ import {navigationRef} from '@navRef';
 import SplashScreen from '@containers/authContainer/SplashScreen';
 import LoginScreen from '@containers/authContainer/LoginScreen';
 import SignUpScreen from '@containers/authContainer/SignUpScreen';
+import Notification from '@containers/appContainer/Notification/index';
 
 // bottom tab
-import { BottomNavigator } from '@navigation/appStack';
+import {BottomNavigator} from '@navigation/appStack';
 
 const AuthStack = () => {
   const Stack = createNativeStackNavigator();
@@ -22,6 +23,7 @@ const AuthStack = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name="Notification" component={Notification} />
         {/* bottom tab */}
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
       </Stack.Navigator>

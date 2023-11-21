@@ -4,7 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
-function TimeDatePicker({showDatePicker, getDate, onChange, date, show}) {
+function TimeDatePicker({showDatePicker, getDate, onChange, date, show, text}) {
   return (
     <View>
       <TouchableOpacity
@@ -15,7 +15,7 @@ function TimeDatePicker({showDatePicker, getDate, onChange, date, show}) {
           color={R.color.black}
           fontSize={R.unit.width(0.045)}
           font={'RajdhaniMedium'}>
-          {getDate === '' ? 'Loading Date' : getDate}
+          {getDate === '' ? text : getDate}
         </Text>
         <View style={styles.imgStyleCont}>
           <Image source={R.image.Calendar()} style={R.styles.img} />
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   contDate: {
     width: R.unit.width(0.95),
     height: R.unit.height(0.075),
-    borderColor: 'gray',
+    borderColor: '#D9D9D9',
     borderWidth: 0.5,
     borderRadius: 5,
     paddingHorizontal: 8,

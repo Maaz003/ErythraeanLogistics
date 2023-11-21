@@ -177,7 +177,12 @@ const Home = ({navigation, ...props}) => {
               <Image source={R.image.Search()} style={R.styles.img} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.orderCont}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('CreateNewOrder');
+            }}
+            activeOpacity={0.7}
+            style={styles.orderCont}>
             <View style={styles.imgPlusStyleCont}>
               <Image source={R.image.Plus()} style={R.styles.img} />
             </View>

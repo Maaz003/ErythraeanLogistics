@@ -10,7 +10,7 @@ import {
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
-import SubBidderCard from '@components/view/cards/SubBidderCard';
+import NotificationCard from '@components/view/cards/NotificationCard';
 
 const Notification = ({navigation, ...props}) => {
   return (
@@ -23,13 +23,13 @@ const Notification = ({navigation, ...props}) => {
           color={'black'}
           fontSize={R.unit.width(0.06)}
           font={'RajdhaniBold'}>
-          Notification
+         Order Notification
         </Text>
       </View>
       <FlatList
         data={[1, 2, 3, 4, 5, 6]}
         renderItem={({index, item}) => {
-          return <SubBidderCard />;
+          return <NotificationCard />;
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
       />

@@ -10,6 +10,8 @@ const AddButton = ({
   isImage,
   image,
   width = 0.85,
+  borderWidth,
+  textColor = 'white',
   ...props
 }) => {
   return (
@@ -22,6 +24,7 @@ const AddButton = ({
           backgroundColor: bgColor,
           marginTop: R.unit.height(marginTop),
           width: R.unit.width(width),
+          borderWidth: borderWidth,
         },
       ]}>
       {isImage && (
@@ -30,7 +33,7 @@ const AddButton = ({
         </View>
       )}
 
-      <Text style={styles.txt1}>{title}</Text>
+      <Text style={[styles.txt1, {color: textColor}]}>{title}</Text>
     </TouchableOpacity>
   );
 };

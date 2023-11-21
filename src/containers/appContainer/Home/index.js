@@ -14,7 +14,7 @@ import Statistics from '@components/view/cards/Statistics';
 import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 import HorizontalCard from '@components/view/cards/HorizontalCard';
 
-const Home = props => {
+const Home = ({navigation, ...props}) => {
   const data = [
     {
       id: '#0000066',
@@ -87,7 +87,10 @@ const Home = props => {
   ];
 
   return (
-    <ScreenBoiler>
+    <ScreenBoiler
+      onPressNotification={() => {
+        navigation.navigate('Notification');
+      }}>
       <View style={styles.flatOrderCardCont}>
         <Text
           color={'black'}

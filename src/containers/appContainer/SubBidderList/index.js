@@ -12,9 +12,12 @@ import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import SubBidderCard from '@components/view/cards/SubBidderCard';
 
-const SubBidderList = props => {
+const SubBidderList = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler>
+    <ScreenBoiler
+      onPressNotification={() => {
+        navigation.navigate('Notification');
+      }}>
       <View style={styles.flexCont}>
         <Text
           color={'black'}
@@ -28,7 +31,12 @@ const SubBidderList = props => {
               <Image source={R.image.Search()} style={R.styles.img} />
             </View>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.orderCont}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('CreateUser');
+            }}
+            activeOpacity={0.7}
+            style={styles.orderCont}>
             <View style={styles.imgPlusStyleCont}>
               <Image source={R.image.Plus()} style={R.styles.img} />
             </View>

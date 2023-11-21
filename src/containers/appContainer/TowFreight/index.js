@@ -19,7 +19,7 @@ import TowCard from '@components/view/cards/TowCard';
 //third party
 import moment from 'moment';
 
-const TowFreight = props => {
+const TowFreight = ({navigation, ...props}) => {
   const [tab, setTab] = useState(true);
   //dropdown
   const data = [
@@ -106,7 +106,10 @@ const TowFreight = props => {
   };
 
   return (
-    <ScreenBoiler>
+    <ScreenBoiler
+      onPressNotification={() => {
+        navigation.navigate('Notification');
+      }}>
       <Text
         color={'black'}
         alignSelf={'flex-start'}

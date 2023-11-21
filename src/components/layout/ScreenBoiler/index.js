@@ -12,7 +12,7 @@ import {
 import {useColorMode} from 'native-base';
 
 export default function ScreenBoiler(props) {
-  const {children} = props;
+  const {children, onPressNotification} = props;
 
   const theme = useColorMode();
   const colorMode = theme?.colorMode;
@@ -51,7 +51,10 @@ export default function ScreenBoiler(props) {
                 resizeMode={'contain'}
               />
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7} style={styles.IconStyleCont}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.IconStyleCont}
+              onPress={onPressNotification}>
               <Image
                 source={R.image.Bell()}
                 style={R.styles.img}

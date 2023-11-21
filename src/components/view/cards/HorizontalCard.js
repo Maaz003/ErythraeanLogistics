@@ -1,12 +1,44 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
+import {Images} from '@assets/Images';
 
 const {width, height} = Dimensions.get('window');
 
 const HorizontalCard = ({item, onPress, ...props}) => {
-  console.log(item);
+  const FlexCont = ({title, data, image}) => {
+    return (
+      <View style={styles.flexCont}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={styles.imgStyleMainCont}>
+            <View style={styles.imgStyleCont}>
+              <Image source={image} style={R.styles.img} />
+            </View>
+          </View>
+          <Text
+            color={'black'}
+            fontSize={R.unit.width(0.045)}
+            font={'RajdhaniMedium'}>
+            {title}
+          </Text>
+        </View>
+        <Text
+          color={'black'}
+          fontSize={R.unit.width(0.045)}
+          font={'RajdhaniMedium'}>
+          {data}
+        </Text>
+      </View>
+    );
+  };
+
   return (
     <>
       <TouchableOpacity
@@ -29,119 +61,20 @@ const HorizontalCard = ({item, onPress, ...props}) => {
           </TouchableOpacity>
         </View>
 
-        {/* Year */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Year
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.Year}
-          </Text>
-        </View>
-
-        {/* Year */}
-
-        {/* Make */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Make
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.Make}
-          </Text>
-        </View>
-
-        {/* Make */}
-
-        {/* Model */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Model
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.Model}
-          </Text>
-        </View>
-
-        {/* Model */}
-
-        {/* LOT */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            LOT
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.LOT}
-          </Text>
-        </View>
-
-        {/* LOT */}
-
-        {/* VIN */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            VIN
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.VIN}
-          </Text>
-        </View>
-
-        {/* VIN */}
-
-        {/* Destination_Port */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Destination Port
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.Destination_Port}
-          </Text>
-        </View>
-
-        {/* Destination_Port */}
+        <FlexCont
+          title={'Year'}
+          data={item.Year}
+          image={Images.ContainerList}
+        />
+        <FlexCont title={'Make'} data={item.Make} image={Images.Order} />
+        <FlexCont title={'Model'} data={item.Model} image={Images.Home} />
+        <FlexCont title={'LOT'} data={item.LOT} image={Images.Settings} />
+        <FlexCont title={'VIN'} data={item.VIN} image={Images.TowFreight} />
+        <FlexCont
+          title={'Destination Port'}
+          data={item.Destination_Port}
+          image={Images.ContainerList}
+        />
       </TouchableOpacity>
     </>
   );
@@ -200,5 +133,18 @@ const styles = StyleSheet.create({
     width: width * 0.02,
     borderRadius: width / 2,
     backgroundColor: 'black',
+  },
+  imgStyleCont: {
+    width: R.unit.width(0.04),
+    height: R.unit.width(0.04),
+  },
+  imgStyleMainCont: {
+    width: R.unit.width(0.075),
+    height: R.unit.width(0.075),
+    marginRight: R.unit.width(0.02),
+    backgroundColor: 'black',
+    borderRadius: R.unit.width(1) / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

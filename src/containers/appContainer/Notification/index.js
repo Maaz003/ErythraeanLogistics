@@ -10,11 +10,9 @@ import {
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
-// import Statistics from '@components/view/cards/Statistics';
-// import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
-import ContainerListCard from '@components/view/cards/ContainerListCard';
+import SubBidderCard from '@components/view/cards/SubBidderCard';
 
-const ContainerList = ({navigation, ...props}) => {
+const Notification = ({navigation, ...props}) => {
   return (
     <ScreenBoiler
       onPressNotification={() => {
@@ -23,21 +21,15 @@ const ContainerList = ({navigation, ...props}) => {
       <View style={styles.flexCont}>
         <Text
           color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
+          fontSize={R.unit.width(0.06)}
           font={'RajdhaniBold'}>
-          Create Container List
+          Notification
         </Text>
-        <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
-          <View style={styles.imgSearchStyleCont}>
-            <Image source={R.image.Search()} style={R.styles.img} />
-          </View>
-        </TouchableOpacity>
       </View>
       <FlatList
         data={[1, 2, 3, 4, 5, 6]}
         renderItem={({index, item}) => {
-          return <ContainerListCard />;
+          return <SubBidderCard />;
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
       />
@@ -45,26 +37,44 @@ const ContainerList = ({navigation, ...props}) => {
   );
 };
 
-export default ContainerList;
+export default Notification;
 
 const styles = StyleSheet.create({
   circleCont: {
-    width: R.unit.width(0.11),
-    height: R.unit.width(0.11),
+    width: R.unit.width(0.09),
+    height: R.unit.width(0.09),
     borderRadius: R.unit.width(1) / 2,
     backgroundColor: '#E3E3E3',
     alignItems: 'center',
     justifyContent: 'center',
   },
   imgSearchStyleCont: {
-    width: R.unit.width(0.05),
-    height: R.unit.width(0.05),
+    width: R.unit.width(0.04),
+    height: R.unit.width(0.04),
+  },
+  imgPlusStyleCont: {
+    width: R.unit.width(0.04),
+    height: R.unit.width(0.04),
+    marginRight: R.unit.width(0.02),
+  },
+  flexDirCont: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  orderCont: {
+    padding: 7,
+    backgroundColor: 'black',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 7,
+    marginLeft: R.unit.width(0.02),
   },
   flexCont: {
-    width: R.unit.width(0.95),
-    alignSelf: 'center',
     flexDirection: 'row',
+    width: R.unit.width(0.95),
     justifyContent: 'space-between',
+    alignSelf: 'center',
     alignItems: 'center',
     marginTop: R.unit.height(0.02),
   },

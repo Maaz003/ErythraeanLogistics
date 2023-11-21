@@ -6,6 +6,32 @@ import Text from '@components/common/Text';
 const {width, height} = Dimensions.get('window');
 
 const HorizontalCard = ({item, onPress, ...props}) => {
+  const FlexCont = ({title, data, image}) => {
+    return (
+      <View style={styles.flexCont}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={styles.imgStyleMainCont}>
+            <View style={styles.imgStyleCont}>
+              <Image source={image} style={R.styles.img} />
+            </View>
+          </View>
+          <Text
+            color={'black'}
+            fontSize={R.unit.width(0.045)}
+            font={'RajdhaniMedium'}>
+            {title}
+          </Text>
+        </View>
+        <Text
+          color={'black'}
+          fontSize={R.unit.width(0.045)}
+          font={'RajdhaniMedium'}>
+          {data}
+        </Text>
+      </View>
+    );
+  };
+
   return (
     <>
       <TouchableOpacity
@@ -188,5 +214,18 @@ const styles = StyleSheet.create({
     width: width * 0.02,
     borderRadius: width / 2,
     backgroundColor: 'black',
+  },
+  imgStyleCont: {
+    width: R.unit.width(0.04),
+    height: R.unit.width(0.04),
+  },
+  imgStyleMainCont: {
+    width: R.unit.width(0.075),
+    height: R.unit.width(0.075),
+    marginRight: R.unit.width(0.02),
+    backgroundColor: 'black',
+    borderRadius: R.unit.width(1) / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

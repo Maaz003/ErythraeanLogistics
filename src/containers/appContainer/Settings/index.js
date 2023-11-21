@@ -11,7 +11,10 @@ import ActionButton from '@components/common/ActionButton';
 
 const Settings = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler>
+    <ScreenBoiler
+      onPressNotification={() => {
+        navigation.navigate('Notification');
+      }}>
       <View style={styles.mainCont}>
         <ActionButton
           title={'Accounting'}

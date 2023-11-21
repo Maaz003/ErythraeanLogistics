@@ -13,7 +13,7 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
 
-const AccountSetting = ({navigation, ...props}) => {
+const CreateUser = ({navigation, ...props}) => {
   const [isPassword, setIsPassword] = useState(true);
   return (
     <ScreenBoiler
@@ -27,11 +27,13 @@ const AccountSetting = ({navigation, ...props}) => {
         font={'RajdhaniBold'}
         gutterTop={10}
         gutterLeft={15}>
-        Account Settings
+        Create User
       </Text>
       <View style={styles.mainCont}>
         <TextInput placeholderText={'Name'} />
         <TextInput placeholderText={'Email'} />
+        <TextInput placeholderText={'Phone'} keyboardType={'numeric'} />
+        <TextInput placeholderText={'Cell Number'} />
         <TextInput
           placeholderText={'Password'}
           isPassword={isPassword}
@@ -54,7 +56,7 @@ const AccountSetting = ({navigation, ...props}) => {
   );
 };
 
-export default AccountSetting;
+export default CreateUser;
 
 const styles = StyleSheet.create({
   mainCont: {

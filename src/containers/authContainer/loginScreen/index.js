@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Image,
@@ -15,6 +15,7 @@ import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
 
 function LoginScreen({navigation, ...props}) {
+  const [isPassword, setIsPassword] = useState(true);
   return (
     <AuthBoiler>
       <AuthFormScrollContainer showAuthHeader={true}>
@@ -24,7 +25,7 @@ function LoginScreen({navigation, ...props}) {
           <View style={styles.appImageContainer}>
             <Image
               source={R.image.AppName()}
-              style={styles.img}
+              style={R.styles.img}
               resizeMode={'contain'}
             />
           </View>
@@ -43,8 +44,15 @@ function LoginScreen({navigation, ...props}) {
               Enter your detail below here
             </Text>
 
-            <TextInput placeholderText={'Username'} />
-            <TextInput placeholderText={'Password'} isPassword={true} />
+            <TextInput placeholderText={'Username'} Icon={R.image.Name()} />
+            <TextInput
+              placeholderText={'Password'}
+              isPassword={isPassword}
+              Icon={R.image.Password()}
+              iconOnPress={() => {
+                setIsPassword(!isPassword);
+              }}
+            />
             <ActionButton
               title={'Login'}
               bgColor={'#262626'}
@@ -73,14 +81,14 @@ function LoginScreen({navigation, ...props}) {
               <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
                 <Image
                   source={R.image.Facebook()}
-                  style={styles.img}
+                  style={R.styles.img}
                   resizeMode={'contain'}
                 />
               </TouchableOpacity>
               <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
                 <Image
                   source={R.image.Gmail()}
-                  style={styles.img}
+                  style={R.styles.img}
                   resizeMode={'contain'}
                 />
               </TouchableOpacity>
@@ -115,10 +123,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: R.unit.height(0.06),
   },
-  img: {
-    width: '100%',
-    height: '100%',
-  },
+
   mainContainer: {
     width: R.unit.width(0.9),
     paddingVertical: R.unit.height(0.02),

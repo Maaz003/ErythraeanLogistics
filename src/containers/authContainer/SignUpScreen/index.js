@@ -27,7 +27,7 @@ function SignUpScreen({navigation, ...props}) {
           <View style={styles.appImageContainer}>
             <Image
               source={R.image.AppName()}
-              style={styles.img}
+              style={R.styles.img}
               resizeMode={'contain'}
             />
           </View>
@@ -48,14 +48,21 @@ function SignUpScreen({navigation, ...props}) {
                 Enter your detail below here & Create your new account.
               </Text>
 
-              <TextInput placeholderText={'User Name'} />
-              <TextInput placeholderText={'First Name'} />
-              <TextInput placeholderText={'Middle Name'} />
-              <TextInput placeholderText={'Last Name'} />
-              <TextInput placeholderText={'Email'} />
-              <TextInput placeholderText={'Phone'} />
-              <TextInput placeholderText={'Password'} isPassword={true} />
-              <TextInput placeholderText={'Company'} />
+              <TextInput placeholderText={'User Name'} Icon={R.image.Name()} />
+              <TextInput placeholderText={'First Name'} Icon={R.image.Name()} />
+              <TextInput
+                placeholderText={'Middle Name'}
+                Icon={R.image.Name()}
+              />
+              <TextInput placeholderText={'Last Name'} Icon={R.image.Name()} />
+              <TextInput placeholderText={'Email'} Icon={R.image.Email()} />
+              <TextInput placeholderText={'Phone'} Icon={R.image.Phone()} />
+              <TextInput
+                placeholderText={'Password'}
+                Icon={R.image.Password()}
+                isPassword={true}
+              />
+              <TextInput placeholderText={'Company'} Icon={R.image.Company()} />
               <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.imageUploadCont}>
@@ -63,7 +70,7 @@ function SignUpScreen({navigation, ...props}) {
                   <View style={styles.photoImgCont}>
                     <Image
                       source={R.image.PhotoTemplet()}
-                      style={styles.img}
+                      style={R.styles.img}
                       resizeMode={'contain'}
                     />
                   </View>
@@ -78,7 +85,7 @@ function SignUpScreen({navigation, ...props}) {
                 <View style={styles.arrowImgCont}>
                   <Image
                     source={R.image.UpArrow()}
-                    style={styles.img}
+                    style={R.styles.img}
                     resizeMode={'contain'}
                   />
                 </View>
@@ -111,14 +118,14 @@ function SignUpScreen({navigation, ...props}) {
                 <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
                   <Image
                     source={R.image.Facebook()}
-                    style={styles.img}
+                    style={R.styles.img}
                     resizeMode={'contain'}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
                   <Image
                     source={R.image.Gmail()}
-                    style={styles.img}
+                    style={R.styles.img}
                     resizeMode={'contain'}
                   />
                 </TouchableOpacity>
@@ -136,7 +143,7 @@ function SignUpScreen({navigation, ...props}) {
               <View style={styles.tickImgCont}>
                 <Image
                   source={R.image.Tick()}
-                  style={styles.img}
+                  style={R.styles.img}
                   resizeMode={'contain'}
                 />
               </View>
@@ -184,10 +191,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: R.unit.height(0.06),
   },
-  img: {
-    width: '100%',
-    height: '100%',
-  },
+
   mainContainer: {
     width: R.unit.width(0.9),
     paddingVertical: R.unit.height(0.02),

@@ -21,7 +21,7 @@ function SplashScreen({navigation, ...props}) {
           <View style={styles.appImageContainer}>
             <Image
               source={R.image.AppName()}
-              style={styles.img}
+              style={R.styles.img}
               resizeMode={'contain'}
             />
           </View>
@@ -48,9 +48,5 @@ const styles = StyleSheet.create({
     width: R.unit.width(0.8),
     height: R.unit.height(0.15),
     marginTop: R.unit.height(0.06),
-  },
-  img: {
-    width: '100%',
-    height: '100%',
   },
 });

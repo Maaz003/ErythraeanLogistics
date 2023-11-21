@@ -1,9 +1,10 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
+import ActionButton from '@components/common/ActionButton';
 // import Statistics from '@components/view/cards/Statistics';
 // import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 // import HorizontalCard from '@components/view/cards/HorizontalCard';
@@ -11,20 +12,31 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 const Settings = props => {
   return (
     <ScreenBoiler>
-      <Text
-        color={'black'}
-        alignSelf={'flex-start'}
-        fontSize={R.unit.width(0.065)}
-        font={'RajdhaniBold'}
-        gutterTop={10}
-        gutterBottom={10}
-        gutterLeft={10}>
-        Settings
-      </Text>
+      <View style={styles.mainCont}>
+        <ActionButton
+          title={'Accounting'}
+          bgColor={'#262626'}
+          marginTop={0.04}
+          isImage={true}
+          image={R.image.Calculator()}
+        />
+        <ActionButton
+          title={'Sub Bidder'}
+          bgColor={'#262626'}
+          marginTop={0.04}
+          isImage={true}
+          image={R.image.User()}
+        />
+      </View>
     </ScreenBoiler>
   );
 };
 
 export default Settings;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  mainCont: {
+    // backgroundColor: 'red',
+    alignItems: 'center',
+  },
+});

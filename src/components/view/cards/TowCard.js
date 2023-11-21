@@ -6,142 +6,130 @@ import Text from '@components/common/Text';
 const {width, height} = Dimensions.get('window');
 
 const HorizontalCard = ({item, onPress, ...props}) => {
-  console.log(item);
   return (
     <>
       <TouchableOpacity
         onPress={onPress}
         activeOpacity={0.8}
         style={[styles.mainCont]}>
-        <View style={styles.flexCont}>
-          <View style={styles.idCont}>
-            <Text
-              color={'white'}
-              fontSize={R.unit.width(0.035)}
-              font={'RajdhaniSemiBold'}>
-              {item.id}
-            </Text>
-          </View>
-          <TouchableOpacity style={styles.circleCont}>
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-          </TouchableOpacity>
-        </View>
-
-        {/* Year */}
-
+        {/* City */}
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Year
+            City
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.Year}
+            ABILENE
           </Text>
         </View>
+        {/* City */}
 
-        {/* Year */}
-
-        {/* Make */}
-
+        {/* TX */}
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Make
+            TX
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.Make}
+            520.00
           </Text>
         </View>
+        {/* TX */}
 
-        {/* Make */}
-
-        {/* Model */}
-
+        {/* NY */}
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Model
+            NY
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.Model}
+            None
           </Text>
         </View>
+        {/* NY */}
 
-        {/* Model */}
-
-        {/* LOT */}
-
+        {/* GA */}
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            LOT
+            GA
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.LOT}
+            None
           </Text>
         </View>
+        {/* GA */}
 
-        {/* LOT */}
-
-        {/* VIN */}
-
+        {/* CA */}
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            VIN
+            CA
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.VIN}
+            None
           </Text>
         </View>
+        {/* CA */}
 
-        {/* VIN */}
-
-        {/* Destination_Port */}
-
+        {/* WA */}
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Destination Port
+            WA
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.Destination_Port}
+            None
           </Text>
         </View>
+        {/* WA */}
 
-        {/* Destination_Port */}
+        {/* Chicago - IL */}
+        <View style={styles.flexCont}>
+          <Text
+            color={'black'}
+            fontSize={R.unit.width(0.045)}
+            font={'RajdhaniMedium'}>
+            Chicago - IL
+          </Text>
+          <Text
+            color={'black'}
+            fontSize={R.unit.width(0.045)}
+            font={'RajdhaniMedium'}>
+            None
+          </Text>
+        </View>
+        {/* Chicago - IL */}
       </TouchableOpacity>
     </>
   );

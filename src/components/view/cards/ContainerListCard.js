@@ -5,8 +5,9 @@ import Text from '@components/common/Text';
 
 const {width, height} = Dimensions.get('window');
 
-const HorizontalCard = ({item, onPress, ...props}) => {
-  console.log(item);
+const ContainerListCard = ({item, onPress, ...props}) => {
+  // Booking Number, Port,Size,Date of Loading
+
   return (
     <>
       <TouchableOpacity
@@ -19,7 +20,7 @@ const HorizontalCard = ({item, onPress, ...props}) => {
               color={'white'}
               fontSize={R.unit.width(0.035)}
               font={'RajdhaniSemiBold'}>
-              {item.id}
+              000066
             </Text>
           </View>
           <TouchableOpacity style={styles.circleCont}>
@@ -29,124 +30,86 @@ const HorizontalCard = ({item, onPress, ...props}) => {
           </TouchableOpacity>
         </View>
 
-        {/* Year */}
+        {/* Booking Number */}
 
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Year
+            Booking Number
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.Year}
+            25496865
           </Text>
         </View>
 
-        {/* Year */}
+        {/* Booking Number */}
 
-        {/* Make */}
+        {/* Port */}
 
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Make
+            Port
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.Make}
+            Salalah Oman
           </Text>
         </View>
 
-        {/* Make */}
+        {/* Port */}
 
-        {/* Model */}
+        {/* Size */}
 
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Model
+            Size
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.Model}
+            45 feet / 5 auto
           </Text>
         </View>
 
-        {/* Model */}
+        {/* Size */}
 
-        {/* LOT */}
+        {/* Date of Loading */}
 
         <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            LOT
+            Date of Loading
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            {item.LOT}
+            8RKNBASD545355486
           </Text>
         </View>
 
-        {/* LOT */}
-
-        {/* VIN */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            VIN
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.VIN}
-          </Text>
-        </View>
-
-        {/* VIN */}
-
-        {/* Destination_Port */}
-
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Destination Port
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {item.Destination_Port}
-          </Text>
-        </View>
-
-        {/* Destination_Port */}
+        {/* Date of Loading */}
       </TouchableOpacity>
     </>
   );
 };
-export default HorizontalCard;
+export default ContainerListCard;
 
 const styles = StyleSheet.create({
   mainCont: {

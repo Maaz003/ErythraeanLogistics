@@ -27,5 +27,8 @@ const image = {
   CircleInfo: () => require('@assets/Images/CircleInfo.png'),
   Search: () => require('@assets/Images/Search.png'),
   Plus: () => require('@assets/Images/Plus.png'),
+  Calculator: () => require('@assets/Images/Calculator.png'),
+  Filter: () => require('@assets/Images/Filter.png'),
+  Calendar: () => require('@assets/Images/Calendar.png'),
 };
 export default image;

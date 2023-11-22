@@ -17,6 +17,9 @@ const ContainerList = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <View style={styles.flexCont}>
         <Text

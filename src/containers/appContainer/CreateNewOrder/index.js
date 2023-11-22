@@ -87,6 +87,9 @@ const CreateNewOrder = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <FormScrollContainer paddingBottom={0.15}>
         <Text

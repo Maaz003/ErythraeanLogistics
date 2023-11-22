@@ -29,7 +29,7 @@ function FormScrollContainer(props) {
   );
 }
 export default FormScrollContainer;
-// adjustPan
+
 const styles = StyleSheet.create({
   mainLayout: {
     flex: 1,

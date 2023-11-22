@@ -55,8 +55,16 @@ function SignUpScreen({navigation, ...props}) {
                 Icon={R.image.Name()}
               />
               <TextInput placeholderText={'Last Name'} Icon={R.image.Name()} />
-              <TextInput placeholderText={'Email'} Icon={R.image.Email()} />
-              <TextInput placeholderText={'Phone'} Icon={R.image.Phone()} />
+              <TextInput
+                placeholderText={'Email'}
+                Icon={R.image.Email()}
+                keyboardType={'email-address'}
+              />
+              <TextInput
+                placeholderText={'Phone'}
+                Icon={R.image.Phone()}
+                keyboardType={'numeric'}
+              />
               <TextInput
                 placeholderText={'Password'}
                 Icon={R.image.Password()}

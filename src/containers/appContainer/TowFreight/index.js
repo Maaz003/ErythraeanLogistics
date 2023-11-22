@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   View,
   Platform,
-  Image,
   FlatList,
 } from 'react-native';
 
@@ -111,6 +110,9 @@ const TowFreight = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <ScrollContainer>
         <Text

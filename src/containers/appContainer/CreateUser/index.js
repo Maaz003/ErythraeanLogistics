@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import R from '@components/utils/R';
@@ -13,6 +13,9 @@ const CreateUser = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <FormScrollContainer>
         <View>

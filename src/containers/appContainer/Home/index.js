@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -91,6 +91,9 @@ const Home = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <ScrollContainer>
         <View style={styles.flatOrderCardCont}>

@@ -1,14 +1,6 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 
-import R from '@components/utils/R';
-import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import OrderDetailCard from '@components/view/cards/OrderDetailCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
@@ -18,6 +10,9 @@ const VehicleDetail = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <ScrollContainer paddingBottom={0.15}>
         <OrderDetailCard />

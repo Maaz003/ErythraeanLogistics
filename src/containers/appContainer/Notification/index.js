@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
@@ -15,15 +9,15 @@ import NotificationCard from '@components/view/cards/NotificationCard';
 const Notification = ({navigation, ...props}) => {
   return (
     <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <View style={styles.flexCont}>
         <Text
           color={'black'}
           fontSize={R.unit.width(0.06)}
           font={'RajdhaniBold'}>
-         Order Notification
+          Order Notification
         </Text>
       </View>
       <FlatList

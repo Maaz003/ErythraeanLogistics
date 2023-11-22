@@ -2,7 +2,11 @@ import R from '@components/utils/R';
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 
-export default function Header({onPressNotification, ...props}) {
+export default function Header({
+  onPressNotification,
+  onPressProfile,
+  ...props
+}) {
   return (
     <View style={styles.contHeader}>
       <TouchableOpacity activeOpacity={0.7} style={styles.ImgStyleCont}>
@@ -30,7 +34,10 @@ export default function Header({onPressNotification, ...props}) {
             resizeMode={'contain'}
           />
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.7} style={styles.ImgStyleCont}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.ImgStyleCont}
+          onPress={onPressProfile}>
           <Image
             source={R.image.DummyImage()}
             style={R.styles.img}

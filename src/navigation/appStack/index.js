@@ -1,4 +1,17 @@
+import React, {useState, useEffect} from 'react';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  View,
+  Dimensions,
+  Keyboard,
+} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import R from '@components/utils/R';
+import {Images} from '../../assets/Images/index';
 
 // //Screens
 import Home from '../../containers/appContainer/Home/index';
@@ -17,20 +30,6 @@ import ContainerDetail from '../../containers/appContainer/ContainerDetail/index
 const {width, height} = Dimensions.get('window');
 
 const Stack = createNativeStackNavigator();
-
-import React, {useState, useEffect} from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  View,
-  Dimensions,
-  Keyboard,
-} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import R from '@components/utils/R';
-import {Images} from '../../assets/Images/index';
-
 const Tab = createBottomTabNavigator();
 
 const CustomTabBar = ({state, descriptors, navigation}) => {

@@ -2,8 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
-import {Images} from '@assets/Images';
-//size, lines, dock receipt, bicopy, telex release, invoice from the auction,Expected Arrival Date,Date of Release,Date of Loading,Container Arrival Date,Invoice Amount,Paid Amount,Validations,Note for Yourself,Delivery Order
+
 const ContainerDetailCard = ({item, onPress, ...props}) => {
   const ContainerDetailContainerCard = ({title, data, image}) => {
     return (

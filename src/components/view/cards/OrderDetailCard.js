@@ -2,7 +2,6 @@ import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
-import {Images} from '@assets/Images';
 
 const OrderDetailCard = ({item, onPress, ...props}) => {
   const OrderDetailContainerCard = ({title, data, image}) => {
@@ -145,7 +144,7 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
         <OrderDetailContainerCard
           title={'Order Status'}
           data={'Approved'}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar}
         />
       </View>
       <View style={styles.container}>

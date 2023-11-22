@@ -1,19 +1,11 @@
 import R from '@components/utils/R';
 import React from 'react';
-import {
-  StyleSheet,
-  StatusBar,
-  SafeAreaView,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, StatusBar, SafeAreaView} from 'react-native';
 import {useColorMode} from 'native-base';
 import Header from '@components/common/Header';
 
 export default function ScreenBoiler(props) {
-  const {children, onPressNotification} = props;
+  const {children, onPressNotification, onPressProfile} = props;
 
   const theme = useColorMode();
   const colorMode = theme?.colorMode;
@@ -33,7 +25,10 @@ export default function ScreenBoiler(props) {
             : 'light-content'
         }
       />
-      <Header onPressNotification={onPressNotification} />
+      <Header
+        onPressNotification={onPressNotification}
+        onPressProfile={onPressProfile}
+      />
       {children}
     </SafeAreaView>
   );

@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import R from '@components/utils/R';
-import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ActionButton from '@components/common/ActionButton';
 
@@ -11,6 +10,9 @@ const Settings = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <View style={styles.mainCont}>
         <ActionButton

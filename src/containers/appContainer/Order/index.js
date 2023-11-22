@@ -10,7 +10,6 @@ import {
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
-// import Statistics from '@components/view/cards/Statistics';
 import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 import OrderCard from '@components/view/cards/OrderCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
@@ -63,6 +62,9 @@ const Orders = ({navigation, ...props}) => {
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
+      }}
+      onPressProfile={() => {
+        navigation.navigate('AccountSetting');
       }}>
       <ScrollContainer>
         <View style={styles.flatWearHouseDetailCardCont}>
@@ -120,7 +122,12 @@ const Orders = ({navigation, ...props}) => {
                 Filter
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7} style={styles.orderCont}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('CreateNewOrder');
+              }}
+              activeOpacity={0.7}
+              style={styles.orderCont}>
               <View style={styles.imgMiniStyleCont}>
                 <Image source={R.image.Plus()} style={R.styles.img} />
               </View>

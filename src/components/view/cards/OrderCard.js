@@ -2,7 +2,6 @@ import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
-import {Images} from '@assets/Images';
 import TitleImageContainerCard from './TitleImageContainerCard';
 
 const OrderCard = ({item, onPress, ...props}) => {

@@ -35,7 +35,13 @@ const ContainerList = ({navigation, ...props}) => {
       <FlatList
         data={[1, 2, 3, 4, 5, 6]}
         renderItem={({index, item}) => {
-          return <ContainerListCard />;
+          return (
+            <ContainerListCard
+              onPress={() => {
+                navigation.navigate('ContainerDetail');
+              }}
+            />
+          );
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
       />

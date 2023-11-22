@@ -11,6 +11,7 @@ import AccountSetting from '../../containers/appContainer/AccountSetting/index';
 import CreateUser from '../../containers/appContainer/CreateUser/index';
 import CreateNewOrder from '../../containers/appContainer/CreateNewOrder/index';
 import OrderDetail from '../../containers/appContainer/OrderDetail/index';
+import ContainerDetail from '../../containers/appContainer/ContainerDetail/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -126,6 +127,7 @@ const ContainerListScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="ContainerList" component={ContainerList} />
+    <Stack.Screen name="ContainerDetail" component={ContainerDetail} />
   </Stack.Navigator>
 );
 

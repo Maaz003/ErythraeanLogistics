@@ -56,91 +56,91 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
         <OrderDetailContainerCard
           title={'Description'}
           data={'2023 test test'}
-          image={Images.ContainerList}
+          image={R.image.InputText()}
         />
         <OrderDetailContainerCard
           title={'Color'}
           data={'Test'}
-          image={Images.ContainerList}
+          image={R.image.Palette()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'VIN Number'}
           data={'8RKNBASD545355486'}
-          image={Images.ContainerList}
+          image={R.image.Tally()}
         />
         <OrderDetailContainerCard
           title={'Keys'}
           data={'Y'}
-          image={Images.ContainerList}
+          image={R.image.Key()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Auction'}
           data={'Developer'}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar()}
         />
         <OrderDetailContainerCard
           title={'LOT'}
           data={'236589'}
-          image={Images.ContainerList}
+          image={R.image.List()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Delivered To Warehouse'}
           data={'None'}
-          image={Images.ContainerList}
+          image={R.image.Warehouse()}
         />
         <OrderDetailContainerCard
           title={'Notes'}
           data={'None'}
-          image={Images.ContainerList}
+          image={R.image.Notes()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Buyer'}
           data={'Developer Customer'}
-          image={Images.ContainerList}
+          image={R.image.User()}
         />
         <OrderDetailContainerCard
           title={'Buyer Number'}
           data={'None'}
-          image={Images.ContainerList}
+          image={R.image.Gear()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Date'}
           data={'None'}
-          image={Images.ContainerList}
+          image={R.image.CalendarWhite()}
         />
         <OrderDetailContainerCard
           title={'Promised to be picked up'}
           data={'None'}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Promised to be delivered'}
           data={'None'}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar()}
         />
         <OrderDetailContainerCard
           title={'Title'}
           data={'Yes'}
-          image={Images.ContainerList}
+          image={R.image.InputText()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Date Received'}
           data={'07-11-2023'}
-          image={Images.ContainerList}
+          image={R.image.CalendarWhite()}
         />
         <OrderDetailContainerCard
           title={'Order Status'}
@@ -152,31 +152,31 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
         <OrderDetailContainerCard
           title={'Terminal Status'}
           data={'Waiting'}
-          image={Images.ContainerList}
+          image={R.image.Tally()}
         />
         <OrderDetailContainerCard
           title={'P.O.L'}
           data={'TX'}
-          image={Images.ContainerList}
+          image={R.image.City()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Invoice'}
           data={'PDF'}
-          image={Images.ContainerList}
+          image={R.image.Dollar()}
         />
         <OrderDetailContainerCard
           title={'Approved By'}
           data={'Name Here'}
-          image={Images.ContainerList}
+          image={R.image.User()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Created By'}
           data={'Name Here'}
-          image={Images.ContainerList}
+          image={R.image.User()}
         />
       </View>
       <Text
@@ -193,60 +193,60 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
         <OrderDetailContainerCard
           title={'Point Of Loading'}
           data={'2023 test test'}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar()}
         />
         <OrderDetailContainerCard
           title={'Container Number'}
           data={'Test'}
-          image={Images.ContainerList}
+          image={R.image.Notes()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Booking Number'}
           data={'8RKNBASD545355486'}
-          image={Images.ContainerList}
+          image={R.image.CirclePlus()}
         />
         <OrderDetailContainerCard
           title={'Destination Port'}
           data={'Y'}
-          image={Images.ContainerList}
+          image={R.image.Warehouse()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Loading Date'}
           data={'Copart'}
-          image={Images.ContainerList}
+          image={R.image.CalendarWhite()}
         />
         <OrderDetailContainerCard
           title={'Expected Arrival Date'}
           data={'Developer'}
-          image={Images.ContainerList}
+          image={R.image.CalendarWhite()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Arrival Date'}
           data={'236589'}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar()}
         />
         <OrderDetailContainerCard
           title={'Unloading Date'}
           data={'None'}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Calendar'}
           data={'Nov-1602023'}
-          image={Images.ContainerList}
+          image={R.image.CalendarWhite()}
         />
         <OrderDetailContainerCard
           title={'Storage'}
           data={'On client: $0 | On Shipping: $0'}
-          image={Images.ContainerList}
+          image={R.image.Warehouse()}
         />
       </View>
       <Text

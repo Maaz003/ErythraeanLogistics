@@ -21,7 +21,7 @@ function ScrollContainer(props) {
       contentContainerStyle={[
         styles.contentContainer,
         contentContainerStyles,
-        {paddingBottom: R.unit.height(0.07)},
+        {paddingBottom: R.unit.height(paddingBottom)},
       ]}>
       {children}
     </ScrollView>

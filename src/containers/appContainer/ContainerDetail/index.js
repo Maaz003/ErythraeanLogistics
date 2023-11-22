@@ -10,22 +10,22 @@ import {
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
-import OrderDetailCard from '@components/view/cards/OrderDetailCard';
+import ContainerDetailCard from '@components/view/cards/ContainerDetailCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 
-const VehicleDetail = ({navigation, ...props}) => {
+const ContainerDetail = ({navigation, ...props}) => {
   return (
     <ScreenBoiler
       onPressNotification={() => {
         navigation.navigate('Notification');
       }}>
       <ScrollContainer paddingBottom={0.15}>
-        <OrderDetailCard />
+        <ContainerDetailCard />
       </ScrollContainer>
     </ScreenBoiler>
   );
 };
 
-export default VehicleDetail;
+export default ContainerDetail;
 
 const styles = StyleSheet.create({});

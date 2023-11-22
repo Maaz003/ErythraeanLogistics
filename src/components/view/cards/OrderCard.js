@@ -31,32 +31,32 @@ const OrderCard = ({item, onPress, ...props}) => {
         <TitleImageContainerCard
           title={'Year'}
           data={item.Year}
-          image={Images.ContainerList}
+          image={R.image.CalendarStar()}
         />
         <TitleImageContainerCard
           title={'Make'}
           data={item.Make}
-          image={Images.Order}
+          image={R.image.CalendarWhite()}
         />
         <TitleImageContainerCard
           title={'Model'}
           data={item.Model}
-          image={Images.Home}
+          image={R.image.CalendarStar()}
         />
         <TitleImageContainerCard
           title={'LOT'}
           data={item.LOT}
-          image={Images.Settings}
+          image={R.image.List()}
         />
         <TitleImageContainerCard
           title={'VIN'}
           data={item.VIN}
-          image={Images.TowFreight}
+          image={R.image.Tally()}
         />
         <TitleImageContainerCard
           title={'Destination Port'}
           data={item.Destination_Port}
-          image={Images.ContainerList}
+          image={R.image.Warehouse()}
         />
       </TouchableOpacity>
     </>

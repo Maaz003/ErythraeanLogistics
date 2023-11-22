@@ -38,37 +38,37 @@ const NotificationCard = ({
         <TitleImageContainerCard
           title={'Year'}
           data={'2023'}
-          image={Images.ContainerList}
+          image={R.image.CalendarWhite()}
         />
         <TitleImageContainerCard
           title={'Make'}
           data={'Test'}
-          image={Images.Order}
+          image={R.image.CalendarStar()}
         />
         <TitleImageContainerCard
           title={'Model'}
           data={'Test'}
-          image={Images.Home}
+          image={R.image.CalendarWhite()}
         />
         <TitleImageContainerCard
           title={'Auction Location'}
           data={'Copart'}
-          image={Images.Settings}
+          image={R.image.LocationDot()}
         />
         <TitleImageContainerCard
           title={'P.O.L'}
           data={'TX'}
-          image={Images.Settings}
+          image={R.image.Building()}
         />
         <TitleImageContainerCard
           title={'VIN'}
           data={'8RKNBASD545355486'}
-          image={Images.TowFreight}
+          image={R.image.Tally()}
         />
         <TitleImageContainerCard
           title={'New Dispatch Charge'}
           data={'Salalah-Oman'}
-          image={Images.ContainerList}
+          image={R.image.List()}
         />
 
         <View style={[styles.flexCont, {marginTop: R.unit.height(0.02)}]}>

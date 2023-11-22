@@ -30,25 +30,25 @@ const ContainerListCard = ({item, onPress, ...props}) => {
 
         <TitleImageContainerCard
           data={'25496865'}
-          image={Images.ContainerList}
+          image={R.image.List()}
           title={'Booking Number'}
         />
 
         <TitleImageContainerCard
           data={'Salalah Oman'}
-          image={Images.Order}
+          image={R.image.Warehouse()}
           title={'Port'}
         />
 
         <TitleImageContainerCard
           data={'45 feet / 5 auto'}
-          image={Images.Home}
+          image={R.image.Tally()}
           title={'Size'}
         />
 
         <TitleImageContainerCard
           data={'8RKNBASD545355486'}
-          image={Images.TowFreight}
+          image={R.image.CalendarStar()}
           title={'Date of Loading'}
         />
       </TouchableOpacity>

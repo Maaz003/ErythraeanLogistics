@@ -10,6 +10,7 @@ import SubBidderList from '../../containers/appContainer/SubBidderList/index';
 import AccountSetting from '../../containers/appContainer/AccountSetting/index';
 import CreateUser from '../../containers/appContainer/CreateUser/index';
 import CreateNewOrder from '../../containers/appContainer/CreateNewOrder/index';
+import OrderDetail from '../../containers/appContainer/OrderDetail/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -89,6 +90,7 @@ const HomeScreens = () => (
     }}>
     <Stack.Screen name="Home" component={Home} />
     <Stack.Screen name="CreateNewOrder" component={CreateNewOrder} />
+    <Stack.Screen name="OrderDetail" component={OrderDetail} />
   </Stack.Navigator>
 );
 

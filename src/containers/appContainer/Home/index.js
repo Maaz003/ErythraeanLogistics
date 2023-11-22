@@ -198,7 +198,14 @@ const Home = ({navigation, ...props}) => {
       <FlatList
         data={data}
         renderItem={({index, item}) => {
-          return <HorizontalCard item={item} />;
+          return (
+            <HorizontalCard
+              onPress={() => {
+                navigation.navigate('OrderDetail');
+              }}
+              item={item}
+            />
+          );
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
       />

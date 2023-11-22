@@ -115,6 +115,7 @@ const Text = props => {
     lineHeight,
     alignSelf,
     gutterLeft = 0,
+    width,
   } = props;
   return (
     <Textc
@@ -131,6 +132,7 @@ const Text = props => {
           lineHeight: lineHeight,
           includeFontPadding: false,
           alignSelf: alignSelf,
+          width: width,
         },
         fontSize && {
           fontSize: fontSize,

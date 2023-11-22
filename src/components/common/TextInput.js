@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import Text from './Text';
 import R from '@components/utils/R';
 
 const Index = ({
@@ -14,14 +13,15 @@ const Index = ({
   value,
   placeholderText,
   handleOnChangeTxt,
-  isPassword,
   keyboardType,
   Icon,
   iconOnPress,
   width = 0.85,
   height,
+  isPasswordInput = false,
   ...props
 }) => {
+  const [isPassword, setIsPassword] = useState(isPasswordInput);
   return (
     <View
       style={[styles.container, {width: R.unit.width(width), height: height}]}>
@@ -37,8 +37,12 @@ const Index = ({
         {...props}
       />
       <TouchableOpacity
-        onPress={iconOnPress}
-        activeOpacity={0.8}
+        onPress={() => {
+          if (isPasswordInput == true) {
+            setIsPassword(!isPassword);
+          }
+        }}
+        activeOpacity={1}
         style={styles.imgStyleCont}>
         <Image source={Icon} style={R.styles.img} resizeMode={'contain'} />
       </TouchableOpacity>

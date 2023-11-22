@@ -12,7 +12,7 @@ import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import Statistics from '@components/view/cards/Statistics';
 import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
-import HorizontalCard from '@components/view/cards/HorizontalCard';
+import OrderCard from '@components/view/cards/OrderCard';
 
 const Home = ({navigation, ...props}) => {
   const data = [
@@ -199,7 +199,7 @@ const Home = ({navigation, ...props}) => {
         data={data}
         renderItem={({index, item}) => {
           return (
-            <HorizontalCard
+            <OrderCard
               onPress={() => {
                 navigation.navigate('OrderDetail');
               }}

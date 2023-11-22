@@ -1,19 +1,11 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import {Images} from '@assets/Images';
 
-const {width, height} = Dimensions.get('window');
-
-const ContainerListCard = ({item, onPress, ...props}) => {
-  const FlexCont = ({title, data, image}) => {
+const OrderDetailCard = ({item, onPress, ...props}) => {
+  const OrderDetailContainerCard = ({title, data, image}) => {
     return (
       <View style={styles.mainCont}>
         <View style={styles.imgStyleMainCont}>
@@ -61,95 +53,127 @@ const ContainerListCard = ({item, onPress, ...props}) => {
         </View>
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Description'}
           data={'2023 test test'}
           image={Images.ContainerList}
         />
-        <FlexCont title={'Color'} data={'Test'} image={Images.ContainerList} />
+        <OrderDetailContainerCard
+          title={'Color'}
+          data={'Test'}
+          image={Images.ContainerList}
+        />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'VIN Number'}
           data={'8RKNBASD545355486'}
           image={Images.ContainerList}
         />
-        <FlexCont title={'Keys'} data={'Y'} image={Images.ContainerList} />
+        <OrderDetailContainerCard
+          title={'Keys'}
+          data={'Y'}
+          image={Images.ContainerList}
+        />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Auction'}
           data={'Developer'}
           image={Images.ContainerList}
         />
-        <FlexCont title={'LOT'} data={'236589'} image={Images.ContainerList} />
+        <OrderDetailContainerCard
+          title={'LOT'}
+          data={'236589'}
+          image={Images.ContainerList}
+        />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Delivered To Warehouse'}
           data={'None'}
           image={Images.ContainerList}
         />
-        <FlexCont title={'Notes'} data={'None'} image={Images.ContainerList} />
+        <OrderDetailContainerCard
+          title={'Notes'}
+          data={'None'}
+          image={Images.ContainerList}
+        />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Buyer'}
           data={'Developer Customer'}
           image={Images.ContainerList}
         />
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Buyer Number'}
           data={'None'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont title={'Date'} data={'None'} image={Images.ContainerList} />
-        <FlexCont
+        <OrderDetailContainerCard
+          title={'Date'}
+          data={'None'}
+          image={Images.ContainerList}
+        />
+        <OrderDetailContainerCard
           title={'Promised to be picked up'}
           data={'None'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Promised to be delivered'}
           data={'None'}
           image={Images.ContainerList}
         />
-        <FlexCont title={'Title'} data={'Yes'} image={Images.ContainerList} />
+        <OrderDetailContainerCard
+          title={'Title'}
+          data={'Yes'}
+          image={Images.ContainerList}
+        />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Date Received'}
           data={'07-11-2023'}
           image={Images.ContainerList}
         />
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Order Status'}
           data={'Approved'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Terminal Status'}
           data={'Waiting'}
           image={Images.ContainerList}
         />
-        <FlexCont title={'P.O.L'} data={'TX'} image={Images.ContainerList} />
+        <OrderDetailContainerCard
+          title={'P.O.L'}
+          data={'TX'}
+          image={Images.ContainerList}
+        />
       </View>
       <View style={styles.container}>
-        <FlexCont title={'Invoice'} data={'PDF'} image={Images.ContainerList} />
-        <FlexCont
+        <OrderDetailContainerCard
+          title={'Invoice'}
+          data={'PDF'}
+          image={Images.ContainerList}
+        />
+        <OrderDetailContainerCard
           title={'Approved By'}
           data={'Name Here'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Created By'}
           data={'Name Here'}
           image={Images.ContainerList}
@@ -166,60 +190,60 @@ const ContainerListCard = ({item, onPress, ...props}) => {
         Container Detail
       </Text>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Point Of Loading'}
           data={'2023 test test'}
           image={Images.ContainerList}
         />
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Container Number'}
           data={'Test'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Booking Number'}
           data={'8RKNBASD545355486'}
           image={Images.ContainerList}
         />
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Destination Port'}
           data={'Y'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Loading Date'}
           data={'Copart'}
           image={Images.ContainerList}
         />
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Expected Arrival Date'}
           data={'Developer'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Arrival Date'}
           data={'236589'}
           image={Images.ContainerList}
         />
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Unloading Date'}
           data={'None'}
           image={Images.ContainerList}
         />
       </View>
       <View style={styles.container}>
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Calendar'}
           data={'Nov-1602023'}
           image={Images.ContainerList}
         />
-        <FlexCont
+        <OrderDetailContainerCard
           title={'Storage'}
           data={'On client: $0 | On Shipping: $0'}
           image={Images.ContainerList}
@@ -260,7 +284,7 @@ const ContainerListCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default ContainerListCard;
+export default OrderDetailCard;
 
 const styles = StyleSheet.create({
   container: {

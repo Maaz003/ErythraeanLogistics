@@ -1,44 +1,11 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import {Images} from '@assets/Images';
-
-const {width, height} = Dimensions.get('window');
+import TitleImageContainerCard from './TitleImageContainerCard';
 
 const ContainerListCard = ({item, onPress, ...props}) => {
-  const FlexCont = ({title, data, image}) => {
-    return (
-      <View style={styles.flexCont}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={styles.imgStyleMainCont}>
-            <View style={styles.imgStyleCont}>
-              <Image source={image} style={R.styles.img} />
-            </View>
-          </View>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {title}
-          </Text>
-        </View>
-        <Text
-          color={'black'}
-          fontSize={R.unit.width(0.045)}
-          font={'RajdhaniMedium'}>
-          {data}
-        </Text>
-      </View>
-    );
-  };
-
   return (
     <>
       <TouchableOpacity
@@ -61,21 +28,25 @@ const ContainerListCard = ({item, onPress, ...props}) => {
           </TouchableOpacity>
         </View>
 
-        <FlexCont
+        <TitleImageContainerCard
           data={'25496865'}
           image={Images.ContainerList}
           title={'Booking Number'}
         />
 
-        <FlexCont data={'Salalah Oman'} image={Images.Order} title={'Port'} />
+        <TitleImageContainerCard
+          data={'Salalah Oman'}
+          image={Images.Order}
+          title={'Port'}
+        />
 
-        <FlexCont
+        <TitleImageContainerCard
           data={'45 feet / 5 auto'}
           image={Images.Home}
           title={'Size'}
         />
 
-        <FlexCont
+        <TitleImageContainerCard
           data={'8RKNBASD545355486'}
           image={Images.TowFreight}
           title={'Date of Loading'}
@@ -122,7 +93,7 @@ const styles = StyleSheet.create({
   },
   idCont: {
     backgroundColor: 'black',
-    borderRadius: width / 2,
+    borderRadius: R.unit.width(1) / 2,
     paddingHorizontal: R.unit.width(0.03),
     paddingVertical: R.unit.width(0.015),
   },
@@ -134,9 +105,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
   },
   circle: {
-    height: width * 0.02,
-    width: width * 0.02,
-    borderRadius: width / 2,
+    height: R.unit.width(0.02),
+    width: R.unit.width(0.02),
+    borderRadius: R.unit.width(1) / 2,
     backgroundColor: 'black',
   },
   imgStyleCont: {

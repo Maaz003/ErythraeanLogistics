@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet,KeyboardAvoidingView} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import R from '@components/utils/R';
 
@@ -14,7 +14,7 @@ function FormScrollContainer(props) {
   } = props;
 
   return (
-    <KeyboardAwareScrollView
+    <KeyboardAvoidingView
       style={[R.styles.container, styles.mainLayout, containerStyles]}
       showsVerticalScrollIndicator={false}
       extraScrollHeight={extraScrollHeight}
@@ -25,7 +25,7 @@ function FormScrollContainer(props) {
         {paddingBottom: R.unit.scale(paddingBottom)},
       ]}>
       {children}
-    </KeyboardAwareScrollView>
+    </KeyboardAvoidingView>
   );
 }
 export default FormScrollContainer;

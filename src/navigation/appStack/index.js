@@ -23,7 +23,6 @@ import {
   StyleSheet,
   Image,
   View,
-  Text,
   Dimensions,
 } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -142,6 +141,7 @@ export const BottomNavigator = ({}) => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -164,16 +164,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 10,
     position: 'absolute',
-    bottom: 25, // Adjust the position from bottom as needed
+    bottom: 25,
     width: '100%',
-    // height: R.unit.height(0.1),
   },
   tabBar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#fff',
-    width: '90%', // Set the width to 90%
+    width: '90%',
     borderRadius: 10,
     elevation: 2,
     height: R.unit.height(0.065),
@@ -195,6 +194,5 @@ const styles = StyleSheet.create({
   imgStyleCont: {
     width: R.unit.width(0.055),
     height: R.unit.width(0.055),
-    // backgroundColor: 'red',
   },
 });

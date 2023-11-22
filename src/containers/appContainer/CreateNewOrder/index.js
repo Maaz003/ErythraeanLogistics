@@ -15,143 +15,37 @@ import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
 import DropDown from '@components/common/DropDown';
 import TimeDatePicker from '@components/common/TimeDatePicker';
+import {
+  SelectCustomer,
+  Year,
+  Auction,
+  AuctionCity,
+  Color,
+  Destination_Port,
+  LOT,
+  Make,
+  Model,
+  POL,
+  Type,
+  VechileOperable,
+} from '@components/constants/createOrderConstant';
 
 //third party
 import moment from 'moment';
 
 const CreateNewOrder = ({navigation, ...props}) => {
   //dropdown
-  const SelectCustomer = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [selectCustomerValue, setSelectCustomerValue] = useState(null);
-  const Year = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [YearValue, setYearValue] = useState(null);
-  const Make = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [MakeValue, setMakeValue] = useState(null);
-  const Model = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [ModelValue, setModelValue] = useState(null);
-  const Color = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [ColorValue, setColorValue] = useState(null);
-  const Auction = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [AuctionValue, setAuctionValue] = useState(null);
-  const AuctionCity = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [AuctionCityValue, setAuctionCityValue] = useState(null);
-  const LOT = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [LOTValue, setLOTValue] = useState(null);
-  const Destination_Port = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [Destination_PortValue, setDestination_PortValue] = useState(null);
-  const POL = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [POLValue, setPOLValue] = useState(null);
-  const Type = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [TypeValue, setTypeValue] = useState(null);
-  const VechileOperable = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
-  ];
   const [VechileOperableValue, setVechileOperableValue] = useState(null);
   //dropdown
 

@@ -1,37 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
-const {width, height} = Dimensions.get('window');
-
-const HorizontalCard = ({item, onPress, ...props}) => {
-  const FlexCont = ({title, data, image}) => {
-    return (
-      <View style={styles.flexCont}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={styles.imgStyleMainCont}>
-            <View style={styles.imgStyleCont}>
-              <Image source={image} style={R.styles.img} />
-            </View>
-          </View>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {title}
-          </Text>
-        </View>
-        <Text
-          color={'black'}
-          fontSize={R.unit.width(0.045)}
-          font={'RajdhaniMedium'}>
-          {data}
-        </Text>
-      </View>
-    );
-  };
-
+const TowCard = ({item, onPress, ...props}) => {
   return (
     <>
       <TouchableOpacity
@@ -160,7 +132,7 @@ const HorizontalCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default HorizontalCard;
+export default TowCard;
 
 const styles = StyleSheet.create({
   mainCont: {
@@ -198,7 +170,7 @@ const styles = StyleSheet.create({
   },
   idCont: {
     backgroundColor: 'black',
-    borderRadius: width / 2,
+    borderRadius: R.unit.width(1) / 2,
     paddingHorizontal: R.unit.width(0.03),
     paddingVertical: R.unit.width(0.015),
   },
@@ -210,9 +182,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
   },
   circle: {
-    height: width * 0.02,
-    width: width * 0.02,
-    borderRadius: width / 2,
+    height: R.unit.width(0.02),
+    width: R.unit.width(0.02),
+    borderRadius: R.unit.width(1) / 2,
     backgroundColor: 'black',
   },
   imgStyleCont: {

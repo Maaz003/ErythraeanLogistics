@@ -12,7 +12,7 @@ import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 // import Statistics from '@components/view/cards/Statistics';
 import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
-import HorizontalCard from '@components/view/cards/HorizontalCard';
+import OrderCard from '@components/view/cards/OrderCard';
 
 const Orders = ({navigation, ...props}) => {
   const data = [
@@ -134,7 +134,7 @@ const Orders = ({navigation, ...props}) => {
       <FlatList
         data={data}
         renderItem={({index, item}) => {
-          return <HorizontalCard item={item} />;
+          return <OrderCard item={item} />;
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
       />

@@ -5,9 +5,6 @@ import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ActionButton from '@components/common/ActionButton';
-// import Statistics from '@components/view/cards/Statistics';
-// import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
-// import HorizontalCard from '@components/view/cards/HorizontalCard';
 
 const Settings = ({navigation, ...props}) => {
   return (

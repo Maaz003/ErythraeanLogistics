@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {useColorMode} from 'native-base';
+import Header from '@components/common/Header';
 
 export default function ScreenBoiler(props) {
   const {children, onPressNotification} = props;
@@ -35,41 +36,7 @@ export default function ScreenBoiler(props) {
       <ScrollView
         contentContainerStyle={styles.scrollCont}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.contHeader}>
-          <TouchableOpacity activeOpacity={0.7} style={styles.ImgStyleCont}>
-            <Image
-              source={R.image.AppIconWhite()}
-              style={R.styles.img}
-              resizeMode={'contain'}
-            />
-          </TouchableOpacity>
-          <View style={styles.sideCont}>
-            <TouchableOpacity activeOpacity={0.7} style={styles.IconStyleCont}>
-              <Image
-                source={R.image.Message()}
-                style={R.styles.img}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.IconStyleCont}
-              onPress={onPressNotification}>
-              <Image
-                source={R.image.Bell()}
-                style={R.styles.img}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.7} style={styles.ImgStyleCont}>
-              <Image
-                source={R.image.DummyImage()}
-                style={R.styles.img}
-                resizeMode={'contain'}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Header onPressNotification={onPressNotification} />
         {children}
       </ScrollView>
     </SafeAreaView>

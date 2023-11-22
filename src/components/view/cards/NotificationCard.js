@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import {Images} from '@assets/Images';
 import ActionButton from '@components/common/ActionButton';
-
-const {width, height} = Dimensions.get('window');
+import TitleImageContainerCard from './TitleImageContainerCard';
 
 const NotificationCard = ({
   item,
@@ -20,32 +13,6 @@ const NotificationCard = ({
   onPressDisagree,
   ...props
 }) => {
-  const FlexCont = ({title, data, image}) => {
-    return (
-      <View style={styles.flexCont}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={styles.imgStyleMainCont}>
-            <View style={styles.imgStyleCont}>
-              <Image source={image} style={R.styles.img} />
-            </View>
-          </View>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {title}
-          </Text>
-        </View>
-        <Text
-          color={'black'}
-          fontSize={R.unit.width(0.045)}
-          font={'RajdhaniMedium'}>
-          {data}
-        </Text>
-      </View>
-    );
-  };
-
   return (
     <>
       <TouchableOpacity
@@ -68,21 +35,37 @@ const NotificationCard = ({
           </TouchableOpacity>
         </View>
 
-        <FlexCont title={'Year'} data={'2023'} image={Images.ContainerList} />
-        <FlexCont title={'Make'} data={'Test'} image={Images.Order} />
-        <FlexCont title={'Model'} data={'Test'} image={Images.Home} />
-        <FlexCont
+        <TitleImageContainerCard
+          title={'Year'}
+          data={'2023'}
+          image={Images.ContainerList}
+        />
+        <TitleImageContainerCard
+          title={'Make'}
+          data={'Test'}
+          image={Images.Order}
+        />
+        <TitleImageContainerCard
+          title={'Model'}
+          data={'Test'}
+          image={Images.Home}
+        />
+        <TitleImageContainerCard
           title={'Auction Location'}
           data={'Copart'}
           image={Images.Settings}
         />
-        <FlexCont title={'P.O.L'} data={'TX'} image={Images.Settings} />
-        <FlexCont
+        <TitleImageContainerCard
+          title={'P.O.L'}
+          data={'TX'}
+          image={Images.Settings}
+        />
+        <TitleImageContainerCard
           title={'VIN'}
           data={'8RKNBASD545355486'}
           image={Images.TowFreight}
         />
-        <FlexCont
+        <TitleImageContainerCard
           title={'New Dispatch Charge'}
           data={'Salalah-Oman'}
           image={Images.ContainerList}
@@ -147,7 +130,7 @@ const styles = StyleSheet.create({
   },
   idCont: {
     backgroundColor: 'black',
-    borderRadius: width / 2,
+    borderRadius: R.unit.width(1) / 2,
     paddingHorizontal: R.unit.width(0.03),
     paddingVertical: R.unit.width(0.015),
   },
@@ -159,9 +142,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
   },
   circle: {
-    height: width * 0.02,
-    width: width * 0.02,
-    borderRadius: width / 2,
+    height: R.unit.width(0.02),
+    width: R.unit.width(0.02),
+    borderRadius: R.unit.width(1) / 2,
     backgroundColor: 'black',
   },
   imgStyleCont: {

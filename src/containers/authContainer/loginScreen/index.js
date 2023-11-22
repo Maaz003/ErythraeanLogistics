@@ -15,7 +15,6 @@ import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
 
 function LoginScreen({navigation, ...props}) {
-  const [isPassword, setIsPassword] = useState(true);
   return (
     <AuthBoiler>
       <AuthFormScrollContainer showAuthHeader={true}>
@@ -47,11 +46,8 @@ function LoginScreen({navigation, ...props}) {
             <TextInput placeholderText={'Username'} Icon={R.image.Name()} />
             <TextInput
               placeholderText={'Password'}
-              isPassword={isPassword}
+              isPasswordInput={true}
               Icon={R.image.Password()}
-              iconOnPress={() => {
-                setIsPassword(!isPassword);
-              }}
             />
             <ActionButton
               title={'Login'}

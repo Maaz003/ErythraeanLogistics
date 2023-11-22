@@ -1,44 +1,11 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import {Images} from '@assets/Images';
+import TitleImageContainerCard from './TitleImageContainerCard';
 
-const {width, height} = Dimensions.get('window');
-
-const HorizontalCard = ({item, onPress, ...props}) => {
-  const FlexCont = ({title, data, image}) => {
-    return (
-      <View style={styles.flexCont}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={styles.imgStyleMainCont}>
-            <View style={styles.imgStyleCont}>
-              <Image source={image} style={R.styles.img} />
-            </View>
-          </View>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            {title}
-          </Text>
-        </View>
-        <Text
-          color={'black'}
-          fontSize={R.unit.width(0.045)}
-          font={'RajdhaniMedium'}>
-          {data}
-        </Text>
-      </View>
-    );
-  };
-
+const OrderCard = ({item, onPress, ...props}) => {
   return (
     <>
       <TouchableOpacity
@@ -61,16 +28,32 @@ const HorizontalCard = ({item, onPress, ...props}) => {
           </TouchableOpacity>
         </View>
 
-        <FlexCont
+        <TitleImageContainerCard
           title={'Year'}
           data={item.Year}
           image={Images.ContainerList}
         />
-        <FlexCont title={'Make'} data={item.Make} image={Images.Order} />
-        <FlexCont title={'Model'} data={item.Model} image={Images.Home} />
-        <FlexCont title={'LOT'} data={item.LOT} image={Images.Settings} />
-        <FlexCont title={'VIN'} data={item.VIN} image={Images.TowFreight} />
-        <FlexCont
+        <TitleImageContainerCard
+          title={'Make'}
+          data={item.Make}
+          image={Images.Order}
+        />
+        <TitleImageContainerCard
+          title={'Model'}
+          data={item.Model}
+          image={Images.Home}
+        />
+        <TitleImageContainerCard
+          title={'LOT'}
+          data={item.LOT}
+          image={Images.Settings}
+        />
+        <TitleImageContainerCard
+          title={'VIN'}
+          data={item.VIN}
+          image={Images.TowFreight}
+        />
+        <TitleImageContainerCard
           title={'Destination Port'}
           data={item.Destination_Port}
           image={Images.ContainerList}
@@ -79,7 +62,7 @@ const HorizontalCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default HorizontalCard;
+export default OrderCard;
 
 const styles = StyleSheet.create({
   mainCont: {
@@ -117,7 +100,7 @@ const styles = StyleSheet.create({
   },
   idCont: {
     backgroundColor: 'black',
-    borderRadius: width / 2,
+    borderRadius: R.unit.width(1) / 2,
     paddingHorizontal: R.unit.width(0.03),
     paddingVertical: R.unit.width(0.015),
   },
@@ -129,9 +112,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
   },
   circle: {
-    height: width * 0.02,
-    width: width * 0.02,
-    borderRadius: width / 2,
+    height: R.unit.width(0.02),
+    width: R.unit.width(0.02),
+    borderRadius: R.unit.width(1) / 2,
     backgroundColor: 'black',
   },
   imgStyleCont: {

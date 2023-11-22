@@ -10,8 +10,6 @@ import {
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
-// import Statistics from '@components/view/cards/Statistics';
-// import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 import ContainerListCard from '@components/view/cards/ContainerListCard';
 
 const ContainerList = ({navigation, ...props}) => {

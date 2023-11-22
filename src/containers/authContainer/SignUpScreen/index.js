@@ -60,7 +60,7 @@ function SignUpScreen({navigation, ...props}) {
               <TextInput
                 placeholderText={'Password'}
                 Icon={R.image.Password()}
-                isPassword={true}
+                isPasswordInput={true}
               />
               <TextInput placeholderText={'Company'} Icon={R.image.Company()} />
               <TouchableOpacity

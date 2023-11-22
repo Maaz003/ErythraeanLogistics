@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
@@ -14,7 +8,6 @@ import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
 
 const CreateUser = ({navigation, ...props}) => {
-  const [isPassword, setIsPassword] = useState(true);
   return (
     <ScreenBoiler
       onPressNotification={() => {
@@ -36,19 +29,13 @@ const CreateUser = ({navigation, ...props}) => {
         <TextInput placeholderText={'Cell Number'} />
         <TextInput
           placeholderText={'Password'}
-          isPassword={isPassword}
+          isPasswordInput={true}
           Icon={R.image.Password()}
-          iconOnPress={() => {
-            setIsPassword(!isPassword);
-          }}
         />
         <TextInput
           placeholderText={'Confirm Password'}
-          isPassword={isPassword}
+          isPasswordInput={true}
           Icon={R.image.Password()}
-          iconOnPress={() => {
-            setIsPassword(!isPassword);
-          }}
         />
         <ActionButton title={'Save'} bgColor={'#262626'} marginTop={0.04} />
       </View>

@@ -3,7 +3,7 @@ import {View, StyleSheet, Image} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
-function OrderCard({isEven, item, ...props}) {
+function Statistics({isEven, item, ...props}) {
   return (
     <View
       style={[styles.mainCont, {backgroundColor: isEven ? 'white' : 'black'}]}>
@@ -39,7 +39,7 @@ function OrderCard({isEven, item, ...props}) {
     </View>
   );
 }
-export default OrderCard;
+export default Statistics;
 
 const styles = StyleSheet.create({
   mainCont: {

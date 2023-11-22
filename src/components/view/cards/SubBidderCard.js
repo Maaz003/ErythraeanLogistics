@@ -1,13 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
-const {width, height} = Dimensions.get('window');
-
-const ContainerListCard = ({item, onPress, ...props}) => {
-  // Booking Number, Port,Size,Date of Loading
-
+const SubBidderCard = ({item, onPress, ...props}) => {
   return (
     <>
       <TouchableOpacity
@@ -128,7 +124,7 @@ const ContainerListCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default ContainerListCard;
+export default SubBidderCard;
 
 const styles = StyleSheet.create({
   mainCont: {
@@ -166,7 +162,7 @@ const styles = StyleSheet.create({
   },
   idCont: {
     backgroundColor: 'black',
-    borderRadius: width / 2,
+    borderRadius: R.unit.width(1) / 2,
     paddingHorizontal: R.unit.width(0.03),
     paddingVertical: R.unit.width(0.015),
   },
@@ -178,9 +174,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
   },
   circle: {
-    height: width * 0.02,
-    width: width * 0.02,
-    borderRadius: width / 2,
+    height: R.unit.width(0.02),
+    width: R.unit.width(0.02),
+    borderRadius: R.unit.width(1) / 2,
     backgroundColor: 'black',
   },
 });

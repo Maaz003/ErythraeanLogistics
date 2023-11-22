@@ -37,7 +37,7 @@ const ContainerList = ({navigation, ...props}) => {
         renderItem={({index, item}) => {
           return <ContainerListCard />;
         }}
-        contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+        contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
       />
     </ScreenBoiler>
   );

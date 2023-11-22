@@ -13,6 +13,7 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 // import Statistics from '@components/view/cards/Statistics';
 import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 import OrderCard from '@components/view/cards/OrderCard';
+import ScrollContainer from '@components/layout/ScrollContainer';
 
 const Orders = ({navigation, ...props}) => {
   const data = [
@@ -63,81 +64,90 @@ const Orders = ({navigation, ...props}) => {
       onPressNotification={() => {
         navigation.navigate('Notification');
       }}>
-      <View style={styles.flatWearHouseDetailCardCont}>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}
-          gutterTop={10}
-          gutterBottom={10}
-          gutterLeft={10}>
-          ORDERS STATISTICS BY P.O.L
-        </Text>
+      <ScrollContainer>
+        <View style={styles.flatWearHouseDetailCardCont}>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.065)}
+            font={'RajdhaniBold'}
+            gutterTop={10}
+            gutterBottom={10}
+            gutterLeft={10}>
+            ORDERS STATISTICS BY P.O.L
+          </Text>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={[1, 2, 3, 4, 5, 6]}
+            renderItem={({index, item}) => {
+              return (
+                <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
+              );
+            }}
+          />
+        </View>
+        <View style={styles.flexCont}>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.065)}
+            font={'RajdhaniBold'}
+            gutterTop={10}
+            gutterBottom={10}
+            gutterLeft={10}>
+            Orders
+          </Text>
+          <View style={styles.flexDirCont}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
+              <View style={styles.imgSearchStyleCont}>
+                <Image source={R.image.Search()} style={R.styles.img} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={[
+                styles.orderCont,
+                {backgroundColor: R.color.white, borderWidth: 1},
+              ]}>
+              <View style={styles.imgMiniStyleCont}>
+                <Image source={R.image.Filter()} style={R.styles.img} />
+              </View>
+              <Text
+                color={'black'}
+                fontSize={R.unit.width(0.04)}
+                font={'RajdhaniSemiBold'}>
+                Filter
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.7} style={styles.orderCont}>
+              <View style={styles.imgMiniStyleCont}>
+                <Image source={R.image.Plus()} style={R.styles.img} />
+              </View>
+              <Text
+                color={'white'}
+                fontSize={R.unit.width(0.04)}
+                font={'RajdhaniSemiBold'}>
+                Create Order
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <FlatList
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4, 5, 6]}
+          data={data}
           renderItem={({index, item}) => {
             return (
-              <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
+              <OrderCard
+                item={item}
+                onPress={() => {
+                  navigation.navigate('OrderDetail');
+                }}
+              />
             );
           }}
+          contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
         />
-      </View>
-      <View style={styles.flexCont}>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}
-          gutterTop={10}
-          gutterBottom={10}
-          gutterLeft={10}>
-          Orders
-        </Text>
-        <View style={styles.flexDirCont}>
-          <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
-            <View style={styles.imgSearchStyleCont}>
-              <Image source={R.image.Search()} style={R.styles.img} />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={[
-              styles.orderCont,
-              {backgroundColor: R.color.white, borderWidth: 1},
-            ]}>
-            <View style={styles.imgMiniStyleCont}>
-              <Image source={R.image.Filter()} style={R.styles.img} />
-            </View>
-            <Text
-              color={'black'}
-              fontSize={R.unit.width(0.04)}
-              font={'RajdhaniSemiBold'}>
-              Filter
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.orderCont}>
-            <View style={styles.imgMiniStyleCont}>
-              <Image source={R.image.Plus()} style={R.styles.img} />
-            </View>
-            <Text
-              color={'white'}
-              fontSize={R.unit.width(0.04)}
-              font={'RajdhaniSemiBold'}>
-              Create Order
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <FlatList
-        data={data}
-        renderItem={({index, item}) => {
-          return <OrderCard item={item} />;
-        }}
-        contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
-      />
+      </ScrollContainer>
     </ScreenBoiler>
   );
 };

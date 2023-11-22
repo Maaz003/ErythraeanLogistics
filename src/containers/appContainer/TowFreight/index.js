@@ -15,6 +15,7 @@ import DropDown from '@components/common/DropDown';
 import TimeDatePicker from '@components/common/TimeDatePicker';
 import Freight from '@components/view/cards/FreightCard';
 import TowCard from '@components/view/cards/TowCard';
+import ScrollContainer from '@components/layout/ScrollContainer';
 
 //third party
 import moment from 'moment';
@@ -111,46 +112,48 @@ const TowFreight = ({navigation, ...props}) => {
       onPressNotification={() => {
         navigation.navigate('Notification');
       }}>
-      <Text
-        color={'black'}
-        alignSelf={'flex-start'}
-        fontSize={R.unit.width(0.065)}
-        font={'RajdhaniBold'}
-        gutterTop={10}
-        gutterBottom={10}
-        gutterLeft={10}>
-        Tow & Freight Rates
-      </Text>
-      <View style={styles.mainCont}>
-        <TouchableOpacity
-          onPress={() => {
-            setTab(true);
-          }}
-          activeOpacity={0.7}
-          style={tab ? styles.textContOn : styles.textContOff}>
-          <Text
-            color={tab ? 'white' : 'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Freight Rates
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setTab(false);
-          }}
-          activeOpacity={0.7}
-          style={tab ? styles.textContOff : styles.textContOn}>
-          <Text
-            color={tab ? 'black' : 'white'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Tow Rates
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollContainer>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.065)}
+          font={'RajdhaniBold'}
+          gutterTop={10}
+          gutterBottom={10}
+          gutterLeft={10}>
+          Tow & Freight Rates
+        </Text>
+        <View style={styles.mainCont}>
+          <TouchableOpacity
+            onPress={() => {
+              setTab(true);
+            }}
+            activeOpacity={0.7}
+            style={tab ? styles.textContOn : styles.textContOff}>
+            <Text
+              color={tab ? 'white' : 'black'}
+              fontSize={R.unit.width(0.045)}
+              font={'RajdhaniMedium'}>
+              Freight Rates
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setTab(false);
+            }}
+            activeOpacity={0.7}
+            style={tab ? styles.textContOff : styles.textContOn}>
+            <Text
+              color={tab ? 'black' : 'white'}
+              fontSize={R.unit.width(0.045)}
+              font={'RajdhaniMedium'}>
+              Tow Rates
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      {tab ? FreightRate() : TowRate()}
+        {tab ? FreightRate() : TowRate()}
+      </ScrollContainer>
     </ScreenBoiler>
   );
 };

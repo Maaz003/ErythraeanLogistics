@@ -33,12 +33,8 @@ export default function ScreenBoiler(props) {
             : 'light-content'
         }
       />
-      <ScrollView
-        contentContainerStyle={styles.scrollCont}
-        showsVerticalScrollIndicator={false}>
-        <Header onPressNotification={onPressNotification} />
-        {children}
-      </ScrollView>
+      <Header onPressNotification={onPressNotification} />
+      {children}
     </SafeAreaView>
   );
 }

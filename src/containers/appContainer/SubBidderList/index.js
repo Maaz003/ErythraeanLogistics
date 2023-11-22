@@ -54,7 +54,7 @@ const SubBidderList = ({navigation, ...props}) => {
         renderItem={({index, item}) => {
           return <SubBidderCard />;
         }}
-        contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+        contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
       />
     </ScreenBoiler>
   );

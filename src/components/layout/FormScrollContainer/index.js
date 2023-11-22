@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,KeyboardAvoidingView} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import R from '@components/utils/R';
 
@@ -9,12 +9,12 @@ function FormScrollContainer(props) {
     containerStyles,
     children,
     keyboardShouldPersistTaps = 'always',
-    paddingBottom = 80,
+    paddingBottom = 0,
     extraScrollHeight = 0,
   } = props;
 
   return (
-    <KeyboardAvoidingView
+    <KeyboardAwareScrollView
       style={[R.styles.container, styles.mainLayout, containerStyles]}
       showsVerticalScrollIndicator={false}
       extraScrollHeight={extraScrollHeight}
@@ -22,18 +22,17 @@ function FormScrollContainer(props) {
       contentContainerStyle={[
         styles.contentContainer,
         contentContainerStyles,
-        {paddingBottom: R.unit.scale(paddingBottom)},
+        {paddingBottom: R.unit.height(paddingBottom)},
       ]}>
       {children}
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 }
 export default FormScrollContainer;
-
+// adjustPan
 const styles = StyleSheet.create({
   mainLayout: {
-    height: R.unit.height(1),
-    width: R.unit.width(1),
+    flex: 1,
   },
   contentContainer: {
     flexGrow: 1,

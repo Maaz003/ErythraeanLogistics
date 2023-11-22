@@ -17,13 +17,14 @@ const {width, height} = Dimensions.get('window');
 
 const Stack = createNativeStackNavigator();
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
   Image,
   View,
   Dimensions,
+  Keyboard,
 } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import R from '@components/utils/R';
@@ -33,9 +34,34 @@ const Tab = createBottomTabNavigator();
 
 const CustomTabBar = ({state, descriptors, navigation}) => {
   // const focusedOptions = descriptors[state.routes[state.index].key].options;
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardOpen(true);
+      },
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardOpen(false);
+      },
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  console.log('keyboardShown ====>', keyboardOpen);
 
   return (
-    <View style={styles.tabBarContainer}>
+    <View
+      style={[styles.tabBarContainer, {display: keyboardOpen ? 'none' : ''}]}>
       <View style={styles.tabBar}>
         {state.routes.map((route, index) => {
           const {options} = descriptors[route.key];
@@ -141,7 +167,6 @@ export const BottomNavigator = ({}) => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -154,7 +179,6 @@ export const BottomNavigator = ({}) => {
       <Tab.Screen name="Home" component={HomeScreens} />
       <Tab.Screen name="TowFreight" component={TowFreightScreens} />
       <Tab.Screen name="Settings" component={SettingsScreens} />
-      {/* Add more screens as needed */}
     </Tab.Navigator>
   );
 };

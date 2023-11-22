@@ -4,7 +4,6 @@ import {
   View,
   TouchableOpacity,
   Image,
-  FlatList,
   Platform,
 } from 'react-native';
 
@@ -29,6 +28,7 @@ import {
   Type,
   VechileOperable,
 } from '@components/constants/createOrderConstant';
+import FormScrollContainer from '@components/layout/FormScrollContainer';
 
 //third party
 import moment from 'moment';
@@ -88,248 +88,250 @@ const CreateNewOrder = ({navigation, ...props}) => {
       onPressNotification={() => {
         navigation.navigate('Notification');
       }}>
-      <Text
-        color={'black'}
-        alignSelf={'flex-start'}
-        fontSize={R.unit.width(0.065)}
-        font={'RajdhaniBold'}
-        gutterTop={10}
-        gutterLeft={15}>
-        Create New Order
-      </Text>
-      <Text
-        color={'black'}
-        alignSelf={'flex-start'}
-        fontSize={R.unit.width(0.05)}
-        font={'RajdhaniBold'}
-        gutterTop={5}
-        gutterLeft={15}>
-        Autos
-      </Text>
-      <Text
-        color={'black'}
-        alignSelf={'flex-start'}
-        fontSize={R.unit.width(0.05)}
-        font={'RajdhaniMedium'}
-        gutterTop={5}
-        gutterLeft={15}>
-        Select PDF Type
-      </Text>
-      <View style={styles.mainCont}>
-        <View style={styles.flexCont}>
-          <TouchableOpacity
-            onPress={() => {
-              setTypeCheck(0);
+      <FormScrollContainer paddingBottom={0.15}>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.065)}
+          font={'RajdhaniBold'}
+          gutterTop={10}
+          gutterLeft={15}>
+          Create New Order
+        </Text>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.05)}
+          font={'RajdhaniBold'}
+          gutterTop={5}
+          gutterLeft={15}>
+          Autos
+        </Text>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.05)}
+          font={'RajdhaniMedium'}
+          gutterTop={5}
+          gutterLeft={15}>
+          Select PDF Type
+        </Text>
+        <View style={styles.mainCont}>
+          <View style={styles.flexCont}>
+            <TouchableOpacity
+              onPress={() => {
+                setTypeCheck(0);
+              }}
+              activeOpacity={0.7}
+              style={styles.halfCont}>
+              <Text
+                color={'black'}
+                fontSize={R.unit.width(0.05)}
+                font={'RajdhaniMedium'}>
+                Copart
+              </Text>
+              {typeCheck === 0 ? (
+                <View style={styles.imgStyleCont}>
+                  <Image source={R.image.Tick()} style={R.styles.img} />
+                </View>
+              ) : (
+                <View style={styles.circleCont} />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setTypeCheck(1);
+              }}
+              activeOpacity={0.7}
+              style={styles.halfCont}>
+              <Text
+                color={'black'}
+                fontSize={R.unit.width(0.05)}
+                font={'RajdhaniMedium'}>
+                IAAI
+              </Text>
+              {typeCheck === 1 ? (
+                <View style={styles.imgStyleCont}>
+                  <Image source={R.image.Tick()} style={R.styles.img} />
+                </View>
+              ) : (
+                <View style={styles.circleCont} />
+              )}
+            </TouchableOpacity>
+          </View>
+          <DropDown
+            data={SelectCustomer}
+            value={selectCustomerValue}
+            placeholderText={'Select Customer'}
+            onChange={item => {
+              setSelectCustomerValue(item.value);
             }}
-            activeOpacity={0.7}
-            style={styles.halfCont}>
-            <Text
-              color={'black'}
-              fontSize={R.unit.width(0.05)}
-              font={'RajdhaniMedium'}>
-              Copart
-            </Text>
-            {typeCheck === 0 ? (
-              <View style={styles.imgStyleCont}>
-                <Image source={R.image.Tick()} style={R.styles.img} />
-              </View>
-            ) : (
-              <View style={styles.circleCont} />
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setTypeCheck(1);
+          />
+          <TimeDatePicker
+            date={date}
+            getDate={getDate}
+            onChange={onChange}
+            show={show}
+            showDatePicker={showDatePicker}
+            text={'Purchased Date'}
+          />
+          <DropDown
+            data={Year}
+            value={YearValue}
+            placeholderText={'Year'}
+            onChange={item => {
+              setYearValue(item.value);
             }}
-            activeOpacity={0.7}
-            style={styles.halfCont}>
-            <Text
-              color={'black'}
-              fontSize={R.unit.width(0.05)}
-              font={'RajdhaniMedium'}>
-              IAAI
-            </Text>
-            {typeCheck === 1 ? (
-              <View style={styles.imgStyleCont}>
-                <Image source={R.image.Tick()} style={R.styles.img} />
-              </View>
-            ) : (
-              <View style={styles.circleCont} />
-            )}
-          </TouchableOpacity>
+          />
+          <DropDown
+            data={Make}
+            value={MakeValue}
+            placeholderText={'Make'}
+            onChange={item => {
+              setMakeValue(item.value);
+            }}
+          />
+          <DropDown
+            data={Model}
+            value={ModelValue}
+            placeholderText={'Model'}
+            onChange={item => {
+              setModelValue(item.value);
+            }}
+          />
+          <DropDown
+            data={Color}
+            value={ColorValue}
+            placeholderText={'Color'}
+            onChange={item => {
+              setColorValue(item.value);
+            }}
+          />
+          <DropDown
+            data={Auction}
+            value={AuctionValue}
+            placeholderText={'Auction'}
+            onChange={item => {
+              setAuctionValue(item.value);
+            }}
+          />
+          <DropDown
+            data={AuctionCity}
+            value={AuctionCityValue}
+            placeholderText={'Auction City'}
+            onChange={item => {
+              setAuctionCityValue(item.value);
+            }}
+          />
+          <DropDown
+            data={LOT}
+            value={LOTValue}
+            placeholderText={'LOT'}
+            onChange={item => {
+              setLOTValue(item.value);
+            }}
+          />
+          <TimeDatePicker
+            date={date1}
+            getDate={getDate1}
+            onChange={onChange1}
+            show={show1}
+            showDatePicker={showDatePicker1}
+            text={'Payment to Auction'}
+          />
+          <DropDown
+            data={Destination_Port}
+            value={Destination_PortValue}
+            placeholderText={'Destination Port'}
+            onChange={item => {
+              setDestination_PortValue(item.value);
+            }}
+          />
+          <DropDown
+            data={POL}
+            value={POLValue}
+            placeholderText={'P.O.L'}
+            onChange={item => {
+              setPOLValue(item.value);
+            }}
+          />
+          <TextInput
+            placeholderText={'VIN Number'}
+            width={0.95}
+            keyboardType={'numeric'}
+          />
+          <DropDown
+            data={Type}
+            value={TypeValue}
+            placeholderText={'Type'}
+            onChange={item => {
+              setTypeValue(item.value);
+            }}
+          />
+          <TextInput placeholderText={'Email'} width={0.95} />
+          <DropDown
+            data={VechileOperable}
+            value={VechileOperableValue}
+            placeholderText={'Vechile Operable'}
+            onChange={item => {
+              setVechileOperableValue(item.value);
+            }}
+          />
+          <View style={styles.flexCont}>
+            <TouchableOpacity
+              onPress={() => {
+                setTypeCheck1(0);
+              }}
+              activeOpacity={0.7}
+              style={styles.halfCont}>
+              <Text
+                color={'black'}
+                fontSize={R.unit.width(0.05)}
+                font={'RajdhaniMedium'}>
+                To Dismantle
+              </Text>
+              {typeCheck1 === 0 ? (
+                <View style={styles.imgStyleCont}>
+                  <Image source={R.image.Tick()} style={R.styles.img} />
+                </View>
+              ) : (
+                <View style={styles.circleCont} />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setTypeCheck1(1);
+              }}
+              activeOpacity={0.7}
+              style={styles.halfCont}>
+              <Text
+                color={'black'}
+                fontSize={R.unit.width(0.05)}
+                font={'RajdhaniMedium'}>
+                Self Delivered
+              </Text>
+              {typeCheck1 === 1 ? (
+                <View style={styles.imgStyleCont}>
+                  <Image source={R.image.Tick()} style={R.styles.img} />
+                </View>
+              ) : (
+                <View style={styles.circleCont} />
+              )}
+            </TouchableOpacity>
+          </View>
+          <TextInput
+            placeholderText={'Notes'}
+            width={0.95}
+            height={R.unit.height(0.25)}
+          />
+          <ActionButton
+            title={'Create'}
+            bgColor={'#262626'}
+            marginTop={0.04}
+            width={0.95}
+          />
         </View>
-        <DropDown
-          data={SelectCustomer}
-          value={selectCustomerValue}
-          placeholderText={'Select Customer'}
-          onChange={item => {
-            setSelectCustomerValue(item.value);
-          }}
-        />
-        <TimeDatePicker
-          date={date}
-          getDate={getDate}
-          onChange={onChange}
-          show={show}
-          showDatePicker={showDatePicker}
-          text={'Purchased Date'}
-        />
-        <DropDown
-          data={Year}
-          value={YearValue}
-          placeholderText={'Year'}
-          onChange={item => {
-            setYearValue(item.value);
-          }}
-        />
-        <DropDown
-          data={Make}
-          value={MakeValue}
-          placeholderText={'Make'}
-          onChange={item => {
-            setMakeValue(item.value);
-          }}
-        />
-        <DropDown
-          data={Model}
-          value={ModelValue}
-          placeholderText={'Model'}
-          onChange={item => {
-            setModelValue(item.value);
-          }}
-        />
-        <DropDown
-          data={Color}
-          value={ColorValue}
-          placeholderText={'Color'}
-          onChange={item => {
-            setColorValue(item.value);
-          }}
-        />
-        <DropDown
-          data={Auction}
-          value={AuctionValue}
-          placeholderText={'Auction'}
-          onChange={item => {
-            setAuctionValue(item.value);
-          }}
-        />
-        <DropDown
-          data={AuctionCity}
-          value={AuctionCityValue}
-          placeholderText={'Auction City'}
-          onChange={item => {
-            setAuctionCityValue(item.value);
-          }}
-        />
-        <DropDown
-          data={LOT}
-          value={LOTValue}
-          placeholderText={'LOT'}
-          onChange={item => {
-            setLOTValue(item.value);
-          }}
-        />
-        <TimeDatePicker
-          date={date1}
-          getDate={getDate1}
-          onChange={onChange1}
-          show={show1}
-          showDatePicker={showDatePicker1}
-          text={'Payment to Auction'}
-        />
-        <DropDown
-          data={Destination_Port}
-          value={Destination_PortValue}
-          placeholderText={'Destination Port'}
-          onChange={item => {
-            setDestination_PortValue(item.value);
-          }}
-        />
-        <DropDown
-          data={POL}
-          value={POLValue}
-          placeholderText={'P.O.L'}
-          onChange={item => {
-            setPOLValue(item.value);
-          }}
-        />
-        <TextInput
-          placeholderText={'VIN Number'}
-          width={0.95}
-          keyboardType={'numeric'}
-        />
-        <DropDown
-          data={Type}
-          value={TypeValue}
-          placeholderText={'Type'}
-          onChange={item => {
-            setTypeValue(item.value);
-          }}
-        />
-        <TextInput placeholderText={'Email'} width={0.95} />
-        <DropDown
-          data={VechileOperable}
-          value={VechileOperableValue}
-          placeholderText={'Vechile Operable'}
-          onChange={item => {
-            setVechileOperableValue(item.value);
-          }}
-        />
-        <View style={styles.flexCont}>
-          <TouchableOpacity
-            onPress={() => {
-              setTypeCheck1(0);
-            }}
-            activeOpacity={0.7}
-            style={styles.halfCont}>
-            <Text
-              color={'black'}
-              fontSize={R.unit.width(0.05)}
-              font={'RajdhaniMedium'}>
-              To Dismantle
-            </Text>
-            {typeCheck1 === 0 ? (
-              <View style={styles.imgStyleCont}>
-                <Image source={R.image.Tick()} style={R.styles.img} />
-              </View>
-            ) : (
-              <View style={styles.circleCont} />
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setTypeCheck1(1);
-            }}
-            activeOpacity={0.7}
-            style={styles.halfCont}>
-            <Text
-              color={'black'}
-              fontSize={R.unit.width(0.05)}
-              font={'RajdhaniMedium'}>
-              Self Delivered
-            </Text>
-            {typeCheck1 === 1 ? (
-              <View style={styles.imgStyleCont}>
-                <Image source={R.image.Tick()} style={R.styles.img} />
-              </View>
-            ) : (
-              <View style={styles.circleCont} />
-            )}
-          </TouchableOpacity>
-        </View>
-        <TextInput
-          placeholderText={'Notes'}
-          width={0.95}
-          height={R.unit.height(0.25)}
-        />
-        <ActionButton
-          title={'Create'}
-          bgColor={'#262626'}
-          marginTop={0.04}
-          width={0.95}
-        />
-      </View>
+      </FormScrollContainer>
     </ScreenBoiler>
   );
 };

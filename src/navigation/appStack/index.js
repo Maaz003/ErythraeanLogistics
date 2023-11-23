@@ -57,8 +57,6 @@ const CustomTabBar = ({state, descriptors, navigation}) => {
     };
   }, []);
 
-  console.log('keyboardShown ====>', keyboardOpen);
-
   return (
     <View
       style={[styles.tabBarContainer, {display: keyboardOpen ? 'none' : ''}]}>

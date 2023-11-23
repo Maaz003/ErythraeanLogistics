@@ -1,10 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, Dimensions, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Icon from '@components/common/Icon';
 import R from '@components/utils/R';
 import navigationRef from '@navRef';
-
-const width = Dimensions.get('window').width;
 
 function AuthHeader(props) {
   const {navigation, isBack = true, mainHeading} = props;
@@ -36,7 +34,7 @@ export default AuthHeader;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: width,
+    width: R.unit.width(1),
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: R.unit.scale(10),

@@ -17,6 +17,7 @@ function AuthFormScrollContainer(props) {
 
   return (
     <KeyboardAwareScrollView
+      enableOnAndroid={true}
       style={[R.styles.container, styles.mainLayout, containerStyles]}
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps={keyboardShouldPersistTaps}

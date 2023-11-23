@@ -1,126 +1,223 @@
-import React from 'react';
-import {Platform, StyleSheet, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useState, useEffect} from 'react';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  View,
+  Dimensions,
+  Keyboard,
+} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useSelector} from 'react-redux';
-import {navigationRef} from '@navRef';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import R from '@components/utils/R';
-import Icon from '@components/common/Icon';
+import {Images} from '../../assets/Images/index';
 
-//MEMBER STACK
-import CoachesScreen from '@containers/appContainer/CoachesScreen';
+// //Screens
+import Home from '../../containers/appContainer/Home/index';
+import ContainerList from '../../containers/appContainer/ContainerList/index';
+import Order from '../../containers/appContainer/Order/index';
+import Settings from '../../containers/appContainer/Settings/index';
+import TowFreight from '../../containers/appContainer/TowFreight/index';
+import SubBidderList from '../../containers/appContainer/SubBidderList/index';
+import AccountSetting from '../../containers/appContainer/AccountSetting/index';
+import CreateUser from '../../containers/appContainer/CreateUser/index';
+import CreateNewOrder from '../../containers/appContainer/CreateNewOrder/index';
+import OrderDetail from '../../containers/appContainer/OrderDetail/index';
+import ContainerDetail from '../../containers/appContainer/ContainerDetail/index';
 
-//CHATS STACK
-import ChatsListScreen from '@containers/appContainer/ChatModule/ChatsListScreen';
-import ChatScreen from '@containers/appContainer/ChatModule/ChatScreen';
+// // dimenstion
+const {width, height} = Dimensions.get('window');
 
-const AppStack = ({navigation}) => {
-  const Stack = createNativeStackNavigator();
-  const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-  const animationConfig = {
-    gestureDirection: 'horizontal',
-    animation: 'slide_from_right',
-    animationDuration: 200,
-  };
-  //COMPANY TAB
-  const AppTabNvigation = () => {
-    return (
-      <NavigationContainer ref={navigationRef}>
-        <Tab.Navigator
-          initialRouteName={'HomeTab'}
-          screenOptions={{
-            headerShown: false,
-            tabBarVisible: true,
-          }}
-          tabBarOptions={{
-            showLabel: false,
-            style: styles.tabContainer,
-          }}>
-          <Tab.Screen
-            name="CommunityTab"
-            component={CommunityStackNavigator}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View style={[styles.tab, focused && styles.focusedTab]}>
-                  <Icon
-                    name={'groups'}
-                    type={'MaterialIcons'}
-                    color={focused ? R.color.primaryColor1 : R.color.gray}
-                    size={35}
-                  />
-                </View>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="ChatTab"
-            component={ChatStackNavigator}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View style={[styles.tab, focused && styles.focusedTab]}>
-                  <Icon
-                    name={'chat'}
-                    type={'MaterialIcons'}
-                    color={focused ? R.color.primaryColor1 : R.color.gray}
-                    size={25}
-                  />
-                </View>
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
+const CustomTabBar = ({state, descriptors, navigation}) => {
+  // const focusedOptions = descriptors[state.routes[state.index].key].options;
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardOpen(true);
+      },
     );
-  };
 
-  const CommunityStackNavigator = props => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName={'Coaches'}>
-        <Stack.Screen name="Coaches" component={CoachesScreen} />
-      </Stack.Navigator>
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardOpen(false);
+      },
     );
-  };
 
-  const ChatStackNavigator = props => {
-    return (
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="ChatsList" component={ChatsListScreen} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
-      </Stack.Navigator>
-    );
-  };
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
-  return <AppTabNvigation />;
+  console.log('keyboardShown ====>', keyboardOpen);
+
+  return (
+    <View
+      style={[styles.tabBarContainer, {display: keyboardOpen ? 'none' : ''}]}>
+      <View style={styles.tabBar}>
+        {state.routes.map((route, index) => {
+          const {options} = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+              ? options.title
+              : route.name;
+
+          const isFocused = state.index === index;
+
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+              canPreventDefault: true,
+            });
+
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
+            }
+          };
+
+          return (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              key={index}
+              onPress={onPress}
+              style={[isFocused ? styles.centerTabItem : styles.tabItem]}>
+              <View style={[styles.imgStyleCont]}>
+                <Image
+                  source={Images[(!isFocused ? 'Un' : '') + label]}
+                  style={R.styles.img}
+                  resizeMode="contain"
+                />
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </View>
+  );
 };
-export default AppStack;
+
+const HomeScreens = () => (
+  <Stack.Navigator
+    initialRouteName="Home"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="CreateNewOrder" component={CreateNewOrder} />
+    <Stack.Screen name="OrderDetail" component={OrderDetail} />
+  </Stack.Navigator>
+);
+
+const ContainerListScreens = () => (
+  <Stack.Navigator
+    initialRouteName="ContainerList"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="ContainerList" component={ContainerList} />
+    <Stack.Screen name="ContainerDetail" component={ContainerDetail} />
+  </Stack.Navigator>
+);
+
+const OrderScreens = () => (
+  <Stack.Navigator
+    initialRouteName="Order"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="Order" component={Order} />
+  </Stack.Navigator>
+);
+
+const SettingsScreens = () => (
+  <Stack.Navigator
+    initialRouteName="Settings"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="Settings" component={Settings} />
+    <Stack.Screen name="SubBidderList" component={SubBidderList} />
+    <Stack.Screen name="AccountSetting" component={AccountSetting} />
+    <Stack.Screen name="CreateUser" component={CreateUser} />
+  </Stack.Navigator>
+);
+
+const TowFreightScreens = () => (
+  <Stack.Navigator
+    initialRouteName="TowFreight"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="TowFreight" component={TowFreight} />
+  </Stack.Navigator>
+);
+
+export const BottomNavigator = ({}) => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: 'blue',
+        },
+      }}
+      tabBar={props => <CustomTabBar {...props} />}>
+      <Tab.Screen name="Order" component={OrderScreens} />
+      <Tab.Screen name="ContainerList" component={ContainerListScreens} />
+      <Tab.Screen name="Home" component={HomeScreens} />
+      <Tab.Screen name="TowFreight" component={TowFreightScreens} />
+      <Tab.Screen name="Settings" component={SettingsScreens} />
+    </Tab.Navigator>
+  );
+};
 
 const styles = StyleSheet.create({
-  tabContainer: {
-    backgroundColor: R.color.primaryColor1,
-
-    paddingBottom: 0,
-    marginBottom: 0,
-    height: R.unit.scale(70),
-  },
-  tab: {
+  tabBarContainer: {
     alignItems: 'center',
-    width: R.unit.width(0.16),
-    height: 50,
-    justifyContent: 'center',
+    paddingBottom: 10,
+    position: 'absolute',
+    bottom: 25,
+    width: '100%',
   },
-  focusedTab: {
-    backgroundColor: R.color.white,
-    width: R.unit.width(0.16),
-    borderRadius: R.unit.scale(10),
-    // height: 50,
+  tabBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    width: '90%',
+    borderRadius: 10,
+    elevation: 2,
+    height: R.unit.height(0.065),
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 16,
+  },
+  centerTabItem: {
+    alignItems: 'center',
+    height: width * 0.17,
+    width: width * 0.17,
+    justifyContent: 'center',
+    backgroundColor: 'black',
+    borderRadius: width / 2,
+  },
+
+  imgStyleCont: {
+    width: R.unit.width(0.055),
+    height: R.unit.width(0.055),
   },
 });

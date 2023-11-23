@@ -8,21 +8,20 @@ function ScrollContainer(props) {
     containerStyles,
     children,
     keyboardShouldPersistTaps = 'always',
-    paddingBottom = 0,
-    height = '80%',
+    paddingBottom = 0.07,
     nestedScrollEnabled,
   } = props;
 
   return (
     <ScrollView
-      style={[styles.mainLayout, containerStyles, {height: height}]}
+      style={[styles.mainLayout, containerStyles]}
       showsVerticalScrollIndicator={false}
       nestedScrollEnabled={nestedScrollEnabled}
       keyboardShouldPersistTaps={keyboardShouldPersistTaps}
       contentContainerStyle={[
         styles.contentContainer,
         contentContainerStyles,
-        {paddingBottom: R.unit.scale(paddingBottom)},
+        {paddingBottom: R.unit.height(paddingBottom)},
       ]}>
       {children}
     </ScrollView>

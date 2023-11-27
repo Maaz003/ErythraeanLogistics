@@ -12,6 +12,7 @@ import AccountSetting from '@containers/appContainer/AccountSetting/index';
 
 // bottom tab
 import {BottomNavigator} from '@navigation/appStack';
+import {BottomDispatcherNavigator} from '@navigation/dispatcherStack';
 
 const AuthStack = () => {
   const Stack = createNativeStackNavigator();
@@ -19,7 +20,7 @@ const AuthStack = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
-        initialRouteName={'SplashScreen'}
+        initialRouteName={'BottomDispatcherNavigator'}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
@@ -28,6 +29,10 @@ const AuthStack = () => {
         <Stack.Screen name="AccountSetting" component={AccountSetting} />
         {/* bottom tab */}
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+        <Stack.Screen
+          name="BottomDispatcherNavigator"
+          component={BottomDispatcherNavigator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

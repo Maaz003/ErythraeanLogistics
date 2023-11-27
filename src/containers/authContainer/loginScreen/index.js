@@ -54,7 +54,8 @@ function LoginScreen({navigation, ...props}) {
               bgColor={'#262626'}
               marginTop={0.04}
               onPress={() => {
-                navigation.navigate('BottomNavigator');
+                navigation.navigate('BottomDispatcherNavigator');
+                // navigation.navigate('BottomNavigator');
               }}
             />
             <View style={styles.contLine} />

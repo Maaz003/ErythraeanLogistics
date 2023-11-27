@@ -11,10 +11,10 @@ const ActionSheet = ({isOpen, onClose, data}) => {
             renderItem={({item}) => {
               return (
                 <>
-                  <Divider borderColor="gray.300" width={'96'} />
+                  <Divider borderColor="black" width={'96'} />
                   <Actionsheet.Item
                     _text={{
-                      color: 'blue.500',
+                      color: 'black',
                     }}
                     onPress={item.onPress}>
                     {item.title}

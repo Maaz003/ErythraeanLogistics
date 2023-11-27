@@ -14,9 +14,11 @@ import R from '@components/utils/R';
 import {Images} from '../../assets/Images/index';
 
 // //Screens
-import Order from '@containers/dispatcherContainer/Order';
-import Home from '@containers/dispatcherContainer/Home';
-import YardDestination from '@containers/dispatcherContainer/YardDestination';
+import Order from '@containers/dispatcherContainer/Order/index';
+import Home from '@containers/dispatcherContainer/Home/index';
+import YardDestination from '@containers/dispatcherContainer/YardDestination/index';
+import CreateNewOrder from '@containers/dispatcherContainer/CreateNewOrder/index';
+import OrderDetail from '@containers/dispatcherContainer/OrderDetail/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -104,6 +106,8 @@ const HomeScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="CreateNewOrder" component={CreateNewOrder} />
+    <Stack.Screen name="OrderDetail" component={OrderDetail} />
   </Stack.Navigator>
 );
 
@@ -124,6 +128,8 @@ const OrderScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="Order" component={Order} />
+    <Stack.Screen name="CreateNewOrder" component={CreateNewOrder} />
+    <Stack.Screen name="OrderDetail" component={OrderDetail} />
   </Stack.Navigator>
 );
 

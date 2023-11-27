@@ -146,7 +146,14 @@ const Home = ({navigation, ...props}) => {
         <FlatList
           data={[1, 2, 3, 4, 5, 6]}
           renderItem={({index, item}) => {
-            return <DispatchOrderCard item={item} />;
+            return (
+              <DispatchOrderCard
+                onPress={() => {
+                  navigation.navigate('OrderDetail');
+                }}
+                item={item}
+              />
+            );
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
         />

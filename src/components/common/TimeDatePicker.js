@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, TouchableOpacity, Image, View} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import R from '@components/utils/R';
@@ -6,7 +6,7 @@ import Text from '@components/common/Text';
 
 function TimeDatePicker({showDatePicker, getDate, onChange, date, show, text}) {
   return (
-    <View>
+    <View style={{marginVertical: R.unit.height(0.01)}}>
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.contDate}

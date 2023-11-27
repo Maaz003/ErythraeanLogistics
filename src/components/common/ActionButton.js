@@ -5,6 +5,7 @@ import R from '@components/utils/R';
 const AddButton = ({
   onPress,
   marginTop = 0,
+  marginLeft = 0,
   bgColor,
   title,
   isImage,
@@ -12,6 +13,7 @@ const AddButton = ({
   width = 0.85,
   borderWidth,
   textColor = 'white',
+  alignSelf,
   ...props
 }) => {
   return (
@@ -23,8 +25,10 @@ const AddButton = ({
         {
           backgroundColor: bgColor,
           marginTop: R.unit.height(marginTop),
+          marginLeft: R.unit.height(marginLeft),
           width: R.unit.width(width),
           borderWidth: borderWidth,
+          alignSelf: alignSelf,
         },
       ]}>
       {isImage && (

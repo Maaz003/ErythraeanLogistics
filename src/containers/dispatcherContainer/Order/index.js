@@ -8,7 +8,7 @@ import Text from '@components/common/Text';
 
 const Order = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler isBack={true}>
+    <ScreenBoiler>
       <Text
         color={'black'}
         alignSelf={'flex-start'}

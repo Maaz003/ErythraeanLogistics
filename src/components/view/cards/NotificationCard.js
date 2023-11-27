@@ -91,7 +91,7 @@ const NotificationCard = ({
     </>
   );
 };
-export default NotificationCard;
+export default React.memo(NotificationCard);
 
 const styles = StyleSheet.create({
   mainCont: {

@@ -10,10 +10,7 @@ import FormScrollContainer from '@components/layout/FormScrollContainer';
 
 const AccountSetting = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}>
+    <ScreenBoiler isBack={true}>
       <FormScrollContainer>
         <Text
           color={'black'}

@@ -10,13 +10,7 @@ import FormScrollContainer from '@components/layout/FormScrollContainer';
 
 const CreateUser = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler isBack={true}>
       <FormScrollContainer>
         <View>
           <Text

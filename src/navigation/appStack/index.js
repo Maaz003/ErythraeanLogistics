@@ -25,6 +25,9 @@ import CreateUser from '../../containers/appContainer/CreateUser/index';
 import CreateNewOrder from '../../containers/appContainer/CreateNewOrder/index';
 import OrderDetail from '../../containers/appContainer/OrderDetail/index';
 import ContainerDetail from '../../containers/appContainer/ContainerDetail/index';
+import AccountingDetail from '../../containers/appContainer/AccountingDetail/index';
+import BalanceUS from '../../containers/appContainer/BalanceUS/index';
+import BalanceUSDetail from '../../containers/appContainer/BalanceUSDetail/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -148,6 +151,9 @@ const SettingsScreens = () => (
     <Stack.Screen name="SubBidderList" component={SubBidderList} />
     <Stack.Screen name="AccountSetting" component={AccountSetting} />
     <Stack.Screen name="CreateUser" component={CreateUser} />
+    <Stack.Screen name="AccountingDetail" component={AccountingDetail} />
+    <Stack.Screen name="BalanceUS" component={BalanceUS} />
+    <Stack.Screen name="BalanceUSDetail" component={BalanceUSDetail} />
   </Stack.Navigator>
 );
 

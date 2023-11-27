@@ -5,14 +5,12 @@ import Text from '@components/common/Text';
 import TitleImageContainerCard from './TitleImageContainerCard';
 import navigationRef from '@navRef';
 
-const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
-  console.log('ContainerListCard');
-
+const BalanceUSCard = ({item, onPress, ...props}) => {
   return (
     <>
       <TouchableOpacity
         onPress={() => {
-          navigationRef.navigate('ContainerDetail');
+          navigationRef.navigate('BalanceUSDetail');
         }}
         activeOpacity={0.8}
         style={[styles.mainCont]}>
@@ -25,9 +23,7 @@ const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
               000066
             </Text>
           </View>
-          <TouchableOpacity
-            style={styles.circleCont}
-            onPress={onPressActionSheet}>
+          <TouchableOpacity style={styles.circleCont}>
             <View style={styles.circle} />
             <View style={styles.circle} />
             <View style={styles.circle} />
@@ -61,7 +57,7 @@ const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
     </>
   );
 };
-export default React.memo(ContainerListCard);
+export default React.memo(BalanceUSCard);
 
 const styles = StyleSheet.create({
   mainCont: {

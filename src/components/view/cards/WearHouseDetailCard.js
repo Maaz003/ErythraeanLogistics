@@ -51,7 +51,7 @@ function WearHouseDetailCard({isEven, ...props}) {
     </View>
   );
 }
-export default WearHouseDetailCard;
+export default React.memo(WearHouseDetailCard);
 
 const styles = StyleSheet.create({
   mainCont: {

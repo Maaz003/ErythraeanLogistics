@@ -132,7 +132,7 @@ const TowCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default TowCard;
+export default React.memo(TowCard);
 
 const styles = StyleSheet.create({
   mainCont: {

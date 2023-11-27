@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,16 +11,39 @@ import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ContainerListCard from '@components/view/cards/ContainerListCard';
+import ActionSheet from '@components/common/ActionSheet';
+import {useCallback} from 'react';
 
 const ContainerList = ({navigation, ...props}) => {
+  const [isActionSheet, setIsActionSheet] = useState(false);
+
+  const onPressActionSheet = useCallback(() => {
+    setIsActionSheet(true);
+  }, []);
+
+  const actionButton = [
+    {
+      title: 'Action Button 1',
+      onPress: () => {
+        console.log('Action Button 1');
+      },
+    },
+    {
+      title: 'Action Button 2',
+      onPress: () => {
+        console.log('Action Button 2');
+      },
+    },
+    {
+      title: 'Action Button 3',
+      onPress: () => {
+        console.log('Action Button 3');
+      },
+    },
+  ];
+
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <View style={styles.flexCont}>
         <Text
           color={'black'}
@@ -35,18 +58,25 @@ const ContainerList = ({navigation, ...props}) => {
           </View>
         </TouchableOpacity>
       </View>
+
       <FlatList
-        data={[1, 2, 3, 4, 5, 6]}
+        data={[{title: '123'}, {title: '456'}, {title: '789'}, {title: '012'}]}
         renderItem={({index, item}) => {
           return (
             <ContainerListCard
-              onPress={() => {
-                navigation.navigate('ContainerDetail');
-              }}
+              item={item}
+              onPressActionSheet={onPressActionSheet}
             />
           );
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
+      />
+      <ActionSheet
+        isOpen={isActionSheet}
+        onClose={() => {
+          setIsActionSheet(false);
+        }}
+        data={actionButton}
       />
     </ScreenBoiler>
   );

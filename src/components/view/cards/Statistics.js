@@ -39,7 +39,7 @@ function Statistics({isEven, item, ...props}) {
     </View>
   );
 }
-export default Statistics;
+export default React.memo(Statistics);
 
 const styles = StyleSheet.create({
   mainCont: {

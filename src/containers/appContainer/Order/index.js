@@ -59,13 +59,7 @@ const Orders = ({navigation, ...props}) => {
   ];
 
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <ScrollContainer>
         <View style={styles.flatWearHouseDetailCardCont}>
           <Text

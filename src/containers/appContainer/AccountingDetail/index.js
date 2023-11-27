@@ -5,36 +5,36 @@ import R from '@components/utils/R';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ActionButton from '@components/common/ActionButton';
 
-const Settings = ({navigation, ...props}) => {
+const AccountingDetail = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler>
+    <ScreenBoiler isBack={true}>
       <View style={styles.mainCont}>
         <ActionButton
-          title={'Accounting'}
+          title={'Balance US'}
           bgColor={'#262626'}
           marginTop={0.04}
           isImage={true}
-          image={R.image.Calculator()}
+          image={R.image.Balance()}
           onPress={() => {
-            navigation.navigate('AccountingDetail');
+            navigation.navigate('BalanceUS');
           }}
         />
         <ActionButton
-          title={'Sub Bidder'}
+          title={'Payments'}
           bgColor={'#262626'}
           marginTop={0.04}
           isImage={true}
-          image={R.image.User()}
-          onPress={() => {
-            navigation.navigate('SubBidderList');
-          }}
+          image={R.image.Payment()}
+          // onPress={() => {
+          //   navigation.navigate('SubBidderList');
+          // }}
         />
         <ActionButton
-          title={'Logout'}
+          title={'Invoice'}
           bgColor={'#262626'}
           marginTop={0.04}
           isImage={true}
-          image={R.image.Logout()}
+          image={R.image.Invoice()}
           // onPress={() => {
           //   navigation.navigate('SubBidderList');
           // }}
@@ -44,7 +44,7 @@ const Settings = ({navigation, ...props}) => {
   );
 };
 
-export default Settings;
+export default AccountingDetail;
 
 const styles = StyleSheet.create({
   mainCont: {

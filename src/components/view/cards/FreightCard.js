@@ -172,7 +172,7 @@ const FreightCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default FreightCard;
+export default React.memo(FreightCard);
 
 const styles = StyleSheet.create({
   mainCont: {

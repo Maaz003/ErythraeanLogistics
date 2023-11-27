@@ -5,15 +5,9 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import OrderDetailCard from '@components/view/cards/OrderDetailCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 
-const VehicleDetail = ({navigation, ...props}) => {
+const OrderDetail = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler isBack={true}>
       <ScrollContainer paddingBottom={0.15}>
         <OrderDetailCard />
       </ScrollContainer>
@@ -21,6 +15,6 @@ const VehicleDetail = ({navigation, ...props}) => {
   );
 };
 
-export default VehicleDetail;
+export default OrderDetail;
 
 const styles = StyleSheet.create({});

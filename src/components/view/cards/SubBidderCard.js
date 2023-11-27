@@ -124,7 +124,7 @@ const SubBidderCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default SubBidderCard;
+export default React.memo(SubBidderCard);
 
 const styles = StyleSheet.create({
   mainCont: {

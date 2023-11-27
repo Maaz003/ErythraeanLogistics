@@ -14,13 +14,7 @@ import SubBidderCard from '@components/view/cards/SubBidderCard';
 
 const SubBidderList = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler isBack={true}>
       <View style={styles.flexCont}>
         <Text
           color={'black'}

@@ -49,5 +49,10 @@ const image = {
   PhoneWhite: () => require('@assets/Images/phone-white.png'),
   Tally: () => require('@assets/Images/tally-4.png'),
   Warehouse: () => require('@assets/Images/warehouse.png'),
+  Logout: () => require('@assets/Images/Logout.png'),
+  Balance: () => require('@assets/Images/Balance.png'),
+  Payment: () => require('@assets/Images/Payment.png'),
+  Invoice: () => require('@assets/Images/Invoice.png'),
+  LeftArrow: () => require('@assets/Images/LeftArrow.png'),
 };
 export default image;

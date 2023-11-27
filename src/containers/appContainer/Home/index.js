@@ -88,13 +88,7 @@ const Home = ({navigation, ...props}) => {
   ];
 
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <ScrollContainer>
         <View style={styles.flatOrderCardCont}>
           <Text

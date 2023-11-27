@@ -35,18 +35,29 @@ import moment from 'moment';
 
 const CreateNewOrder = ({navigation, ...props}) => {
   //dropdown
-  const [selectCustomerValue, setSelectCustomerValue] = useState(null);
-  const [YearValue, setYearValue] = useState(null);
-  const [MakeValue, setMakeValue] = useState(null);
-  const [ModelValue, setModelValue] = useState(null);
-  const [ColorValue, setColorValue] = useState(null);
-  const [AuctionValue, setAuctionValue] = useState(null);
-  const [AuctionCityValue, setAuctionCityValue] = useState(null);
-  const [LOTValue, setLOTValue] = useState(null);
-  const [Destination_PortValue, setDestination_PortValue] = useState(null);
-  const [POLValue, setPOLValue] = useState(null);
-  const [TypeValue, setTypeValue] = useState(null);
-  const [VechileOperableValue, setVechileOperableValue] = useState(null);
+
+  const [values, setValues] = useState({
+    selectCustomer: null,
+    year: null,
+    make: null,
+    model: null,
+    color: null,
+    auction: null,
+    auctionCity: null,
+    lot: null,
+    destinationPort: null,
+    pol: null,
+    type: null,
+    vehicleOperable: null,
+  });
+
+  // Update the state based on the dropdown selection
+  const handleDropdownChange = (key, value) => {
+    setValues({
+      ...values,
+      [key]: value,
+    });
+  };
   //dropdown
 
   //time
@@ -83,14 +94,10 @@ const CreateNewOrder = ({navigation, ...props}) => {
 
   const [typeCheck, setTypeCheck] = useState(2);
   const [typeCheck1, setTypeCheck1] = useState(2);
+
+  console.log('values Dropdown ===>', values);
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler isBack={true}>
       <FormScrollContainer paddingBottom={0.15}>
         <Text
           color={'black'}
@@ -164,10 +171,10 @@ const CreateNewOrder = ({navigation, ...props}) => {
           </View>
           <DropDown
             data={SelectCustomer}
-            value={selectCustomerValue}
+            value={values.selectCustomer}
             placeholderText={'Select Customer'}
             onChange={item => {
-              setSelectCustomerValue(item.value);
+              handleDropdownChange('selectCustomer', item.value);
             }}
           />
           <TimeDatePicker
@@ -180,58 +187,58 @@ const CreateNewOrder = ({navigation, ...props}) => {
           />
           <DropDown
             data={Year}
-            value={YearValue}
+            value={values.year}
             placeholderText={'Year'}
             onChange={item => {
-              setYearValue(item.value);
+              handleDropdownChange('year', item.value);
             }}
           />
           <DropDown
             data={Make}
-            value={MakeValue}
+            value={values.make}
             placeholderText={'Make'}
             onChange={item => {
-              setMakeValue(item.value);
+              handleDropdownChange('make', item.value);
             }}
           />
           <DropDown
             data={Model}
-            value={ModelValue}
+            value={values.model}
             placeholderText={'Model'}
             onChange={item => {
-              setModelValue(item.value);
+              handleDropdownChange('model', item.value);
             }}
           />
           <DropDown
             data={Color}
-            value={ColorValue}
+            value={values.color}
             placeholderText={'Color'}
             onChange={item => {
-              setColorValue(item.value);
+              handleDropdownChange('color', item.value);
             }}
           />
           <DropDown
             data={Auction}
-            value={AuctionValue}
+            value={values.auction}
             placeholderText={'Auction'}
             onChange={item => {
-              setAuctionValue(item.value);
+              handleDropdownChange('auction', item.value);
             }}
           />
           <DropDown
             data={AuctionCity}
-            value={AuctionCityValue}
+            value={values.auctionCity}
             placeholderText={'Auction City'}
             onChange={item => {
-              setAuctionCityValue(item.value);
+              handleDropdownChange('auctionCity', item.value);
             }}
           />
           <DropDown
             data={LOT}
-            value={LOTValue}
+            value={values.lot}
             placeholderText={'LOT'}
             onChange={item => {
-              setLOTValue(item.value);
+              handleDropdownChange('lot', item.value);
             }}
           />
           <TimeDatePicker
@@ -244,18 +251,18 @@ const CreateNewOrder = ({navigation, ...props}) => {
           />
           <DropDown
             data={Destination_Port}
-            value={Destination_PortValue}
+            value={values.destinationPort}
             placeholderText={'Destination Port'}
             onChange={item => {
-              setDestination_PortValue(item.value);
+              handleDropdownChange('destinationPort', item.value);
             }}
           />
           <DropDown
             data={POL}
-            value={POLValue}
+            value={values.pol}
             placeholderText={'P.O.L'}
             onChange={item => {
-              setPOLValue(item.value);
+              handleDropdownChange('pol', item.value);
             }}
           />
           <TextInput
@@ -265,19 +272,19 @@ const CreateNewOrder = ({navigation, ...props}) => {
           />
           <DropDown
             data={Type}
-            value={TypeValue}
+            value={values.type}
             placeholderText={'Type'}
             onChange={item => {
-              setTypeValue(item.value);
+              handleDropdownChange('type', item.value);
             }}
           />
           <TextInput placeholderText={'Email'} width={0.95} />
           <DropDown
             data={VechileOperable}
-            value={VechileOperableValue}
+            value={values.vehicleOperable}
             placeholderText={'Vechile Operable'}
             onChange={item => {
-              setVechileOperableValue(item.value);
+              handleDropdownChange('vehicleOperable', item.value);
             }}
           />
           <View style={styles.flexCont}>

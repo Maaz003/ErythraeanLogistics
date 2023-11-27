@@ -29,7 +29,7 @@ const TitleImageContainerCard = ({title, data, image}) => {
   );
 };
 
-export default TitleImageContainerCard;
+export default React.memo(TitleImageContainerCard);
 
 const styles = StyleSheet.create({
   flexCont: {

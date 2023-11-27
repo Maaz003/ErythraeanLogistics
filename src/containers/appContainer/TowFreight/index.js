@@ -107,13 +107,7 @@ const TowFreight = ({navigation, ...props}) => {
   };
 
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <ScrollContainer>
         <Text
           color={'black'}

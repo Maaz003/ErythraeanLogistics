@@ -1,14 +1,27 @@
 import R from '@components/utils/R';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {StyleSheet, StatusBar, SafeAreaView} from 'react-native';
 import {useColorMode} from 'native-base';
 import Header from '@components/common/Header';
+import navigationRef from '@navRef';
 
 export default function ScreenBoiler(props) {
-  const {children, onPressNotification, onPressProfile} = props;
+  const {children, isBack = false} = props;
 
   const theme = useColorMode();
   const colorMode = theme?.colorMode;
+
+  const onPressNotification = useCallback(() => {
+    navigationRef.navigate('Notification');
+  }, []);
+
+  const onPressProfile = useCallback(() => {
+    navigationRef.navigate('AccountSetting');
+  }, []);
+
+  const onPressBack = useCallback(() => {
+    navigationRef.goBack();
+  }, []);
 
   return (
     <SafeAreaView style={styles.background}>
@@ -28,6 +41,8 @@ export default function ScreenBoiler(props) {
       <Header
         onPressNotification={onPressNotification}
         onPressProfile={onPressProfile}
+        isBack={isBack}
+        onPressBack={onPressBack}
       />
       {children}
     </SafeAreaView>

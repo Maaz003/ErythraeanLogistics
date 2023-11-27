@@ -8,10 +8,7 @@ import NotificationCard from '@components/view/cards/NotificationCard';
 
 const Notification = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <View style={styles.flexCont}>
         <Text
           color={'black'}

@@ -3,8 +3,8 @@ import {View, StyleSheet, Image} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
-const ContainerDetailCard = ({item, onPress, ...props}) => {
-  const ContainerDetailContainerCard = ({title, data, image}) => {
+const BalanceUSDetailCard = ({item, onPress, ...props}) => {
+  const BalanceDetailContainerCard = ({title, data, image}) => {
     return (
       <View style={styles.mainCont}>
         <View style={styles.imgStyleMainCont}>
@@ -40,7 +40,7 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
           alignSelf={'flex-start'}
           fontSize={R.unit.width(0.065)}
           font={'RajdhaniBold'}>
-          Container Detail
+          Balance US Detail
         </Text>
         <View style={styles.idCont}>
           <Text
@@ -53,108 +53,108 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
       </View>
 
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Booking Number'}
           data={'8RKNBASD545355486'}
           image={R.image.CirclePlus()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Lines'}
           data={'Y'}
           image={R.image.Tally()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Port'}
           data={'Y'}
           image={R.image.Warehouse()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Size'}
           data={'45 feet / 5 auto'}
           image={R.image.Gear()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Dock Receipt'}
           data={'PDF'}
           image={R.image.Dollar()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'BI Copy'}
           data={'None'}
           image={R.image.Key()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Telex Release'}
           data={'None'}
           image={R.image.City()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Invoice from auction'}
           data={'PDF'}
           image={R.image.List()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Expected Arrival Date'}
           data={'None'}
           image={R.image.CalendarWhite()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Date of Release'}
           data={'None'}
           image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Date of Loading'}
           data={'07-11-2023'}
           image={R.image.CalendarWhite()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Container Arrival Date'}
           data={'07-11-2023'}
           image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Unloading Date'}
           data={'None'}
           image={R.image.CalendarWhite()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Invoice'}
           data={'PDF'}
           image={R.image.Dollar()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Invoice Amount'}
           data={'PDF'}
           image={R.image.Dollar()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Paid Ammount'}
           data={'None'}
           image={R.image.Dollar()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Validations'}
           data={'None'}
           image={R.image.InputText()}
         />
-        <ContainerDetailContainerCard
+        <BalanceDetailContainerCard
           title={'Delivery Order'}
           data={'None'}
           image={R.image.CalendarStar()}
@@ -163,7 +163,7 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default React.memo(ContainerDetailCard);
+export default React.memo(BalanceUSDetailCard);
 
 const styles = StyleSheet.create({
   container: {

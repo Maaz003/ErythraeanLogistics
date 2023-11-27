@@ -283,7 +283,7 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default OrderDetailCard;
+export default React.memo(OrderDetailCard);
 
 const styles = StyleSheet.create({
   container: {

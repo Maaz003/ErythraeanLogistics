@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import Text from './Text';
 import R from '@components/utils/R';
-import Icon from './Icon';
 import {Dropdown} from 'react-native-element-dropdown';
 
 const DropDown = ({placeholderText, data, value, onChange, ...props}) => {

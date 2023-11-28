@@ -17,7 +17,7 @@ import ActionButton from '@components/common/ActionButton';
 function LoginScreen({navigation, ...props}) {
   return (
     <AuthBoiler>
-      <AuthFormScrollContainer showAuthHeader={true}>
+      <AuthFormScrollContainer>
         <ImageBackground
           source={R.image.AuthBackground()}
           style={styles.ImageBackgroundStyle}>

@@ -50,12 +50,19 @@ function LoginScreen({navigation, ...props}) {
               Icon={R.image.Password()}
             />
             <ActionButton
-              title={'Login'}
+              title={'Login (User)'}
               bgColor={'#262626'}
               marginTop={0.04}
               onPress={() => {
+                navigation.navigate('BottomNavigator');
+              }}
+            />
+            <ActionButton
+              title={'Login (Dispatcher)'}
+              bgColor={'#262626'}
+              marginTop={0.01}
+              onPress={() => {
                 navigation.navigate('BottomDispatcherNavigator');
-                // navigation.navigate('BottomNavigator');
               }}
             />
             <View style={styles.contLine} />

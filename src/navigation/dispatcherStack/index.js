@@ -19,6 +19,7 @@ import Home from '@containers/dispatcherContainer/Home/index';
 import YardDestination from '@containers/dispatcherContainer/YardDestination/index';
 import CreateNewOrder from '@containers/dispatcherContainer/CreateNewOrder/index';
 import OrderDetail from '@containers/dispatcherContainer/OrderDetail/index';
+import Carrier from '@containers/dispatcherContainer/Carrier/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -132,6 +133,15 @@ const OrderScreens = () => (
     <Stack.Screen name="OrderDetail" component={OrderDetail} />
   </Stack.Navigator>
 );
+const CarrierScreens = () => (
+  <Stack.Navigator
+    initialRouteName="Carrier"
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <Stack.Screen name="Carrier" component={Carrier} />
+  </Stack.Navigator>
+);
 
 export const BottomDispatcherNavigator = ({}) => {
   return (
@@ -148,6 +158,7 @@ export const BottomDispatcherNavigator = ({}) => {
       <Tab.Screen name="Order" component={OrderScreens} />
       <Tab.Screen name="Home" component={HomeScreens} />
       <Tab.Screen name="YardDestination" component={YardDestinationScreens} />
+      <Tab.Screen name="Carrier" component={CarrierScreens} />
     </Tab.Navigator>
   );
 };

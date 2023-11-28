@@ -20,7 +20,7 @@ const AuthStack = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
-        initialRouteName={'BottomDispatcherNavigator'}
+        initialRouteName={'SplashScreen'}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />

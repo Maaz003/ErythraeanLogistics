@@ -15,7 +15,7 @@ const DispatcherOrderDetailCard = ({item, onPress, ...props}) => {
         <View style={{marginTop: R.unit.height(0.005)}}>
           <Text
             color={'black'}
-            fontSize={R.unit.width(0.047)}
+            fontSize={R.unit.width(0.045)}
             font={'RajdhaniSemiBold'}
             width={R.unit.width(0.4)}>
             {title}

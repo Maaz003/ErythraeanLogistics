@@ -20,6 +20,7 @@ import YardDestination from '@containers/dispatcherContainer/YardDestination/ind
 import CreateNewOrder from '@containers/dispatcherContainer/CreateNewOrder/index';
 import OrderDetail from '@containers/dispatcherContainer/OrderDetail/index';
 import Carrier from '@containers/dispatcherContainer/Carrier/index';
+import CreateCarrierCompany from '@containers/dispatcherContainer/CreateCarrierCompany/index';
 
 // // dimenstion
 const {width, height} = Dimensions.get('window');
@@ -140,6 +141,7 @@ const CarrierScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="Carrier" component={Carrier} />
+    <Stack.Screen name="CreateCarrierCompany" component={CreateCarrierCompany} />
   </Stack.Navigator>
 );
 

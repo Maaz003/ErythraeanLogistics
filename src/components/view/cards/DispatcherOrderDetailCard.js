@@ -17,14 +17,14 @@ const DispatcherOrderDetailCard = ({item, onPress, ...props}) => {
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniSemiBold'}
-            width={R.unit.width(0.4)}>
+            width={R.unit.width(0.375)}>
             {title}
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.04)}
             font={'RajdhaniMedium'}
-            width={R.unit.width(0.4)}>
+            width={R.unit.width(0.375)}>
             {data}
           </Text>
         </View>
@@ -91,7 +91,7 @@ const DispatcherOrderDetailCard = ({item, onPress, ...props}) => {
       <View style={styles.container}>
         <DispatcherOrderDetailContainerCard
           title={'VIN Number'}
-          data={'8RKNBASD545355486'}
+          data={'8RKNBASASFSDDFD545355486'}
           image={R.image.Tally()}
         />
 
@@ -162,7 +162,7 @@ const DispatcherOrderDetailCard = ({item, onPress, ...props}) => {
         <DispatcherOrderDetailContainerCard
           title={'Purchased Date'}
           data={'07-11-2023'}
-          image={R.image.CalendarStar}
+          image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
@@ -273,7 +273,7 @@ const DispatcherOrderDetailCard = ({item, onPress, ...props}) => {
         alignSelf={'flex-start'}
         fontSize={R.unit.width(0.05)}
         font={'RajdhaniBold'}
-        gutterTop={15}
+        gutterTop={5}
         gutterLeft={10}>
         Origin
       </Text>
@@ -693,7 +693,8 @@ const styles = StyleSheet.create({
     width: R.unit.width(0.95),
     alignSelf: 'center',
     flexDirection: 'row',
-    alignItems: 'center',
+    // alignItems: 'center',
+    justifyContent:'space-between'
   },
   //comp
   imgStyleCont: {
@@ -712,7 +713,7 @@ const styles = StyleSheet.create({
   mainCont: {
     // backgroundColor: 'red',
     flexDirection: 'row',
-    width: R.unit.width(0.48),
+    width: R.unit.width(0.47),
     // alignSelf: 'center',
   },
 

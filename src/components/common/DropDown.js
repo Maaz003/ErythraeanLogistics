@@ -19,6 +19,7 @@ const DropDown = ({placeholderText, data, value, onChange, ...props}) => {
         placeholder={placeholderText}
         value={value}
         onChange={onChange}
+        fontFamily='Rajdhani-Medium'
       />
     </View>
   );
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
   label: {
     position: 'absolute',
     backgroundColor: 'white',
+    // backgroundColor: 'red',
     left: 22,
     top: 8,
     zIndex: 999,
@@ -54,12 +56,12 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: R.unit.width(0.045),
-    fontFamily: 'Rajdhani-Medium',
+    // fontFamily: 'Rajdhani-Medium',
     color: R.color.gray2,
   },
   selectedTextStyle: {
     fontSize: R.unit.width(0.045),
-    fontFamily: 'Rajdhani-Medium',
+    // fontFamily: 'Rajdhani-Medium',
     color: R.color.black,
   },
 });

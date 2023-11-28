@@ -55,5 +55,6 @@ const image = {
   Invoice: () => require('@assets/Images/Invoice.png'),
   LeftArrow: () => require('@assets/Images/LeftArrow.png'),
   PlusBlack: () => require('@assets/Images/PlusBlack.png'),
+  PDF: () => require('@assets/Images/PDF.png'),
 };
 export default image;

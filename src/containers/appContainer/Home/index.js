@@ -93,52 +93,48 @@ const Home = ({navigation, ...props}) => {
   return (
     <ScreenBoiler>
       <ScrollContainer>
-        <View style={styles.flatOrderCardCont}>
-          <Text
-            color={'black'}
-            alignSelf={'flex-start'}
-            fontSize={R.unit.width(0.065)}
-            font={'RajdhaniBold'}
-            gutterTop={10}
-            gutterLeft={10}>
-            Statistics
-          </Text>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={statistics}
-            renderItem={({index, item}) => {
-              return (
-                <Statistics
-                  item={item}
-                  isEven={index % 2 == 0 ? true : false}
-                />
-              );
-            }}
-          />
-        </View>
-        <View style={styles.flatWearHouseDetailCardCont}>
-          <Text
-            color={'black'}
-            alignSelf={'flex-start'}
-            fontSize={R.unit.width(0.065)}
-            font={'RajdhaniBold'}
-            gutterTop={10}
-            gutterBottom={10}
-            gutterLeft={10}>
-            ORDERS STATISTICS BY P.O.L
-          </Text>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={[1, 2, 3, 4, 5, 6]}
-            renderItem={({index, item}) => {
-              return (
-                <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
-              );
-            }}
-          />
-        </View>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.065)}
+          font={'RajdhaniBold'}
+          gutterTop={10}
+          gutterLeft={25}>
+          Statistics
+        </Text>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={statistics}
+          renderItem={({index, item}) => {
+            return (
+              <Statistics item={item} isEven={index % 2 == 0 ? true : false} />
+            );
+          }}
+          contentContainerStyle={styles.flatCont}
+        />
+
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.065)}
+          font={'RajdhaniBold'}
+          gutterTop={10}
+          gutterBottom={10}
+          gutterLeft={25}>
+          ORDERS STATISTICS BY P.O.L
+        </Text>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4, 5, 6]}
+          renderItem={({index, item}) => {
+            return (
+              <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
+            );
+          }}
+          contentContainerStyle={styles.flatCont}
+        />
         <View style={styles.flexCont}>
           <Text
             color={'black'}
@@ -247,15 +243,9 @@ const Home = ({navigation, ...props}) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  flatOrderCardCont: {
+  flatCont: {
     paddingLeft: R.unit.width(0.03),
-    height: R.unit.height(0.33),
-    // backgroundColor:'red'
-  },
-  flatWearHouseDetailCardCont: {
-    paddingLeft: R.unit.width(0.03),
-    // backgroundColor: 'red',
-    height: R.unit.height(0.39),
+    paddingBottom: R.unit.height(0.03),
   },
 
   contentContainerStyle: {

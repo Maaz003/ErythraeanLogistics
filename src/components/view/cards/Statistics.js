@@ -44,7 +44,8 @@ export default React.memo(Statistics);
 const styles = StyleSheet.create({
   mainCont: {
     width: R.unit.width(0.4),
-    height: R.unit.height(0.23),
+    // height: R.unit.height(0.23),
+    paddingVertical: R.unit.height(0.02),
     backgroundColor: '#262626',
     borderRadius: 15,
     justifyContent: 'center',

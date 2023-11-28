@@ -64,28 +64,27 @@ const Orders = ({navigation, ...props}) => {
   return (
     <ScreenBoiler>
       <ScrollContainer>
-        <View style={styles.flatWearHouseDetailCardCont}>
-          <Text
-            color={'black'}
-            alignSelf={'flex-start'}
-            fontSize={R.unit.width(0.065)}
-            font={'RajdhaniBold'}
-            gutterTop={10}
-            gutterBottom={10}
-            gutterLeft={10}>
-            ORDERS STATISTICS BY P.O.L
-          </Text>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={[1, 2, 3, 4, 5, 6]}
-            renderItem={({index, item}) => {
-              return (
-                <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
-              );
-            }}
-          />
-        </View>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.065)}
+          font={'RajdhaniBold'}
+          gutterTop={10}
+          gutterBottom={10}
+          gutterLeft={10}>
+          ORDERS STATISTICS BY P.O.L
+        </Text>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4, 5, 6]}
+          renderItem={({index, item}) => {
+            return (
+              <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
+            );
+          }}
+          contentContainerStyle={styles.flatCont}
+        />
         <View style={styles.flexCont}>
           <Text
             color={'black'}
@@ -184,10 +183,9 @@ const Orders = ({navigation, ...props}) => {
 export default Orders;
 
 const styles = StyleSheet.create({
-  flatWearHouseDetailCardCont: {
+  flatCont: {
     paddingLeft: R.unit.width(0.03),
-    // backgroundColor: 'red',
-    height: R.unit.height(0.39),
+    paddingBottom: R.unit.height(0.03),
   },
   circleCont: {
     width: R.unit.width(0.11),

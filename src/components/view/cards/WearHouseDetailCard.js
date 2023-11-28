@@ -10,6 +10,28 @@ function WearHouseDetailCard({isEven, ...props}) {
     {name: 'At The Terminal', number: '4'},
     {name: 'Loaded', number: '4'},
   ];
+
+  const OrderStatisticsCard = ({item, number}) => {
+    return (
+      <View style={styles.flexCont}>
+        <Text
+          color={isEven ? 'white' : 'black'}
+          fontSize={R.unit.width(0.05)}
+          font={'RajdhaniMedium'}
+          gutterTop={10}>
+          {item}
+        </Text>
+        <Text
+          color={isEven ? 'white' : 'black'}
+          fontSize={R.unit.width(0.05)}
+          font={'RajdhaniMedium'}
+          gutterTop={10}>
+          {number}
+        </Text>
+      </View>
+    );
+  };
+
   return (
     <View
       style={[styles.mainCont, {backgroundColor: isEven ? 'black' : 'white'}]}>
@@ -25,29 +47,10 @@ function WearHouseDetailCard({isEven, ...props}) {
       <View
         style={[styles.line, {backgroundColor: isEven ? 'white' : 'black'}]}
       />
-      <FlatList
-        data={data}
-        renderItem={({item, index}) => {
-          return (
-            <View key={index} style={styles.flexCont}>
-              <Text
-                color={isEven ? 'white' : 'black'}
-                fontSize={R.unit.width(0.05)}
-                font={'RajdhaniMedium'}
-                gutterTop={10}>
-                {item.name}
-              </Text>
-              <Text
-                color={isEven ? 'white' : 'black'}
-                fontSize={R.unit.width(0.05)}
-                font={'RajdhaniMedium'}
-                gutterTop={10}>
-                {item.number}
-              </Text>
-            </View>
-          );
-        }}
-      />
+      <OrderStatisticsCard item={'Pending'} number={'4'}/>
+      <OrderStatisticsCard item={'Dispatch'} number={'0'}/>
+      <OrderStatisticsCard item={'At The Terminal'} number={'4'}/>
+      <OrderStatisticsCard item={'Loaded'} number={'4'}/>
     </View>
   );
 }
@@ -56,7 +59,7 @@ export default React.memo(WearHouseDetailCard);
 const styles = StyleSheet.create({
   mainCont: {
     width: R.unit.width(0.55),
-    height: R.unit.height(0.3),
+    // height: R.unit.height(0.3),
     backgroundColor: '#262626',
     borderRadius: 15,
     alignItems: 'center',

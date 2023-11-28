@@ -40,30 +40,26 @@ const Home = ({navigation, ...props}) => {
   return (
     <ScreenBoiler>
       <ScrollContainer>
-        <View style={styles.flatOrderCardCont}>
-          <Text
-            color={'black'}
-            alignSelf={'flex-start'}
-            fontSize={R.unit.width(0.065)}
-            font={'RajdhaniBold'}
-            gutterTop={10}
-            gutterLeft={10}>
-            Statistics
-          </Text>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={statistics}
-            renderItem={({index, item}) => {
-              return (
-                <Statistics
-                  item={item}
-                  isEven={index % 2 == 0 ? true : false}
-                />
-              );
-            }}
-          />
-        </View>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.065)}
+          font={'RajdhaniBold'}
+          gutterTop={10}
+          gutterLeft={25}>
+          Statistics
+        </Text>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={statistics}
+          renderItem={({index, item}) => {
+            return (
+              <Statistics item={item} isEven={index % 2 == 0 ? true : false} />
+            );
+          }}
+          contentContainerStyle={styles.flatCont}
+        />
         <Text
           color={'black'}
           alignSelf={'flex-start'}
@@ -83,7 +79,7 @@ const Home = ({navigation, ...props}) => {
               <OrderStatisticsCard isEven={index % 2 == 0 ? true : false} />
             );
           }}
-          contentContainerStyle={styles.flatOrderStatistics}
+          contentContainerStyle={styles.flatCont}
         />
         <View style={styles.flexCont}>
           <Text
@@ -193,12 +189,7 @@ const Home = ({navigation, ...props}) => {
 export default Home;
 
 const styles = StyleSheet.create({
-  flatOrderCardCont: {
-    paddingLeft: R.unit.width(0.03),
-    height: R.unit.height(0.33),
-    // backgroundColor:'red'
-  },
-  flatOrderStatistics: {
+  flatCont: {
     paddingBottom: R.unit.height(0.03),
     marginLeft: R.unit.width(0.03),
   },

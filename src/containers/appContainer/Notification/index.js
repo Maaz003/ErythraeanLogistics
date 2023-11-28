@@ -8,7 +8,7 @@ import NotificationCard from '@components/view/cards/NotificationCard';
 
 const Notification = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler>
+    <ScreenBoiler isBack={true}>
       <View style={styles.flexCont}>
         <Text
           color={'black'}

@@ -91,7 +91,9 @@ const styles = StyleSheet.create({
     paddingVertical: R.unit.width(0.015),
   },
   circleCont: {
-    width: R.unit.width(0.07),
+    width: R.unit.width(0.15),
+    paddingHorizontal: R.unit.width(0.04),
+    height: R.unit.height(0.05),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

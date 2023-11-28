@@ -19,7 +19,7 @@ const DropDown = ({placeholderText, data, value, onChange, ...props}) => {
         placeholder={placeholderText}
         value={value}
         onChange={onChange}
-        fontFamily='Rajdhani-Medium'
+        fontFamily="Rajdhani-Medium"
       />
     </View>
   );
@@ -30,13 +30,11 @@ export default DropDown;
 const styles = StyleSheet.create({
   //dropDown
   dropDownCont: {
-    // backgroundColor: 'red',
     marginVertical: R.unit.height(0.01),
     width: R.unit.width(0.95),
     alignSelf: 'center',
   },
   dropdown: {
-    // backgroundColor: 'red',
     height: R.unit.height(0.075),
     borderColor: '#D9D9D9',
     borderWidth: 0.5,
@@ -47,7 +45,6 @@ const styles = StyleSheet.create({
   label: {
     position: 'absolute',
     backgroundColor: 'white',
-    // backgroundColor: 'red',
     left: 22,
     top: 8,
     zIndex: 999,
@@ -56,12 +53,10 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: R.unit.width(0.045),
-    // fontFamily: 'Rajdhani-Medium',
     color: R.color.gray2,
   },
   selectedTextStyle: {
     fontSize: R.unit.width(0.045),
-    // fontFamily: 'Rajdhani-Medium',
     color: R.color.black,
   },
 });

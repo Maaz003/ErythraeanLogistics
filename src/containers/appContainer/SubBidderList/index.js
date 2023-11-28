@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,8 +11,10 @@ import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import SubBidderCard from '@components/view/cards/SubBidderCard';
+import TextInput from '@components/common/TextInput';
 
 const SubBidderList = ({navigation, ...props}) => {
+  const [isSearch, setIsSearch] = useState(false);
   return (
     <ScreenBoiler isBack={true}>
       <View style={styles.flexCont}>
@@ -23,10 +25,23 @@ const SubBidderList = ({navigation, ...props}) => {
           Sub Bidder List
         </Text>
         <View style={styles.flexDirCont}>
-          <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
+          <TouchableOpacity
+            onPress={() => setIsSearch(!isSearch)}
+            activeOpacity={0.7}
+            style={styles.circleCont}>
+            {!isSearch ? (
             <View style={styles.imgSearchStyleCont}>
               <Image source={R.image.Search()} style={R.styles.img} />
             </View>
+          ) : (
+            <Text
+              color={'black'}
+              alignSelf={'center'}
+              fontSize={R.unit.width(0.07)}
+              font={'RajdhaniBold'}>
+              x
+            </Text>
+          )}
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -46,6 +61,18 @@ const SubBidderList = ({navigation, ...props}) => {
           </TouchableOpacity>
         </View>
       </View>
+      {isSearch && (
+        <View style={styles.flexCont}>
+          <TextInput
+            placeholderText={'Search Sub Bidder...'}
+            width={0.85}
+            marginTop={0}
+          />
+          <TouchableOpacity style={styles.imgSearchStyleCont}>
+            <Image source={R.image.Search()} style={R.styles.img} />
+          </TouchableOpacity>
+        </View>
+      )}
       <FlatList
         data={[1, 2, 3, 4, 5, 6]}
         renderItem={({index, item}) => {

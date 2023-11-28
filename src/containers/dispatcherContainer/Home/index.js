@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -14,6 +14,7 @@ import Statistics from '@components/view/cards/Statistics';
 import OrderStatisticsCard from '@components/view/cards/OrderStatisticsCard';
 import DispatchOrderCard from '@components/view/cards/DispatchOrderCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
+import TextInput from '@components/common/TextInput';
 
 const Home = ({navigation, ...props}) => {
   const statistics = [
@@ -33,6 +34,8 @@ const Home = ({navigation, ...props}) => {
       img: R.image.BagShopWhite(),
     },
   ];
+
+  const [isSearch, setIsSearch] = useState(false);
 
   return (
     <ScreenBoiler>
@@ -120,10 +123,23 @@ const Home = ({navigation, ...props}) => {
             Recent Orders
           </Text>
           <View style={styles.flexDirCont}>
-            <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
-              <View style={styles.imgSearchStyleCont}>
-                <Image source={R.image.Search()} style={R.styles.img} />
-              </View>
+            <TouchableOpacity
+              onPress={() => setIsSearch(!isSearch)}
+              activeOpacity={0.7}
+              style={styles.circleCont}>
+              {!isSearch ? (
+                <View style={styles.imgSearchStyleCont}>
+                  <Image source={R.image.Search()} style={R.styles.img} />
+                </View>
+              ) : (
+                <Text
+                  color={'black'}
+                  alignSelf={'center'}
+                  fontSize={R.unit.width(0.07)}
+                  font={'RajdhaniBold'}>
+                  x
+                </Text>
+              )}
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
@@ -143,6 +159,18 @@ const Home = ({navigation, ...props}) => {
             </TouchableOpacity>
           </View>
         </View>
+        {isSearch && (
+          <View style={styles.flexCont}>
+            <TextInput
+              placeholderText={'Search Orders...'}
+              width={0.85}
+              marginTop={0}
+            />
+            <TouchableOpacity style={styles.imgSearchStyleCont}>
+              <Image source={R.image.Search()} style={R.styles.img} />
+            </TouchableOpacity>
+          </View>
+        )}
         <FlatList
           data={[1, 2, 3, 4, 5, 6]}
           renderItem={({index, item}) => {

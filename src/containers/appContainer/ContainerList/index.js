@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {
   StyleSheet,
   View,
@@ -12,7 +12,7 @@ import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ContainerListCard from '@components/view/cards/ContainerListCard';
 import ActionSheet from '@components/common/ActionSheet';
-import {useCallback} from 'react';
+import TextInput from '@components/common/TextInput';
 
 const ContainerList = ({navigation, ...props}) => {
   const [isActionSheet, setIsActionSheet] = useState(false);
@@ -20,6 +20,8 @@ const ContainerList = ({navigation, ...props}) => {
   const onPressActionSheet = useCallback(() => {
     setIsActionSheet(true);
   }, []);
+
+  const [isSearch, setIsSearch] = useState(false);
 
   const actionButton = [
     {
@@ -50,15 +52,39 @@ const ContainerList = ({navigation, ...props}) => {
           alignSelf={'flex-start'}
           fontSize={R.unit.width(0.065)}
           font={'RajdhaniBold'}>
-          Create Container List
+          Container List
         </Text>
-        <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
-          <View style={styles.imgSearchStyleCont}>
-            <Image source={R.image.Search()} style={R.styles.img} />
-          </View>
+        <TouchableOpacity
+          onPress={() => setIsSearch(!isSearch)}
+          activeOpacity={0.7}
+          style={styles.circleCont}>
+          {!isSearch ? (
+            <View style={styles.imgSearchStyleCont}>
+              <Image source={R.image.Search()} style={R.styles.img} />
+            </View>
+          ) : (
+            <Text
+              color={'black'}
+              alignSelf={'center'}
+              fontSize={R.unit.width(0.07)}
+              font={'RajdhaniBold'}>
+              x
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
-
+      {isSearch && (
+        <View style={styles.flexCont}>
+          <TextInput
+            placeholderText={'Search Container...'}
+            width={0.85}
+            marginTop={0}
+          />
+          <TouchableOpacity style={styles.imgSearchStyleCont}>
+            <Image source={R.image.Search()} style={R.styles.img} />
+          </TouchableOpacity>
+        </View>
+      )}
       <FlatList
         data={[{title: '123'}, {title: '456'}, {title: '789'}, {title: '012'}]}
         renderItem={({index, item}) => {
@@ -103,6 +129,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: R.unit.height(0.02),
+    marginTop: R.unit.height(0.015),
   },
 });

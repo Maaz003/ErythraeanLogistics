@@ -21,7 +21,7 @@ export default function Header({
           </TouchableOpacity>
         )}
 
-        <View activeOpacity={0.7} style={styles.ImgStyleCont}>
+        <View style={styles.ImgStyleCont}>
           <Image
             source={R.image.AppIconWhite()}
             style={R.styles.img}

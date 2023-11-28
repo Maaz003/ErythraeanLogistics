@@ -19,12 +19,20 @@ const Index = ({
   width = 0.85,
   height,
   isPasswordInput = false,
+  marginTop = 0.015,
   ...props
 }) => {
   const [isPassword, setIsPassword] = useState(isPasswordInput);
   return (
     <View
-      style={[styles.container, {width: R.unit.width(width), height: height}]}>
+      style={[
+        styles.container,
+        {
+          width: R.unit.width(width),
+          height: height,
+          marginTop: R.unit.height(marginTop),
+        },
+      ]}>
       <TextInput
         editable={editable}
         value={value}
@@ -58,8 +66,8 @@ const styles = StyleSheet.create({
     borderColor: '#D9D9D9',
     borderWidth: 0.7,
     borderRadius: R.unit.width(0.02),
-    marginTop: R.unit.height(0.015),
     flexDirection: 'row',
+    alignSelf: 'center',
   },
 
   textInput: {

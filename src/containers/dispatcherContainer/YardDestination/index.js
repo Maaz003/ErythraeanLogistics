@@ -12,6 +12,7 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import Text from '@components/common/Text';
 import YardDestinationCard from '@components/view/cards/YardDestinationCard';
 import ActionSheet from '@components/common/ActionSheet';
+import TextInput from '@components/common/TextInput';
 
 const YardDestination = ({navigation, ...props}) => {
   const [isActionSheet, setIsActionSheet] = useState(false);
@@ -41,6 +42,8 @@ const YardDestination = ({navigation, ...props}) => {
     },
   ];
 
+  const [isSearch, setIsSearch] = useState(false);
+
   return (
     <ScreenBoiler>
       <View style={styles.flexCont}>
@@ -51,13 +54,37 @@ const YardDestination = ({navigation, ...props}) => {
           font={'RajdhaniBold'}>
           Yard Destination
         </Text>
-        <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
-          <View style={styles.imgSearchStyleCont}>
-            <Image source={R.image.Search()} style={R.styles.img} />
-          </View>
+        <TouchableOpacity
+          onPress={() => setIsSearch(!isSearch)}
+          activeOpacity={0.7}
+          style={styles.circleCont}>
+          {!isSearch ? (
+            <View style={styles.imgSearchStyleCont}>
+              <Image source={R.image.Search()} style={R.styles.img} />
+            </View>
+          ) : (
+            <Text
+              color={'black'}
+              alignSelf={'center'}
+              fontSize={R.unit.width(0.07)}
+              font={'RajdhaniBold'}>
+              x
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
-
+      {isSearch && (
+        <View style={styles.flexCont}>
+          <TextInput
+            placeholderText={'Search Yard Destination...'}
+            width={0.85}
+            marginTop={0}
+          />
+          <TouchableOpacity style={styles.imgSearchStyleCont}>
+            <Image source={R.image.Search()} style={R.styles.img} />
+          </TouchableOpacity>
+        </View>
+      )}
       <FlatList
         data={[1, 2, 3, 4, 5, 6]}
         renderItem={({item, index}) => {

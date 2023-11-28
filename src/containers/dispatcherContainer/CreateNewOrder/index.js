@@ -319,7 +319,10 @@ const CreateNewOrder = ({navigation, ...props}) => {
             font={'RajdhaniBold'}
             gutterTop={5}
             gutterLeft={15}>
-            Dispatcher Data (For Dispatcher Use Only)
+            Dispatcher Data{' '}
+            <Text fontSize={R.unit.width(0.035)} color={'black'}>
+              (For Dispatcher Use Only)
+            </Text>
           </Text>
           <DropDown
             data={Auction}
@@ -397,7 +400,11 @@ const CreateNewOrder = ({navigation, ...props}) => {
             font={'RajdhaniBold'}
             gutterTop={5}
             gutterLeft={15}>
-            Accounting Data (For Accounting Use Only)
+            Accounting Data{' '}
+            <Text fontSize={R.unit.width(0.035)} color={'black'}>
+              {' '}
+              (For Accounting Use Only)
+            </Text>
           </Text>
           <DropDown
             data={POL}

@@ -84,7 +84,7 @@ const TowFreight = ({navigation, ...props}) => {
         <DropDown
           data={data}
           value={value}
-          placeholderText={'Select Destination Port'}
+          placeholderText={'Options (Copart and IAAI)'}
           onChange={item => {
             setValue(item.value);
           }}

@@ -1,7 +1,6 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
 import R from '@components/utils/R';
-import {Dropdown} from 'react-native-element-dropdown';
+import { StyleSheet, View } from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const DropDown = ({placeholderText, data, value, onChange, ...props}) => {
   return (

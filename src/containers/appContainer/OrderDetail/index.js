@@ -5,11 +5,13 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import OrderDetailCard from '@components/view/cards/OrderDetailCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 
-const OrderDetail = ({navigation, ...props}) => {
+const OrderDetail = ({navigation, route, ...props}) => {
+  const data = route.params.item;
+  console.log('OrderDetail ===>', data);
   return (
     <ScreenBoiler isBack={true}>
       <ScrollContainer paddingBottom={0.15}>
-        <OrderDetailCard />
+        <OrderDetailCard item={data} />
       </ScrollContainer>
     </ScreenBoiler>
   );

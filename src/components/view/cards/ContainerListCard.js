@@ -12,7 +12,9 @@ const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
     <>
       <TouchableOpacity
         onPress={() => {
-          navigationRef.navigate('ContainerDetail');
+          navigationRef.navigate('ContainerDetail', {
+            item: item,
+          });
         }}
         activeOpacity={0.8}
         style={[styles.mainCont]}>
@@ -22,7 +24,7 @@ const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
               color={'white'}
               fontSize={R.unit.width(0.035)}
               font={'RajdhaniSemiBold'}>
-              000066
+              {item.id}
             </Text>
           </View>
           <TouchableOpacity
@@ -35,25 +37,25 @@ const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
         </View>
 
         <TitleImageContainerCard
-          data={'25496865'}
+          data={item?.booking_number}
           image={R.image.List()}
           title={'Booking Number'}
         />
 
         <TitleImageContainerCard
-          data={'Salalah Oman'}
+          data={item?.destination_port}
           image={R.image.Warehouse()}
           title={'Port'}
         />
 
         <TitleImageContainerCard
-          data={'45 feet / 5 auto'}
+          data={item?.container_size}
           image={R.image.Tally()}
           title={'Size'}
         />
 
         <TitleImageContainerCard
-          data={'8RKNBASD545355486'}
+          data={item?.date_of_loading}
           image={R.image.CalendarStar()}
           title={'Date of Loading'}
         />

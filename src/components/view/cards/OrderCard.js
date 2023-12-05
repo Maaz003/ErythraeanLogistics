@@ -3,12 +3,17 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import TitleImageContainerCard from './TitleImageContainerCard';
+import navigationRef from '@navRef';
 
 const OrderCard = ({item, onPress, onPressActionSheet, ...props}) => {
   return (
     <>
       <TouchableOpacity
-        onPress={onPress}
+        onPress={() => {
+          navigationRef.navigate('OrderDetail', {
+            item: item,
+          });
+        }}
         activeOpacity={0.8}
         style={[styles.mainCont]}>
         <View style={styles.flexCont}>
@@ -17,7 +22,7 @@ const OrderCard = ({item, onPress, onPressActionSheet, ...props}) => {
               color={'white'}
               fontSize={R.unit.width(0.035)}
               font={'RajdhaniSemiBold'}>
-              {item.id}
+              {item?.id}
             </Text>
           </View>
           <TouchableOpacity
@@ -31,32 +36,32 @@ const OrderCard = ({item, onPress, onPressActionSheet, ...props}) => {
 
         <TitleImageContainerCard
           title={'Year'}
-          data={item.Year}
+          data={item?.year}
           image={R.image.CalendarStar()}
         />
         <TitleImageContainerCard
           title={'Make'}
-          data={item.Make}
+          data={item?.make}
           image={R.image.CalendarWhite()}
         />
         <TitleImageContainerCard
           title={'Model'}
-          data={item.Model}
+          data={item?.model}
           image={R.image.CalendarStar()}
         />
         <TitleImageContainerCard
           title={'LOT'}
-          data={item.LOT}
+          data={item?.lot}
           image={R.image.List()}
         />
         <TitleImageContainerCard
           title={'VIN'}
-          data={item.VIN}
+          data={item?.vin_number}
           image={R.image.Tally()}
         />
         <TitleImageContainerCard
           title={'Destination Port'}
-          data={item.Destination_Port}
+          data={item?.destination_port}
           image={R.image.Warehouse()}
         />
       </TouchableOpacity>

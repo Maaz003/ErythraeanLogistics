@@ -15,9 +15,13 @@ import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 import OrderCard from '@components/view/cards/OrderCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 import TextInput from '@components/common/TextInput';
+import Loader from '@components/common/Loader';
 
 //! RTK QUERY API
-import {useGetOrderStatisticsQuery} from '../../../store/services/index';
+import {
+  useGetOrderStatisticsQuery,
+  useGetOrderQuery,
+} from '../../../store/services/index';
 import {useSelector, useDispatch} from 'react-redux';
 
 const Home = ({navigation, ...props}) => {
@@ -95,57 +99,37 @@ const Home = ({navigation, ...props}) => {
   const [isSearch, setIsSearch] = useState(false);
 
   const {data: statisticsData, isLoading} = useGetOrderStatisticsQuery();
+  const {data: orderData, isLoading: orderIsLoading} = useGetOrderQuery();
 
   console.log('statisticsData ===>', statisticsData);
   return (
-    <ScreenBoiler>
-      <ScrollContainer>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}
-          gutterTop={10}
-          gutterLeft={25}>
-          Statistics
-        </Text>
-        <FlatList
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={statistics}
-          renderItem={({index, item}) => {
-            return (
-              <Statistics item={item} isEven={index % 2 == 0 ? true : false} />
-            );
-          }}
-          contentContainerStyle={styles.flatCont}
-        />
+    <>
+      <ScreenBoiler>
+        <ScrollContainer>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.065)}
+            font={'RajdhaniBold'}
+            gutterTop={10}
+            gutterLeft={25}>
+            Statistics
+          </Text>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={statistics}
+            renderItem={({index, item}) => {
+              return (
+                <Statistics
+                  item={item}
+                  isEven={index % 2 == 0 ? true : false}
+                />
+              );
+            }}
+            contentContainerStyle={styles.flatCont}
+          />
 
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}
-          gutterTop={10}
-          gutterBottom={10}
-          gutterLeft={25}>
-          ORDERS STATISTICS BY P.O.L
-        </Text>
-        <FlatList
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={isLoading ? [] : statisticsData?.data}
-          renderItem={({index, item}) => {
-            return (
-              <WearHouseDetailCard
-                item={item}
-                isEven={index % 2 == 0 ? true : false}
-              />
-            );
-          }}
-          contentContainerStyle={styles.flatCont}
-        />
-        <View style={styles.flexCont}>
           <Text
             color={'black'}
             alignSelf={'flex-start'}
@@ -153,100 +137,123 @@ const Home = ({navigation, ...props}) => {
             font={'RajdhaniBold'}
             gutterTop={10}
             gutterBottom={10}
-            gutterLeft={10}>
-            Announcements
+            gutterLeft={25}>
+            ORDERS STATISTICS BY P.O.L
           </Text>
-          <TouchableOpacity activeOpacity={0.7} style={styles.imgInfoStyleCont}>
-            <Image source={R.image.CircleInfo()} style={R.styles.img} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.announcmentCont}>
-          <View style={styles.imgAnnouncmentStyleCont}>
-            <Image source={R.image.Announcement()} style={R.styles.img} />
-          </View>
-          <Text
-            color={'#E3E3E3'}
-            fontSize={R.unit.width(0.09)}
-            font={'RajdhaniBold'}>
-            No Announcement Yet
-          </Text>
-        </View>
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            alignSelf={'flex-start'}
-            fontSize={R.unit.width(0.065)}
-            font={'RajdhaniBold'}
-            gutterTop={10}
-            gutterBottom={10}
-            gutterLeft={10}>
-            Orders
-          </Text>
-          <View style={styles.flexDirCont}>
-            <TouchableOpacity
-              onPress={() => setIsSearch(!isSearch)}
-              activeOpacity={0.7}
-              style={styles.circleCont}>
-              {!isSearch ? (
-                <View style={styles.imgSearchStyleCont}>
-                  <Image source={R.image.Search()} style={R.styles.img} />
-                </View>
-              ) : (
-                <Text
-                  color={'black'}
-                  alignSelf={'center'}
-                  fontSize={R.unit.width(0.07)}
-                  font={'RajdhaniBold'}>
-                  x
-                </Text>
-              )}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('CreateNewOrder');
-              }}
-              activeOpacity={0.7}
-              style={styles.orderCont}>
-              <View style={styles.imgPlusStyleCont}>
-                <Image source={R.image.Plus()} style={R.styles.img} />
-              </View>
-              <Text
-                color={'white'}
-                fontSize={R.unit.width(0.04)}
-                font={'RajdhaniSemiBold'}>
-                Create Order
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        {isSearch && (
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={isLoading ? [] : statisticsData?.data}
+            renderItem={({index, item}) => {
+              return (
+                <WearHouseDetailCard
+                  item={item}
+                  isEven={index % 2 == 0 ? true : false}
+                />
+              );
+            }}
+            contentContainerStyle={styles.flatCont}
+          />
           <View style={styles.flexCont}>
-            <TextInput
-              placeholderText={'Search Order...'}
-              width={0.85}
-              marginTop={0}
-            />
-            <TouchableOpacity style={styles.imgSearchStyleCont}>
-              <Image source={R.image.Search()} style={R.styles.img} />
+            <Text
+              color={'black'}
+              alignSelf={'flex-start'}
+              fontSize={R.unit.width(0.065)}
+              font={'RajdhaniBold'}
+              gutterTop={10}
+              gutterBottom={10}
+              gutterLeft={10}>
+              Announcements
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.imgInfoStyleCont}>
+              <Image source={R.image.CircleInfo()} style={R.styles.img} />
             </TouchableOpacity>
           </View>
-        )}
-        <FlatList
-          data={data}
-          renderItem={({index, item}) => {
-            return (
-              <OrderCard
+          <View style={styles.announcmentCont}>
+            <View style={styles.imgAnnouncmentStyleCont}>
+              <Image source={R.image.Announcement()} style={R.styles.img} />
+            </View>
+            <Text
+              color={'#E3E3E3'}
+              fontSize={R.unit.width(0.09)}
+              font={'RajdhaniBold'}>
+              No Announcement Yet
+            </Text>
+          </View>
+          <View style={styles.flexCont}>
+            <Text
+              color={'black'}
+              alignSelf={'flex-start'}
+              fontSize={R.unit.width(0.065)}
+              font={'RajdhaniBold'}
+              gutterTop={10}
+              gutterBottom={10}
+              gutterLeft={10}>
+              Orders
+            </Text>
+            <View style={styles.flexDirCont}>
+              <TouchableOpacity
+                onPress={() => setIsSearch(!isSearch)}
+                activeOpacity={0.7}
+                style={styles.circleCont}>
+                {!isSearch ? (
+                  <View style={styles.imgSearchStyleCont}>
+                    <Image source={R.image.Search()} style={R.styles.img} />
+                  </View>
+                ) : (
+                  <Text
+                    color={'black'}
+                    alignSelf={'center'}
+                    fontSize={R.unit.width(0.07)}
+                    font={'RajdhaniBold'}>
+                    x
+                  </Text>
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('OrderDetail');
+                  navigation.navigate('CreateNewOrder');
                 }}
-                item={item}
+                activeOpacity={0.7}
+                style={styles.orderCont}>
+                <View style={styles.imgPlusStyleCont}>
+                  <Image source={R.image.Plus()} style={R.styles.img} />
+                </View>
+                <Text
+                  color={'white'}
+                  fontSize={R.unit.width(0.04)}
+                  font={'RajdhaniSemiBold'}>
+                  Create Order
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          {isSearch && (
+            <View style={styles.flexCont}>
+              <TextInput
+                placeholderText={'Search Order...'}
+                width={0.85}
+                marginTop={0}
               />
-            );
-          }}
-          contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
-        />
-      </ScrollContainer>
-    </ScreenBoiler>
+              <TouchableOpacity style={styles.imgSearchStyleCont}>
+                <Image source={R.image.Search()} style={R.styles.img} />
+              </TouchableOpacity>
+            </View>
+          )}
+          <FlatList
+            data={orderIsLoading ? [] : orderData?.data}
+            renderItem={({index, item}) => {
+              return <OrderCard item={item} />;
+            }}
+            contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+          />
+        </ScrollContainer>
+      </ScreenBoiler>
+      {isLoading && <Loader />}
+      {orderIsLoading && <Loader />}
+    </>
   );
 };
 

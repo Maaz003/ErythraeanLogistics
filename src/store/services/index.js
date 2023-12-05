@@ -56,6 +56,22 @@ export const serviceApi = createApi({
       }),
     }),
     //----------------------------------------------Statistics-------------------------------------//
+    //----------------------------------------------Order-------------------------------------//
+    getOrder: builder.query({
+      query: () => ({
+        url: 'api/orders',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Order-------------------------------------//
+    //----------------------------------------------Container List-------------------------------------//
+    getContainer: builder.query({
+      query: () => ({
+        url: 'api/container',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Container List-------------------------------------//
   }),
 });
 
@@ -66,4 +82,6 @@ export const {
   useGetUserQuery,
   useGetDestinationPortQuery,
   useGetOrderStatisticsQuery,
+  useGetOrderQuery,
+  useGetContainerQuery,
 } = serviceApi;

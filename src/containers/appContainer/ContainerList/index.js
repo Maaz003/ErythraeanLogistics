@@ -13,6 +13,10 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ContainerListCard from '@components/view/cards/ContainerListCard';
 import ActionSheet from '@components/common/ActionSheet';
 import TextInput from '@components/common/TextInput';
+import Loader from '@components/common/Loader';
+
+//! RTK QUERY API
+import {useGetContainerQuery} from '../../../store/services/index';
 
 const ContainerList = ({navigation, ...props}) => {
   const [isActionSheet, setIsActionSheet] = useState(false);
@@ -44,67 +48,73 @@ const ContainerList = ({navigation, ...props}) => {
     },
   ];
 
+  const {data, isLoading} = useGetContainerQuery();
+  console.log('useGetContainerQuery ===>', data);
+
   return (
-    <ScreenBoiler>
-      <View style={styles.flexCont}>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}>
-          Container List
-        </Text>
-        <TouchableOpacity
-          onPress={() => setIsSearch(!isSearch)}
-          activeOpacity={0.7}
-          style={styles.circleCont}>
-          {!isSearch ? (
-            <View style={styles.imgSearchStyleCont}>
-              <Image source={R.image.Search()} style={R.styles.img} />
-            </View>
-          ) : (
-            <Text
-              color={'black'}
-              alignSelf={'center'}
-              fontSize={R.unit.width(0.07)}
-              font={'RajdhaniBold'}>
-              x
-            </Text>
-          )}
-        </TouchableOpacity>
-      </View>
-      {isSearch && (
+    <>
+      <ScreenBoiler>
         <View style={styles.flexCont}>
-          <TextInput
-            placeholderText={'Search Container...'}
-            width={0.85}
-            marginTop={0}
-          />
-          <TouchableOpacity style={styles.imgSearchStyleCont}>
-            <Image source={R.image.Search()} style={R.styles.img} />
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.065)}
+            font={'RajdhaniBold'}>
+            Container List
+          </Text>
+          <TouchableOpacity
+            onPress={() => setIsSearch(!isSearch)}
+            activeOpacity={0.7}
+            style={styles.circleCont}>
+            {!isSearch ? (
+              <View style={styles.imgSearchStyleCont}>
+                <Image source={R.image.Search()} style={R.styles.img} />
+              </View>
+            ) : (
+              <Text
+                color={'black'}
+                alignSelf={'center'}
+                fontSize={R.unit.width(0.07)}
+                font={'RajdhaniBold'}>
+                x
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
-      )}
-      <FlatList
-        data={[{title: '123'}, {title: '456'}, {title: '789'}, {title: '012'}]}
-        renderItem={({index, item}) => {
-          return (
-            <ContainerListCard
-              item={item}
-              onPressActionSheet={onPressActionSheet}
+        {isSearch && (
+          <View style={styles.flexCont}>
+            <TextInput
+              placeholderText={'Search Container...'}
+              width={0.85}
+              marginTop={0}
             />
-          );
-        }}
-        contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
-      />
-      <ActionSheet
-        isOpen={isActionSheet}
-        onClose={() => {
-          setIsActionSheet(false);
-        }}
-        data={actionButton}
-      />
-    </ScreenBoiler>
+            <TouchableOpacity style={styles.imgSearchStyleCont}>
+              <Image source={R.image.Search()} style={R.styles.img} />
+            </TouchableOpacity>
+          </View>
+        )}
+        <FlatList
+          data={isLoading ? [] : data?.data}
+          renderItem={({index, item}) => {
+            return (
+              <ContainerListCard
+                item={item}
+                onPressActionSheet={onPressActionSheet}
+              />
+            );
+          }}
+          contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
+        />
+        <ActionSheet
+          isOpen={isActionSheet}
+          onClose={() => {
+            setIsActionSheet(false);
+          }}
+          data={actionButton}
+        />
+      </ScreenBoiler>
+      {isLoading && <Loader />}
+    </>
   );
 };
 

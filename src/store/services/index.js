@@ -14,22 +14,29 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['User', 'MCoach', 'MCoaches', 'Chats', 'Notifications', 'Posts'],
+  tagTypes: ['User'],
 
   endpoints: builder => ({
     //----------------------------------------------A U T H-------------------------------------//
     loginUser: builder.mutation({
-      query: data => ({
-        url: 'login',
+      query: formData => ({
+        url: 'api/auth/login',
         method: 'POST',
-        body: data,
+        body: formData, // Accepts FormData
       }),
     }),
     signupUser: builder.mutation({
-      query: data => ({
-        url: 'signup',
+      query: formData => ({
+        url: 'api/auth/signup',
         method: 'POST',
-        body: data,
+        body: formData, // Accepts FormData
+        headers: headersFormdata,
+      }),
+    }),
+    getUser: builder.query({
+      query: () => ({
+        url: 'api/userinfo',
+        method: 'Get',
       }),
     }),
   }),
@@ -39,4 +46,5 @@ export const {
   //AUTH ENDPOINTS
   useLoginUserMutation,
   useSignupUserMutation,
+  useGetUserQuery,
 } = serviceApi;

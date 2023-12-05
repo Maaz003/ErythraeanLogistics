@@ -5,7 +5,22 @@ import R from '@components/utils/R';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ActionButton from '@components/common/ActionButton';
 
+//redux
+import {useDispatch} from 'react-redux';
+import {userLogout} from '@store/user/userSlice';
+// import {} from '@store/user/userSlice'
+
 const Settings = ({navigation, ...props}) => {
+  const dispatch = useDispatch();
+
+  const _handleLogout = () => {
+    dispatch(userLogout());
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'SplashScreen'}],
+    });
+  };
+
   return (
     <ScreenBoiler>
       <View style={styles.mainCont}>
@@ -35,9 +50,7 @@ const Settings = ({navigation, ...props}) => {
           marginTop={0.04}
           isImage={true}
           image={R.image.Logout()}
-          // onPress={() => {
-          //   navigation.navigate('SubBidderList');
-          // }}
+          onPress={() => _handleLogout()}
         />
       </View>
     </ScreenBoiler>

@@ -13,25 +13,94 @@ import AuthFormScrollContainer from '@components/layout/AuthFormScrollContainer'
 import Text from '@components/common/Text';
 import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
+import DropDown from '@components/common/DropDown';
+import {SelectCustomer} from '@components/constants/createOrderConstant';
+import Loader from '@components/common/Loader';
+import PopUp from '@components/common/PopUp';
+
+//! RTK QUERY API
+import {
+  useGetDestinationPortQuery,
+  useSignupUserMutation,
+} from '../../../store/services/index';
+import {userLogin} from '../../../store/user/userSlice';
+import {useSelector, useDispatch} from 'react-redux';
 
 function SignUpScreen({navigation, ...props}) {
   // const dispatch = useDispatch();
-  const [state, setState] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
+  const [state, setState] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    cell: '',
+    password: '',
+    destination_port: null,
+    role: '02bd29e8-42a5-4948-a157-c02a6f6bc4f6',
+  });
+
+  const onChangeText = (text, key) => {
+    setState(prevState => ({
+      ...prevState,
+      [key]: text,
+    }));
+  };
+
+  const {data, isLoading} = useGetDestinationPortQuery();
+
+  // api
+  const [signupUser] = useSignupUserMutation();
+
+  const handleSignUp = () => {
+    setIsLoader(true);
+    const formData = new FormData();
+    formData.append('name', state.name);
+    formData.append('email', state.email);
+    formData.append('phone', state.phone);
+    formData.append('cell', state.cell);
+    formData.append('destination_port_id', state.destination_port);
+    formData.append('password', state.password);
+    formData.append('role', state.role);
+
+    signupUser(formData)
+      .unwrap()
+      .then(result => {
+        console.log('Sign up successful:', result);
+        setIsLoader(false);
+        PopUp({
+          heading: result?.message,
+          type: 'success',
+        });
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'LoginScreen'}],
+        });
+      })
+      .catch(error => {
+        console.error('Sign up failed:', error);
+        PopUp({
+          heading: error?.data?.message,
+          type: 'danger',
+        });
+        setIsLoader(false);
+      });
+  };
 
   return (
-    <AuthBoiler>
-      <AuthFormScrollContainer showAuthHeader={true}>
-        <ImageBackground
-          source={R.image.AuthBackground()}
-          style={styles.ImageBackgroundStyle}>
-          <View style={styles.appImageContainer}>
-            <Image
-              source={R.image.AppName()}
-              style={R.styles.img}
-              resizeMode={'contain'}
-            />
-          </View>
-          {!state ? (
+    <>
+      <AuthBoiler>
+        <AuthFormScrollContainer showAuthHeader={true}>
+          <ImageBackground
+            source={R.image.AuthBackground()}
+            style={styles.ImageBackgroundStyle}>
+            <View style={styles.appImageContainer}>
+              <Image
+                source={R.image.AppName()}
+                style={R.styles.img}
+                resizeMode={'contain'}
+              />
+            </View>
+
             <View style={styles.mainContainer}>
               <Text
                 color={'black'}
@@ -48,56 +117,53 @@ function SignUpScreen({navigation, ...props}) {
                 Enter your detail below here & Create your new account.
               </Text>
 
-              <TextInput placeholderText={'User Name'} Icon={R.image.Name()} />
-              <TextInput placeholderText={'First Name'} Icon={R.image.Name()} />
               <TextInput
-                placeholderText={'Middle Name'}
+                placeholderText={'Name'}
                 Icon={R.image.Name()}
+                value={state.name}
+                handleOnChangeTxt={text => onChangeText(text, 'name')}
               />
-              <TextInput placeholderText={'Last Name'} Icon={R.image.Name()} />
+
               <TextInput
                 placeholderText={'Email'}
                 Icon={R.image.Email()}
                 keyboardType={'email-address'}
+                value={state.email}
+                handleOnChangeTxt={text => onChangeText(text, 'email')}
               />
               <TextInput
                 placeholderText={'Phone'}
                 Icon={R.image.Phone()}
                 keyboardType={'numeric'}
+                value={state.phone}
+                handleOnChangeTxt={text => onChangeText(text, 'phone')}
+              />
+              <TextInput
+                placeholderText={'Cell'}
+                Icon={R.image.Phone()}
+                keyboardType={'numeric'}
+                value={state.cell}
+                handleOnChangeTxt={text => onChangeText(text, 'cell')}
               />
               <TextInput
                 placeholderText={'Password'}
                 Icon={R.image.Password()}
                 isPasswordInput={true}
+                value={state.password}
+                handleOnChangeTxt={text => onChangeText(text, 'password')}
               />
-              <TextInput placeholderText={'Company'} Icon={R.image.Company()} />
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={styles.imageUploadCont}>
-                <View style={styles.uploadCont}>
-                  <View style={styles.photoImgCont}>
-                    <Image
-                      source={R.image.PhotoTemplet()}
-                      style={R.styles.img}
-                      resizeMode={'contain'}
-                    />
-                  </View>
-                  <Text
-                    color={'#5A5A5A'}
-                    fontSize={R.unit.width(0.044)}
-                    font={'RajdhaniMedium'}
-                    gutterTop={5}>
-                    Upload
-                  </Text>
-                </View>
-                <View style={styles.arrowImgCont}>
-                  <Image
-                    source={R.image.UpArrow()}
-                    style={R.styles.img}
-                    resizeMode={'contain'}
-                  />
-                </View>
-              </TouchableOpacity>
+              <DropDown
+                data={isLoading ? [] : data?.data}
+                value={state.destination_port}
+                placeholderText={'Select Destination Port'}
+                onChange={item => {
+                  onChangeText(item.id, 'destination_port');
+                }}
+                valueField={'id'}
+                labelField={'name'}
+                width={0.85}
+              />
+
               <Text
                 color={'#5A5A5A'}
                 fontSize={R.unit.width(0.047)}
@@ -112,7 +178,7 @@ function SignUpScreen({navigation, ...props}) {
                 bgColor={'#262626'}
                 marginTop={0.04}
                 onPress={() => {
-                  setState(true);
+                  handleSignUp();
                 }}
               />
 
@@ -139,40 +205,12 @@ function SignUpScreen({navigation, ...props}) {
                 </TouchableOpacity>
               </View>
             </View>
-          ) : (
-            <View
-              style={[
-                styles.mainContainer,
-                {
-                  paddingVertical: R.unit.height(0.15),
-                  paddingHorizontal: R.unit.width(0.05),
-                },
-              ]}>
-              <View style={styles.tickImgCont}>
-                <Image
-                  source={R.image.Tick()}
-                  style={R.styles.img}
-                  resizeMode={'contain'}
-                />
-              </View>
-              <Text
-                color={'black'}
-                fontSize={R.unit.width(0.11)}
-                font={'RajdhaniBold'}>
-                Your Sign Up
-              </Text>
-              <Text
-                color={'black'}
-                fontSize={R.unit.width(0.075)}
-                font={'RajdhaniRegular'}
-                align={'center'}>
-                Request Has Been Submitted To The Admin
-              </Text>
-            </View>
-          )}
-        </ImageBackground>
-      </AuthFormScrollContainer>
-    </AuthBoiler>
+          </ImageBackground>
+        </AuthFormScrollContainer>
+      </AuthBoiler>
+      {isLoading && <Loader />}
+      {isLoader && <Loader />}
+    </>
   );
 }
 export default SignUpScreen;
@@ -225,27 +263,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: R.unit.height(0.025),
   },
-  uploadCont: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  imageUploadCont: {
-    width: R.unit.width(0.85),
-    paddingVertical: R.unit.height(0.015),
-    borderColor: '#D9D9D9',
-    borderWidth: 0.7,
-    borderRadius: R.unit.width(0.02),
-    marginTop: R.unit.height(0.027),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: R.unit.width(0.04),
-  },
-  photoImgCont: {
-    width: R.unit.width(0.07),
-    height: R.unit.width(0.07),
-    marginRight: R.unit.width(0.03),
-  },
+
   arrowImgCont: {
     width: R.unit.width(0.05),
     height: R.unit.width(0.05),

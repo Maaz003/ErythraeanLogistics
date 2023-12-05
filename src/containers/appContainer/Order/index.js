@@ -15,6 +15,10 @@ import OrderCard from '@components/view/cards/OrderCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 import TextInput from '@components/common/TextInput';
 
+//! RTK QUERY API
+import {useGetOrderStatisticsQuery} from '../../../store/services/index';
+import {useSelector, useDispatch} from 'react-redux';
+
 const Orders = ({navigation, ...props}) => {
   const data = [
     {
@@ -61,6 +65,8 @@ const Orders = ({navigation, ...props}) => {
 
   const [isSearch, setIsSearch] = useState(false);
 
+  const {data: statisticsData, isLoading, re} = useGetOrderStatisticsQuery();
+
   return (
     <ScreenBoiler>
       <ScrollContainer>
@@ -77,10 +83,13 @@ const Orders = ({navigation, ...props}) => {
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4, 5, 6]}
+          data={isLoading ? [] : statisticsData?.data}
           renderItem={({index, item}) => {
             return (
-              <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
+              <WearHouseDetailCard
+                item={item}
+                isEven={index % 2 == 0 ? true : false}
+              />
             );
           }}
           contentContainerStyle={styles.flatCont}

@@ -3,14 +3,7 @@ import {View, StyleSheet, FlatList} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
-function WearHouseDetailCard({isEven, ...props}) {
-  const data = [
-    {name: 'Pending', number: '4'},
-    {name: 'Dispatch', number: '0'},
-    {name: 'At The Terminal', number: '4'},
-    {name: 'Loaded', number: '4'},
-  ];
-
+function WearHouseDetailCard({isEven, item, ...props}) {
   const OrderStatisticsCard = ({item, number}) => {
     return (
       <View style={styles.flexCont}>
@@ -42,15 +35,15 @@ function WearHouseDetailCard({isEven, ...props}) {
         gutterBottom={10}
         alignSelf={'flex-start'}
         gutterLeft={15}>
-        CA
+        {item['P.O.L']}
       </Text>
       <View
         style={[styles.line, {backgroundColor: isEven ? 'white' : 'black'}]}
       />
-      <OrderStatisticsCard item={'Pending'} number={'4'}/>
-      <OrderStatisticsCard item={'Dispatch'} number={'0'}/>
-      <OrderStatisticsCard item={'At The Terminal'} number={'4'}/>
-      <OrderStatisticsCard item={'Loaded'} number={'4'}/>
+      <OrderStatisticsCard item={'Pending'} number={item?.pending} />
+      <OrderStatisticsCard item={'Dispatch'} number={item?.dispatched} />
+      <OrderStatisticsCard item={'At The Terminal'} number={item?.terminal} />
+      <OrderStatisticsCard item={'Loaded'} number={item?.loaded} />
     </View>
   );
 }

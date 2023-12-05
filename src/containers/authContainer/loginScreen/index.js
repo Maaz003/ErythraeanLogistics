@@ -28,7 +28,6 @@ function LoginScreen({navigation, ...props}) {
   const [isLoader, setIsLoader] = useState(false);
 
   const userReducer = useSelector(state => state.user);
-  console.log('userReducer ====>', userReducer);
 
   //api
   const [loginUser] = useLoginUserMutation();
@@ -38,7 +37,7 @@ function LoginScreen({navigation, ...props}) {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-
+    console.log('formData ==>', formData);
     loginUser(formData)
       .unwrap()
       .then(result => {
@@ -55,7 +54,7 @@ function LoginScreen({navigation, ...props}) {
         });
       })
       .catch(error => {
-        console.error('Login failed:', error);
+        console.log('Login failed ===>', error);
         PopUp({
           heading: error?.data?.message,
           type: 'danger',

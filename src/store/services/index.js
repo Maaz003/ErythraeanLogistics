@@ -8,8 +8,9 @@ export const serviceApi = createApi({
     baseUrl: baseURL,
     prepareHeaders: async (headers, {getState}) => {
       const state = getState();
+      console.log('state ===>', state.user?.userToken);
       if (state?.user?.userToken) {
-        headers.set('token', `${state?.user?.userToken}`);
+        headers.append('Authorization', 'Bearer ' + state.user.userToken);
       }
       return headers;
     },
@@ -30,7 +31,6 @@ export const serviceApi = createApi({
         url: 'api/auth/signup',
         method: 'POST',
         body: formData, // Accepts FormData
-        headers: headersFormdata,
       }),
     }),
     getUser: builder.query({
@@ -39,6 +39,23 @@ export const serviceApi = createApi({
         method: 'Get',
       }),
     }),
+    //----------------------------------------------A U T H-------------------------------------//
+    //----------------------------------------------Destination Port-------------------------------------//
+    getDestinationPort: builder.query({
+      query: () => ({
+        url: 'api/destination',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Destination Port-------------------------------------//
+    //----------------------------------------------Statistics-------------------------------------//
+    getOrderStatistics: builder.query({
+      query: () => ({
+        url: 'api/order_statistics',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Statistics-------------------------------------//
   }),
 });
 
@@ -47,4 +64,6 @@ export const {
   useLoginUserMutation,
   useSignupUserMutation,
   useGetUserQuery,
+  useGetDestinationPortQuery,
+  useGetOrderStatisticsQuery,
 } = serviceApi;

@@ -1,18 +1,27 @@
 import R from '@components/utils/R';
-import { StyleSheet, View } from 'react-native';
-import { Dropdown } from 'react-native-element-dropdown';
+import {StyleSheet, View} from 'react-native';
+import {Dropdown} from 'react-native-element-dropdown';
 
-const DropDown = ({placeholderText, data, value, onChange, ...props}) => {
+const DropDown = ({
+  placeholderText,
+  data,
+  value,
+  onChange,
+  width = 0.95,
+  labelField = 'label',
+  valueField = 'value',
+  ...props
+}) => {
   return (
-    <View style={styles.dropDownCont}>
+    <View style={[styles.dropDownCont, {width: R.unit.width(width)}]}>
       <Dropdown
         style={[styles.dropdown]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         data={data}
         maxHeight={300}
-        labelField="label"
-        valueField="value"
+        labelField={labelField}
+        valueField={valueField}
         placeholder={placeholderText}
         value={value}
         onChange={onChange}
@@ -28,7 +37,7 @@ const styles = StyleSheet.create({
   //dropDown
   dropDownCont: {
     marginVertical: R.unit.height(0.01),
-    width: R.unit.width(0.95),
+
     alignSelf: 'center',
   },
   dropdown: {

@@ -1,12 +1,16 @@
-import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
+import PDFViewer from '@components/common/PDF';
 
 const BalanceUSDetailCard = ({item, onPress, ...props}) => {
-  const BalanceDetailContainerCard = ({title, data, image}) => {
+  const BalanceDetailContainerCard = ({title, data, image, onPress}) => {
     return (
-      <View style={styles.mainCont}>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.mainCont}
+        onPress={onPress}>
         <View style={styles.imgStyleMainCont}>
           <View style={styles.imgStyleCont}>
             <Image source={image} style={R.styles.img} />
@@ -20,17 +24,27 @@ const BalanceUSDetailCard = ({item, onPress, ...props}) => {
             width={R.unit.width(0.4)}>
             {title}
           </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.04)}
-            font={'RajdhaniMedium'}
-            width={R.unit.width(0.4)}>
-            {data}
-          </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            {data == 'PDF' && (
+              <View style={styles.pdfImgStyleCont}>
+                <Image source={R.image.PDF()} style={R.styles.img} />
+              </View>
+            )}
+            <Text
+              color={'black'}
+              fontSize={R.unit.width(0.04)}
+              font={data == 'PDF' ? 'RajdhaniBold' : 'RajdhaniMedium'}
+              width={R.unit.width(0.4)}>
+              {data}
+            </Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
+
+  const [pdf, setPdf] = useState('');
+  const [isPDF, setIsPDF] = useState(false);
 
   return (
     <>
@@ -42,24 +56,24 @@ const BalanceUSDetailCard = ({item, onPress, ...props}) => {
           font={'RajdhaniBold'}>
           Balance US Detail
         </Text>
-        <View style={styles.idCont}>
-          <Text
-            color={'white'}
-            fontSize={R.unit.width(0.035)}
-            font={'RajdhaniSemiBold'}>
-            000066
-          </Text>
-        </View>
       </View>
 
       <View style={styles.container}>
         <BalanceDetailContainerCard
           title={'Booking Number'}
-          data={'8RKNBASD545355486'}
+          data={
+            item?.loaded?.booking_number == null
+              ? 'None'
+              : item?.loaded?.booking_number
+          }
           image={R.image.CirclePlus()}
         />
         <BalanceDetailContainerCard
-          title={'Lines'}
+          title={
+            item?.loaded?.shipping_lines == null
+              ? 'None'
+              : item?.loaded?.shipping_lines
+          }
           data={'Y'}
           image={R.image.Tally()}
         />
@@ -67,12 +81,16 @@ const BalanceUSDetailCard = ({item, onPress, ...props}) => {
       <View style={styles.container}>
         <BalanceDetailContainerCard
           title={'Port'}
-          data={'Y'}
+          data={item?.destination_port}
           image={R.image.Warehouse()}
         />
         <BalanceDetailContainerCard
           title={'Size'}
-          data={'45 feet / 5 auto'}
+          data={
+            item?.loaded?.container_size == null
+              ? 'None'
+              : item?.loaded?.container_size
+          }
           image={R.image.Gear()}
         />
       </View>
@@ -81,85 +99,134 @@ const BalanceUSDetailCard = ({item, onPress, ...props}) => {
           title={'Dock Receipt'}
           data={'PDF'}
           image={R.image.Dollar()}
+          onPress={() => {
+            setIsPDF(true);
+            setPdf(item?.loaded?.dock_receipt);
+          }}
         />
         <BalanceDetailContainerCard
           title={'BI Copy'}
-          data={'None'}
+          data={item?.loaded?.bl_copy == null ? 'None' : item?.loaded?.bl_copy}
           image={R.image.Key()}
         />
       </View>
       <View style={styles.container}>
         <BalanceDetailContainerCard
           title={'Telex Release'}
-          data={'None'}
+          data={
+            item?.loaded?.telex_release == null
+              ? 'None'
+              : item?.loaded?.telex_release
+          }
           image={R.image.City()}
         />
         <BalanceDetailContainerCard
           title={'Invoice from auction'}
           data={'PDF'}
           image={R.image.List()}
+          onPress={() => {
+            setIsPDF(true);
+            setPdf(item?.loaded?.auction_invoices);
+          }}
         />
       </View>
       <View style={styles.container}>
         <BalanceDetailContainerCard
           title={'Expected Arrival Date'}
-          data={'None'}
+          data={item?.arrival_date == null ? 'None' : item?.arrival_date}
           image={R.image.CalendarWhite()}
         />
         <BalanceDetailContainerCard
           title={'Date of Release'}
-          data={'None'}
+          data={
+            item?.loaded?.date_of_release == null
+              ? 'None'
+              : item?.loaded?.date_of_release
+          }
           image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
         <BalanceDetailContainerCard
           title={'Date of Loading'}
-          data={'07-11-2023'}
+          data={
+            item?.loaded?.date_of_loading == null
+              ? 'None'
+              : item?.loaded?.date_of_loading
+          }
           image={R.image.CalendarWhite()}
         />
         <BalanceDetailContainerCard
           title={'Container Arrival Date'}
-          data={'07-11-2023'}
+          data={
+            item?.loaded?.actual_container_arrival_date == null
+              ? 'None'
+              : item?.loaded?.actual_container_arrival_date
+          }
           image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
-        <BalanceDetailContainerCard
+        {/* <BalanceDetailContainerCard
           title={'Unloading Date'}
           data={'None'}
           image={R.image.CalendarWhite()}
-        />
+        /> */}
         <BalanceDetailContainerCard
           title={'Invoice'}
           data={'PDF'}
           image={R.image.Dollar()}
+          onPress={() => {
+            setIsPDF(true);
+            setPdf(item?.loaded?.customer_invoice);
+          }}
+        />
+        <BalanceDetailContainerCard
+          title={'Delivery Order'}
+          data={
+            item?.loaded?.delivery_order == null
+              ? 'None'
+              : item?.loaded?.delivery_order
+          }
+          image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
         <BalanceDetailContainerCard
           title={'Invoice Amount'}
-          data={'PDF'}
+          data={
+            item?.loaded?.invoice_amount == null
+              ? 'None'
+              : item?.loaded?.invoice_amount
+          }
           image={R.image.Dollar()}
         />
         <BalanceDetailContainerCard
           title={'Paid Ammount'}
-          data={'None'}
+          data={
+            item?.loaded?.paid_amount == null
+              ? 'None'
+              : item?.loaded?.paid_amount
+          }
           image={R.image.Dollar()}
         />
       </View>
       <View style={styles.container}>
-        <BalanceDetailContainerCard
+        {/* <BalanceDetailContainerCard
           title={'Validations'}
           data={'None'}
           image={R.image.InputText()}
-        />
-        <BalanceDetailContainerCard
-          title={'Delivery Order'}
-          data={'None'}
-          image={R.image.CalendarStar()}
-        />
+        /> */}
       </View>
+      {isPDF && (
+        <PDFViewer
+          onPressBack={() => {
+            setIsPDF(false);
+            setPdf('');
+          }}
+          uri={pdf}
+        />
+      )}
     </>
   );
 };
@@ -203,16 +270,10 @@ const styles = StyleSheet.create({
     marginTop: R.unit.height(0.03),
     justifyContent: 'space-between',
   },
-  idCont: {
-    backgroundColor: 'black',
-    borderRadius: R.unit.width(1) / 2,
-    paddingHorizontal: R.unit.width(0.03),
-    paddingVertical: R.unit.width(0.015),
-  },
-  line: {
-    width: R.unit.width(0.95),
-    height: R.unit.height(0.015),
-    borderRadius: 20,
-    alignSelf: 'center',
+
+  pdfImgStyleCont: {
+    width: R.unit.width(0.045),
+    height: R.unit.width(0.045),
+    marginRight: R.unit.width(0.018),
   },
 });

@@ -4,6 +4,39 @@ import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
 const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
+  function getOrderStatus(id) {
+    let status;
+    switch (id) {
+      case 0:
+        status = 'Incoming/Pending';
+        break;
+      case 1:
+        status = 'Approved';
+        break;
+      case 2:
+        status = 'Dispatched';
+        break;
+      case 3:
+        status = 'Processing';
+        break;
+      case 4:
+        status = 'Canceled';
+        break;
+      case 5:
+        status = 'Waiting For Customer Approval';
+        break;
+      case 6:
+        status = 'Custom Created';
+        break;
+      default:
+        status = 'Unknown Status';
+        break;
+    }
+    return status;
+  }
+
+  const sub_bidders_status = getOrderStatus(item?.status);
+
   return (
     <>
       <TouchableOpacity
@@ -16,7 +49,7 @@ const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
               color={'white'}
               fontSize={R.unit.width(0.035)}
               font={'RajdhaniSemiBold'}>
-              000066
+              {item?.customer_id}
             </Text>
           </View>
           <TouchableOpacity
@@ -41,7 +74,7 @@ const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            ABC
+            {item?.name}
           </Text>
         </View>
 
@@ -60,7 +93,7 @@ const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            abc@gmail.com
+            {item?.email}
           </Text>
         </View>
 
@@ -79,7 +112,7 @@ const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            +132 4567 4879
+            {item?.profile?.phone}
           </Text>
         </View>
 
@@ -87,7 +120,7 @@ const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
 
         {/* Role */}
 
-        <View style={styles.flexCont}>
+        {/* <View style={styles.flexCont}>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
@@ -100,7 +133,7 @@ const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
             font={'RajdhaniMedium'}>
             None
           </Text>
-        </View>
+        </View> */}
 
         {/* Role */}
 
@@ -117,7 +150,7 @@ const SubBidderCard = ({item, onPress, onPressActionSheet, ...props}) => {
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            Approved
+            {sub_bidders_status}
           </Text>
         </View>
 

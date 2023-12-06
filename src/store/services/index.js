@@ -15,7 +15,7 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['User'],
+  tagTypes: ['User', 'SubBidder'],
 
   endpoints: builder => ({
     //----------------------------------------------A U T H-------------------------------------//
@@ -83,10 +83,44 @@ export const serviceApi = createApi({
       query: formData => ({
         url: 'api/price_agreement',
         method: 'POST',
-        body: formData, // Accepts FormData
+        body: formData,
       }),
     }),
     //----------------------------------------------Notification-------------------------------------//
+    //----------------------------------------------Sub Bidder-------------------------------------//
+    getSubBidder: builder.query({
+      query: () => ({
+        url: 'api/sub_bidders',
+        method: 'Get',
+      }),
+      providesTags: ['SubBidder'],
+    }),
+    createSubBidder: builder.mutation({
+      query: formData => ({
+        url: 'api/create_sub_bidder',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: ['SubBidder'],
+    }),
+    //----------------------------------------------Sub Bidder-------------------------------------//
+    //----------------------------------------------Balance US-------------------------------------//
+    getBalanceUS: builder.query({
+      query: () => ({
+        url: 'api/balance_us',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Balance US-------------------------------------//
+    //----------------------------------------------Towing Rates-------------------------------------//
+    getTowingRates: builder.query({
+      query: id => ({
+        url: 'api/towing_rates?auction_company_id=' + id,
+        method: 'Get',
+      }),
+    }),
+
+    //----------------------------------------------Towing Rates-------------------------------------//
   }),
 });
 
@@ -101,4 +135,8 @@ export const {
   useGetContainerQuery,
   useGetNotificationQuery,
   usePriceAgreementMutation,
+  useGetSubBidderQuery,
+  useCreateSubBidderMutation,
+  useGetBalanceUSQuery,
+  useGetTowingRatesQuery,
 } = serviceApi;

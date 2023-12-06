@@ -23,8 +23,6 @@ import {
   useGetDestinationPortQuery,
   useSignupUserMutation,
 } from '../../../store/services/index';
-import {userLogin} from '../../../store/user/userSlice';
-import {useSelector, useDispatch} from 'react-redux';
 
 function SignUpScreen({navigation, ...props}) {
   // const dispatch = useDispatch();

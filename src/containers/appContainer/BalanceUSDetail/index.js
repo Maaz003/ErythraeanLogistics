@@ -5,11 +5,13 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import BalanceUSDetailCard from '@components/view/cards/BalanceUSDetailCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 
-const BalanceUSDetail = ({navigation, ...props}) => {
+const BalanceUSDetail = ({navigation, route, ...props}) => {
+  const data = route.params.item;
+
   return (
     <ScreenBoiler isBack={true}>
       <ScrollContainer paddingBottom={0.15}>
-        <BalanceUSDetailCard />
+        <BalanceUSDetailCard item={data} />
       </ScrollContainer>
     </ScreenBoiler>
   );

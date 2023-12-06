@@ -10,7 +10,9 @@ const BalanceUSCard = ({item, onPress, onPressActionSheet, ...props}) => {
     <>
       <TouchableOpacity
         onPress={() => {
-          navigationRef.navigate('BalanceUSDetail');
+          navigationRef.navigate('BalanceUSDetail', {
+            item: item,
+          });
         }}
         activeOpacity={0.8}
         style={[styles.mainCont]}>
@@ -20,7 +22,7 @@ const BalanceUSCard = ({item, onPress, onPressActionSheet, ...props}) => {
               color={'white'}
               fontSize={R.unit.width(0.035)}
               font={'RajdhaniSemiBold'}>
-              000066
+              {item?.id}
             </Text>
           </View>
           <TouchableOpacity
@@ -33,27 +35,27 @@ const BalanceUSCard = ({item, onPress, onPressActionSheet, ...props}) => {
         </View>
 
         <TitleImageContainerCard
-          data={'25496865'}
+          data={item?.vin_number}
           image={R.image.List()}
-          title={'Booking Number'}
+          title={'VIN'}
         />
 
         <TitleImageContainerCard
-          data={'Salalah Oman'}
+          data={item?.destination_port}
           image={R.image.Warehouse()}
           title={'Port'}
         />
 
         <TitleImageContainerCard
-          data={'45 feet / 5 auto'}
+          data={item?.auction_city}
           image={R.image.Tally()}
-          title={'Size'}
+          title={'Auction City'}
         />
 
         <TitleImageContainerCard
-          data={'8RKNBASD545355486'}
+          data={item?.dispatched_date == null ? 'None' : item?.dispatched_date}
           image={R.image.CalendarStar()}
-          title={'Date of Loading'}
+          title={'Dispatched Date'}
         />
       </TouchableOpacity>
     </>

@@ -25,6 +25,7 @@ const BalanceUS = ({navigation, ...props}) => {
         renderItem={({item}) => {
           return <BalanceUSCard item={item} />;
         }}
+        contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
       />
     </ScreenBoiler>
   );

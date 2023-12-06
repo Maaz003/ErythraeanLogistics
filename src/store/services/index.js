@@ -72,6 +72,21 @@ export const serviceApi = createApi({
       }),
     }),
     //----------------------------------------------Container List-------------------------------------//
+    //----------------------------------------------Notification-------------------------------------//
+    getNotification: builder.query({
+      query: () => ({
+        url: 'api/order_notification',
+        method: 'Get',
+      }),
+    }),
+    priceAgreement: builder.mutation({
+      query: formData => ({
+        url: 'api/price_agreement',
+        method: 'POST',
+        body: formData, // Accepts FormData
+      }),
+    }),
+    //----------------------------------------------Notification-------------------------------------//
   }),
 });
 
@@ -84,4 +99,6 @@ export const {
   useGetOrderStatisticsQuery,
   useGetOrderQuery,
   useGetContainerQuery,
+  useGetNotificationQuery,
+  usePriceAgreementMutation,
 } = serviceApi;

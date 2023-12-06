@@ -27,8 +27,6 @@ function LoginScreen({navigation, ...props}) {
   const [password, setPassword] = useState('123456789');
   const [isLoader, setIsLoader] = useState(false);
 
-  const userReducer = useSelector(state => state.user);
-
   //api
   const [loginUser] = useLoginUserMutation();
 

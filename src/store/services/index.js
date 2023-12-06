@@ -119,8 +119,25 @@ export const serviceApi = createApi({
         method: 'Get',
       }),
     }),
-
     //----------------------------------------------Towing Rates-------------------------------------//
+    //----------------------------------------------Auction-------------------------------------//
+    getAuctionCity: builder.query({
+      query: id => ({
+        url: 'api/get_auction_city?id=' + id,
+        method: 'Get',
+      }),
+    }),
+
+    //----------------------------------------------Auction-------------------------------------//
+    //----------------------------------------------POL-------------------------------------//
+    getExportPorts: builder.query({
+      query: () => ({
+        url: 'api/export_ports',
+        method: 'Get',
+      }),
+    }),
+
+    //----------------------------------------------POL-------------------------------------//
   }),
 });
 
@@ -139,4 +156,6 @@ export const {
   useCreateSubBidderMutation,
   useGetBalanceUSQuery,
   useGetTowingRatesQuery,
+  useGetAuctionCityQuery,
+  useGetExportPortsQuery,
 } = serviceApi;

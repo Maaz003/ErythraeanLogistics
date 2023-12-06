@@ -14,51 +14,44 @@ import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
 import DropDown from '@components/common/DropDown';
 import TimeDatePicker from '@components/common/TimeDatePicker';
-import {
-  SelectCustomer,
-  Year,
-  Auction,
-  AuctionCity,
-  Color,
-  Destination_Port,
-  LOT,
-  Make,
-  Model,
-  POL,
-  Type,
-  VechileOperable,
-} from '@components/constants/createOrderConstant';
+import {Type, VechileOperable} from '@components/constants/createOrderConstant';
 import FormScrollContainer from '@components/layout/FormScrollContainer';
 
 //third party
 import moment from 'moment';
 
+//! RTK QUERY API
+import {
+  useGetAuctionCityQuery,
+  useGetDestinationPortQuery,
+  useGetExportPortsQuery,
+} from '../../../store/services/index';
+import {useSelector} from 'react-redux';
+
 const CreateNewOrder = ({navigation, ...props}) => {
-  //dropdown
-
-  const [values, setValues] = useState({
-    selectCustomer: null,
-    year: null,
-    make: null,
-    model: null,
-    color: null,
-    auction: null,
-    auctionCity: null,
-    lot: null,
-    destinationPort: null,
-    pol: null,
-    type: null,
-    vehicleOperable: null,
+  const user = useSelector(state => state.user.user);
+  const [state, setState] = useState({
+    year: '', //text
+    make: '', //text
+    model: '', //text
+    color: '', //text
+    auction: 1, //dropdown
+    auction_city: null, //dropdown
+    auction_zip: null,
+    auction_state: null,
+    auction_address: null,
+    auction_cell: null,
+    auction_phone: null,
+    lot: '', //text
+    destination_port: user?.destination?.destination_port_id, //dropdown
+    pol: null, //dropdown
+    vin_number: '', //text
+    vehicle_operable: null, //dropdown
+    type: null, //dropdown
+    to_dismantle: false, //bool
+    self_delivered: false, //bool
+    note: '', //text
   });
-
-  // Update the state based on the dropdown selection
-  const handleDropdownChange = (key, value) => {
-    setValues({
-      ...values,
-      [key]: value,
-    });
-  };
-  //dropdown
 
   //time
   const [date, setDate] = useState(new Date());
@@ -81,7 +74,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
   const [show1, setShow1] = useState(false);
 
   const onChange1 = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
+    const currentDate = selectedDate || date1;
     setShow1(Platform.OS === 'ios');
     setDate1(currentDate);
     setGetDate1(moment(currentDate).format('DD-MM-YYYY'));
@@ -92,10 +85,45 @@ const CreateNewOrder = ({navigation, ...props}) => {
   };
   //time
 
-  const [typeCheck, setTypeCheck] = useState(2);
-  const [typeCheck1, setTypeCheck1] = useState(2);
+  const onChangeText = (text, key) => {
+    setState(prevState => ({
+      ...prevState,
+      [key]: text,
+    }));
+  };
 
-  console.log('values Dropdown ===>', values);
+  const _handleCreateNewOrder = () => {
+    const formData = new FormData();
+    formData.append('year', state.year);
+    formData.append('make', state.make);
+    formData.append('model', state.model);
+    formData.append('color', state.color);
+    formData.append('auction', state.auction);
+    formData.append('auction_city', state.auction_city);
+    formData.append('lot', state.lot);
+    formData.append('destination_port', state.destination_port);
+    formData.append('opening_port', state.pol);
+    formData.append('vin_number', state.vin_number);
+    formData.append('vehicle_operable', state.vehicle_operable);
+    formData.append('type', state.type);
+    formData.append('dismantle', state.to_dismantle);
+    formData.append('self_delivered', state.self_delivered);
+    formData.append('notes', state.note);
+    formData.append('purchase_date', getDate);
+    formData.append('payment_to_auction', getDate1);
+
+    console.log('formData ===>', formData);
+  };
+
+  //apis
+  const {data: auctionCityData, isFetching: auctionCityIsFetching} =
+    useGetAuctionCityQuery(state.auction);
+
+  const {data: destinationData, isFetching: destinationIsFetching} =
+    useGetDestinationPortQuery();
+
+  const {data: POLData, isFetching: POLIsFetching} = useGetExportPortsQuery();
+
   return (
     <ScreenBoiler isBack={true}>
       <FormScrollContainer paddingBottom={0.15}>
@@ -130,7 +158,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
           <View style={styles.flexCont}>
             <TouchableOpacity
               onPress={() => {
-                setTypeCheck(0);
+                onChangeText(1, 'auction');
               }}
               activeOpacity={0.7}
               style={styles.halfCont}>
@@ -140,7 +168,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
                 font={'RajdhaniMedium'}>
                 Copart
               </Text>
-              {typeCheck === 0 ? (
+              {state.auction === 1 ? (
                 <View style={styles.imgStyleCont}>
                   <Image source={R.image.Tick()} style={R.styles.img} />
                 </View>
@@ -150,7 +178,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setTypeCheck(1);
+                onChangeText(2, 'auction');
               }}
               activeOpacity={0.7}
               style={styles.halfCont}>
@@ -160,7 +188,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
                 font={'RajdhaniMedium'}>
                 IAAI
               </Text>
-              {typeCheck === 1 ? (
+              {state.auction === 2 ? (
                 <View style={styles.imgStyleCont}>
                   <Image source={R.image.Tick()} style={R.styles.img} />
                 </View>
@@ -169,14 +197,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
               )}
             </TouchableOpacity>
           </View>
-          <DropDown
-            data={SelectCustomer}
-            value={values.selectCustomer}
-            placeholderText={'Select Customer'}
-            onChange={item => {
-              handleDropdownChange('selectCustomer', item.value);
-            }}
-          />
+
           <TimeDatePicker
             date={date}
             getDate={getDate}
@@ -185,61 +206,52 @@ const CreateNewOrder = ({navigation, ...props}) => {
             showDatePicker={showDatePicker}
             text={'Purchased Date'}
           />
-          <DropDown
-            data={Year}
-            value={values.year}
+          <TextInput
             placeholderText={'Year'}
-            onChange={item => {
-              handleDropdownChange('year', item.value);
-            }}
+            width={0.95}
+            keyboardType={'numeric'}
+            value={state.year}
+            handleOnChangeTxt={text => onChangeText(text, 'year')}
           />
-          <DropDown
-            data={Make}
-            value={values.make}
+          <TextInput
             placeholderText={'Make'}
-            onChange={item => {
-              handleDropdownChange('make', item.value);
-            }}
+            width={0.95}
+            value={state.make}
+            handleOnChangeTxt={text => onChangeText(text, 'make')}
           />
-          <DropDown
-            data={Model}
-            value={values.model}
+          <TextInput
             placeholderText={'Model'}
-            onChange={item => {
-              handleDropdownChange('model', item.value);
-            }}
+            width={0.95}
+            value={state.model}
+            handleOnChangeTxt={text => onChangeText(text, 'model')}
           />
-          <DropDown
-            data={Color}
-            value={values.color}
+          <TextInput
             placeholderText={'Color'}
-            onChange={item => {
-              handleDropdownChange('color', item.value);
-            }}
+            width={0.95}
+            value={state.color}
+            handleOnChangeTxt={text => onChangeText(text, 'color')}
           />
+
           <DropDown
-            data={Auction}
-            value={values.auction}
-            placeholderText={'Auction'}
-            onChange={item => {
-              handleDropdownChange('auction', item.value);
-            }}
-          />
-          <DropDown
-            data={AuctionCity}
-            value={values.auctionCity}
+            data={auctionCityIsFetching ? [] : auctionCityData?.data}
+            value={state.auction_city}
             placeholderText={'Auction City'}
             onChange={item => {
-              handleDropdownChange('auctionCity', item.value);
+              onChangeText(item.name, 'auction_city');
+              onChangeText(item.zip, 'auction_zip');
+              onChangeText(item.state, 'auction_state');
+              onChangeText(item.address, 'auction_address');
+              onChangeText(item.cell, 'auction_cell');
+              onChangeText(item.phone, 'auction_phone');
             }}
+            labelField={'name'}
+            valueField={'name'}
           />
-          <DropDown
-            data={LOT}
-            value={values.lot}
+          <TextInput
             placeholderText={'LOT'}
-            onChange={item => {
-              handleDropdownChange('lot', item.value);
-            }}
+            width={0.95}
+            value={state.lot}
+            handleOnChangeTxt={text => onChangeText(text, 'lot')}
           />
           <TimeDatePicker
             date={date1}
@@ -249,48 +261,53 @@ const CreateNewOrder = ({navigation, ...props}) => {
             showDatePicker={showDatePicker1}
             text={'Payment to Auction'}
           />
+
           <DropDown
-            data={Destination_Port}
-            value={values.destinationPort}
+            data={destinationIsFetching ? [] : destinationData?.data}
+            value={state.destination_port}
             placeholderText={'Destination Port'}
             onChange={item => {
-              handleDropdownChange('destinationPort', item.value);
+              onChangeText(item.value, 'destination_port');
             }}
+            valueField={'id'}
+            labelField={'name'}
           />
           <DropDown
-            data={POL}
-            value={values.pol}
+            data={POLIsFetching ? [] : POLData?.data}
+            value={state.pol}
             placeholderText={'P.O.L'}
             onChange={item => {
-              handleDropdownChange('pol', item.value);
+              onChangeText(item.name, 'pol');
             }}
+            valueField={'name'}
+            labelField={'name'}
           />
           <TextInput
             placeholderText={'VIN Number'}
             width={0.95}
-            keyboardType={'numeric'}
+            value={state.vin_number}
+            handleOnChangeTxt={text => onChangeText(text, 'vin_number')}
           />
           <DropDown
             data={Type}
-            value={values.type}
+            value={state.type}
             placeholderText={'Type'}
             onChange={item => {
-              handleDropdownChange('type', item.value);
+              onChangeText(item.value, 'type');
             }}
           />
-          <TextInput placeholderText={'Email'} width={0.95} />
           <DropDown
             data={VechileOperable}
-            value={values.vehicleOperable}
+            value={state.vehicle_operable}
             placeholderText={'Vechile Operable'}
             onChange={item => {
-              handleDropdownChange('vehicleOperable', item.value);
+              onChangeText(item.value, 'vehicle_operable');
             }}
           />
           <View style={styles.flexCont}>
             <TouchableOpacity
               onPress={() => {
-                setTypeCheck1(0);
+                onChangeText(!state.to_dismantle, 'to_dismantle');
               }}
               activeOpacity={0.7}
               style={styles.halfCont}>
@@ -300,7 +317,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
                 font={'RajdhaniMedium'}>
                 To Dismantle
               </Text>
-              {typeCheck1 === 0 ? (
+              {state.to_dismantle ? (
                 <View style={styles.imgStyleCont}>
                   <Image source={R.image.Tick()} style={R.styles.img} />
                 </View>
@@ -310,7 +327,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setTypeCheck1(1);
+                onChangeText(!state.self_delivered, 'self_delivered');
               }}
               activeOpacity={0.7}
               style={styles.halfCont}>
@@ -320,7 +337,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
                 font={'RajdhaniMedium'}>
                 Self Delivered
               </Text>
-              {typeCheck1 === 1 ? (
+              {state.self_delivered ? (
                 <View style={styles.imgStyleCont}>
                   <Image source={R.image.Tick()} style={R.styles.img} />
                 </View>
@@ -333,12 +350,15 @@ const CreateNewOrder = ({navigation, ...props}) => {
             placeholderText={'Notes'}
             width={0.95}
             height={R.unit.height(0.25)}
+            value={state.note}
+            handleOnChangeTxt={text => onChangeText(text, 'note')}
           />
           <ActionButton
             title={'Create'}
             bgColor={'#262626'}
             marginTop={0.04}
             width={0.95}
+            onPress={() => _handleCreateNewOrder()}
           />
         </View>
       </FormScrollContainer>

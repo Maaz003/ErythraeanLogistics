@@ -50,9 +50,9 @@ const TowFreight = ({navigation, ...props}) => {
   };
   //time
 
-  const {data: towingData, isLoading} = useGetTowingRatesQuery(value);
+  const {data: towingData, isFetching} = useGetTowingRatesQuery(value);
 
-  console.log('towingData', towingData, isLoading);
+  console.log('towingData', towingData, isFetching);
 
   const FreightRate = () => {
     return (
@@ -96,9 +96,9 @@ const TowFreight = ({navigation, ...props}) => {
           }}
         />
         <FlatList
-          data={[1, 2, 3, 4, 5, 6]}
-          renderItem={({}) => {
-            return <TowCard />;
+          data={isFetching ? [] : towingData?.data}
+          renderItem={({item}) => {
+            return <TowCard item={item} />;
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
         />
@@ -152,7 +152,7 @@ const TowFreight = ({navigation, ...props}) => {
           {tab ? FreightRate() : TowRate()}
         </ScrollContainer>
       </ScreenBoiler>
-      {isLoading && <Loader />}
+      {isFetching && <Loader />}
     </>
   );
 };

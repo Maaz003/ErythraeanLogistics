@@ -16,6 +16,8 @@ import DropDown from '@components/common/DropDown';
 import TimeDatePicker from '@components/common/TimeDatePicker';
 import {Type, VechileOperable} from '@components/constants/createOrderConstant';
 import FormScrollContainer from '@components/layout/FormScrollContainer';
+import Loader from '@components/common/Loader';
+import PopUp from '@components/common/PopUp';
 
 //third party
 import moment from 'moment';
@@ -25,11 +27,13 @@ import {
   useGetAuctionCityQuery,
   useGetDestinationPortQuery,
   useGetExportPortsQuery,
+  useCreateOrderMutation,
 } from '../../../store/services/index';
 import {useSelector} from 'react-redux';
 
 const CreateNewOrder = ({navigation, ...props}) => {
   const user = useSelector(state => state.user.user);
+  console.log('user ==>', user);
   const [state, setState] = useState({
     year: '', //text
     make: '', //text
@@ -52,6 +56,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
     self_delivered: false, //bool
     note: '', //text
   });
+  const [isLoader, setIsLoader] = useState(false);
 
   //time
   const [date, setDate] = useState(new Date());
@@ -92,8 +97,26 @@ const CreateNewOrder = ({navigation, ...props}) => {
     }));
   };
 
+  //apis
+  const {data: auctionCityData, isFetching: auctionCityIsFetching} =
+    useGetAuctionCityQuery(state.auction);
+
+  const {data: destinationData, isFetching: destinationIsFetching} =
+    useGetDestinationPortQuery();
+
+  console.log('destinationData', destinationData);
+
+  const {data: POLData, isFetching: POLIsFetching} = useGetExportPortsQuery();
+
+  const [createOrder] = useCreateOrderMutation();
+
   const _handleCreateNewOrder = () => {
+    const destination = destinationData?.data.find(
+      x => x.id == state.destination_port,
+    );
+    setIsLoader(true);
     const formData = new FormData();
+    formData.append('customer', user?.id);
     formData.append('year', state.year);
     formData.append('make', state.make);
     formData.append('model', state.model);
@@ -101,7 +124,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
     formData.append('auction', state.auction);
     formData.append('auction_city', state.auction_city);
     formData.append('lot', state.lot);
-    formData.append('destination_port', state.destination_port);
+    formData.append('destination_port', destination?.name);
     formData.append('opening_port', state.pol);
     formData.append('vin_number', state.vin_number);
     formData.append('vehicle_operable', state.vehicle_operable);
@@ -113,256 +136,270 @@ const CreateNewOrder = ({navigation, ...props}) => {
     formData.append('payment_to_auction', getDate1);
 
     console.log('formData ===>', formData);
+
+    createOrder(formData)
+      .unwrap()
+      .then(result => {
+        console.log('createOrder successful:', result);
+        setIsLoader(false);
+        PopUp({
+          heading: result?.message,
+          type: 'success',
+        });
+        navigation.goBack();
+      })
+      .catch(error => {
+        console.error('createOrder failed:', error);
+        PopUp({
+          heading: error?.data?.message,
+          type: 'danger',
+        });
+        setIsLoader(false);
+      });
   };
 
-  //apis
-  const {data: auctionCityData, isFetching: auctionCityIsFetching} =
-    useGetAuctionCityQuery(state.auction);
-
-  const {data: destinationData, isFetching: destinationIsFetching} =
-    useGetDestinationPortQuery();
-
-  const {data: POLData, isFetching: POLIsFetching} = useGetExportPortsQuery();
-
   return (
-    <ScreenBoiler isBack={true}>
-      <FormScrollContainer paddingBottom={0.15}>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}
-          gutterTop={10}
-          gutterLeft={15}>
-          Create New Order
-        </Text>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.05)}
-          font={'RajdhaniBold'}
-          gutterTop={5}
-          gutterLeft={15}>
-          Autos
-        </Text>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.05)}
-          font={'RajdhaniMedium'}
-          gutterTop={5}
-          gutterLeft={15}>
-          Select PDF Type
-        </Text>
-        <View style={styles.mainCont}>
-          <View style={styles.flexCont}>
-            <TouchableOpacity
-              onPress={() => {
-                onChangeText(1, 'auction');
+    <>
+      <ScreenBoiler isBack={true}>
+        <FormScrollContainer paddingBottom={0.15}>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.065)}
+            font={'RajdhaniBold'}
+            gutterTop={10}
+            gutterLeft={15}>
+            Create New Order
+          </Text>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.05)}
+            font={'RajdhaniBold'}
+            gutterTop={5}
+            gutterLeft={15}>
+            Autos
+          </Text>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.05)}
+            font={'RajdhaniMedium'}
+            gutterTop={5}
+            gutterLeft={15}>
+            Select PDF Type
+          </Text>
+          <View style={styles.mainCont}>
+            <View style={styles.flexCont}>
+              <TouchableOpacity
+                onPress={() => {
+                  onChangeText(1, 'auction');
+                }}
+                activeOpacity={0.7}
+                style={styles.halfCont}>
+                <Text
+                  color={'black'}
+                  fontSize={R.unit.width(0.05)}
+                  font={'RajdhaniMedium'}>
+                  Copart
+                </Text>
+                {state.auction === 1 ? (
+                  <View style={styles.imgStyleCont}>
+                    <Image source={R.image.Tick()} style={R.styles.img} />
+                  </View>
+                ) : (
+                  <View style={styles.circleCont} />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  onChangeText(2, 'auction');
+                }}
+                activeOpacity={0.7}
+                style={styles.halfCont}>
+                <Text
+                  color={'black'}
+                  fontSize={R.unit.width(0.05)}
+                  font={'RajdhaniMedium'}>
+                  IAAI
+                </Text>
+                {state.auction === 2 ? (
+                  <View style={styles.imgStyleCont}>
+                    <Image source={R.image.Tick()} style={R.styles.img} />
+                  </View>
+                ) : (
+                  <View style={styles.circleCont} />
+                )}
+              </TouchableOpacity>
+            </View>
+
+            <TimeDatePicker
+              date={date}
+              getDate={getDate}
+              onChange={onChange}
+              show={show}
+              showDatePicker={showDatePicker}
+              text={'Purchased Date'}
+            />
+            <TextInput
+              placeholderText={'Year'}
+              width={0.95}
+              keyboardType={'numeric'}
+              value={state.year}
+              handleOnChangeTxt={text => onChangeText(text, 'year')}
+            />
+            <TextInput
+              placeholderText={'Make'}
+              width={0.95}
+              value={state.make}
+              handleOnChangeTxt={text => onChangeText(text, 'make')}
+            />
+            <TextInput
+              placeholderText={'Model'}
+              width={0.95}
+              value={state.model}
+              handleOnChangeTxt={text => onChangeText(text, 'model')}
+            />
+            <TextInput
+              placeholderText={'Color'}
+              width={0.95}
+              value={state.color}
+              handleOnChangeTxt={text => onChangeText(text, 'color')}
+            />
+
+            <DropDown
+              data={auctionCityIsFetching ? [] : auctionCityData?.data}
+              value={state.auction_city}
+              placeholderText={'Auction City'}
+              onChange={item => {
+                onChangeText(item.name, 'auction_city');
+                onChangeText(item.zip, 'auction_zip');
+                onChangeText(item.state, 'auction_state');
+                onChangeText(item.address, 'auction_address');
+                onChangeText(item.cell, 'auction_cell');
+                onChangeText(item.phone, 'auction_phone');
               }}
-              activeOpacity={0.7}
-              style={styles.halfCont}>
-              <Text
-                color={'black'}
-                fontSize={R.unit.width(0.05)}
-                font={'RajdhaniMedium'}>
-                Copart
-              </Text>
-              {state.auction === 1 ? (
-                <View style={styles.imgStyleCont}>
-                  <Image source={R.image.Tick()} style={R.styles.img} />
-                </View>
-              ) : (
-                <View style={styles.circleCont} />
-              )}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                onChangeText(2, 'auction');
+              labelField={'name'}
+              valueField={'name'}
+            />
+            <TextInput
+              placeholderText={'LOT'}
+              width={0.95}
+              value={state.lot}
+              handleOnChangeTxt={text => onChangeText(text, 'lot')}
+            />
+            <TimeDatePicker
+              date={date1}
+              getDate={getDate1}
+              onChange={onChange1}
+              show={show1}
+              showDatePicker={showDatePicker1}
+              text={'Payment to Auction'}
+            />
+
+            <DropDown
+              data={destinationIsFetching ? [] : destinationData?.data}
+              value={state.destination_port}
+              placeholderText={'Destination Port'}
+              onChange={item => {
+                onChangeText(item.value, 'destination_port');
               }}
-              activeOpacity={0.7}
-              style={styles.halfCont}>
-              <Text
-                color={'black'}
-                fontSize={R.unit.width(0.05)}
-                font={'RajdhaniMedium'}>
-                IAAI
-              </Text>
-              {state.auction === 2 ? (
-                <View style={styles.imgStyleCont}>
-                  <Image source={R.image.Tick()} style={R.styles.img} />
-                </View>
-              ) : (
-                <View style={styles.circleCont} />
-              )}
-            </TouchableOpacity>
+              valueField={'id'}
+              labelField={'name'}
+            />
+            <DropDown
+              data={POLIsFetching ? [] : POLData?.data}
+              value={state.pol}
+              placeholderText={'P.O.L'}
+              onChange={item => {
+                onChangeText(item.name, 'pol');
+              }}
+              valueField={'name'}
+              labelField={'name'}
+            />
+            <TextInput
+              placeholderText={'VIN Number'}
+              width={0.95}
+              value={state.vin_number}
+              handleOnChangeTxt={text => onChangeText(text, 'vin_number')}
+            />
+            <DropDown
+              data={Type}
+              value={state.type}
+              placeholderText={'Type'}
+              onChange={item => {
+                onChangeText(item.value, 'type');
+              }}
+            />
+            <DropDown
+              data={VechileOperable}
+              value={state.vehicle_operable}
+              placeholderText={'Vechile Operable'}
+              onChange={item => {
+                onChangeText(item.value, 'vehicle_operable');
+              }}
+            />
+            <View style={styles.flexCont}>
+              <TouchableOpacity
+                onPress={() => {
+                  onChangeText(!state.to_dismantle, 'to_dismantle');
+                }}
+                activeOpacity={0.7}
+                style={styles.halfCont}>
+                <Text
+                  color={'black'}
+                  fontSize={R.unit.width(0.05)}
+                  font={'RajdhaniMedium'}>
+                  To Dismantle
+                </Text>
+                {state.to_dismantle ? (
+                  <View style={styles.imgStyleCont}>
+                    <Image source={R.image.Tick()} style={R.styles.img} />
+                  </View>
+                ) : (
+                  <View style={styles.circleCont} />
+                )}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  onChangeText(!state.self_delivered, 'self_delivered');
+                }}
+                activeOpacity={0.7}
+                style={styles.halfCont}>
+                <Text
+                  color={'black'}
+                  fontSize={R.unit.width(0.05)}
+                  font={'RajdhaniMedium'}>
+                  Self Delivered
+                </Text>
+                {state.self_delivered ? (
+                  <View style={styles.imgStyleCont}>
+                    <Image source={R.image.Tick()} style={R.styles.img} />
+                  </View>
+                ) : (
+                  <View style={styles.circleCont} />
+                )}
+              </TouchableOpacity>
+            </View>
+            <TextInput
+              placeholderText={'Notes'}
+              width={0.95}
+              height={R.unit.height(0.25)}
+              value={state.note}
+              handleOnChangeTxt={text => onChangeText(text, 'note')}
+            />
+            <ActionButton
+              title={'Create'}
+              bgColor={'#262626'}
+              marginTop={0.04}
+              width={0.95}
+              onPress={() => _handleCreateNewOrder()}
+            />
           </View>
-
-          <TimeDatePicker
-            date={date}
-            getDate={getDate}
-            onChange={onChange}
-            show={show}
-            showDatePicker={showDatePicker}
-            text={'Purchased Date'}
-          />
-          <TextInput
-            placeholderText={'Year'}
-            width={0.95}
-            keyboardType={'numeric'}
-            value={state.year}
-            handleOnChangeTxt={text => onChangeText(text, 'year')}
-          />
-          <TextInput
-            placeholderText={'Make'}
-            width={0.95}
-            value={state.make}
-            handleOnChangeTxt={text => onChangeText(text, 'make')}
-          />
-          <TextInput
-            placeholderText={'Model'}
-            width={0.95}
-            value={state.model}
-            handleOnChangeTxt={text => onChangeText(text, 'model')}
-          />
-          <TextInput
-            placeholderText={'Color'}
-            width={0.95}
-            value={state.color}
-            handleOnChangeTxt={text => onChangeText(text, 'color')}
-          />
-
-          <DropDown
-            data={auctionCityIsFetching ? [] : auctionCityData?.data}
-            value={state.auction_city}
-            placeholderText={'Auction City'}
-            onChange={item => {
-              onChangeText(item.name, 'auction_city');
-              onChangeText(item.zip, 'auction_zip');
-              onChangeText(item.state, 'auction_state');
-              onChangeText(item.address, 'auction_address');
-              onChangeText(item.cell, 'auction_cell');
-              onChangeText(item.phone, 'auction_phone');
-            }}
-            labelField={'name'}
-            valueField={'name'}
-          />
-          <TextInput
-            placeholderText={'LOT'}
-            width={0.95}
-            value={state.lot}
-            handleOnChangeTxt={text => onChangeText(text, 'lot')}
-          />
-          <TimeDatePicker
-            date={date1}
-            getDate={getDate1}
-            onChange={onChange1}
-            show={show1}
-            showDatePicker={showDatePicker1}
-            text={'Payment to Auction'}
-          />
-
-          <DropDown
-            data={destinationIsFetching ? [] : destinationData?.data}
-            value={state.destination_port}
-            placeholderText={'Destination Port'}
-            onChange={item => {
-              onChangeText(item.value, 'destination_port');
-            }}
-            valueField={'id'}
-            labelField={'name'}
-          />
-          <DropDown
-            data={POLIsFetching ? [] : POLData?.data}
-            value={state.pol}
-            placeholderText={'P.O.L'}
-            onChange={item => {
-              onChangeText(item.name, 'pol');
-            }}
-            valueField={'name'}
-            labelField={'name'}
-          />
-          <TextInput
-            placeholderText={'VIN Number'}
-            width={0.95}
-            value={state.vin_number}
-            handleOnChangeTxt={text => onChangeText(text, 'vin_number')}
-          />
-          <DropDown
-            data={Type}
-            value={state.type}
-            placeholderText={'Type'}
-            onChange={item => {
-              onChangeText(item.value, 'type');
-            }}
-          />
-          <DropDown
-            data={VechileOperable}
-            value={state.vehicle_operable}
-            placeholderText={'Vechile Operable'}
-            onChange={item => {
-              onChangeText(item.value, 'vehicle_operable');
-            }}
-          />
-          <View style={styles.flexCont}>
-            <TouchableOpacity
-              onPress={() => {
-                onChangeText(!state.to_dismantle, 'to_dismantle');
-              }}
-              activeOpacity={0.7}
-              style={styles.halfCont}>
-              <Text
-                color={'black'}
-                fontSize={R.unit.width(0.05)}
-                font={'RajdhaniMedium'}>
-                To Dismantle
-              </Text>
-              {state.to_dismantle ? (
-                <View style={styles.imgStyleCont}>
-                  <Image source={R.image.Tick()} style={R.styles.img} />
-                </View>
-              ) : (
-                <View style={styles.circleCont} />
-              )}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                onChangeText(!state.self_delivered, 'self_delivered');
-              }}
-              activeOpacity={0.7}
-              style={styles.halfCont}>
-              <Text
-                color={'black'}
-                fontSize={R.unit.width(0.05)}
-                font={'RajdhaniMedium'}>
-                Self Delivered
-              </Text>
-              {state.self_delivered ? (
-                <View style={styles.imgStyleCont}>
-                  <Image source={R.image.Tick()} style={R.styles.img} />
-                </View>
-              ) : (
-                <View style={styles.circleCont} />
-              )}
-            </TouchableOpacity>
-          </View>
-          <TextInput
-            placeholderText={'Notes'}
-            width={0.95}
-            height={R.unit.height(0.25)}
-            value={state.note}
-            handleOnChangeTxt={text => onChangeText(text, 'note')}
-          />
-          <ActionButton
-            title={'Create'}
-            bgColor={'#262626'}
-            marginTop={0.04}
-            width={0.95}
-            onPress={() => _handleCreateNewOrder()}
-          />
-        </View>
-      </FormScrollContainer>
-    </ScreenBoiler>
+        </FormScrollContainer>
+      </ScreenBoiler>
+      {isLoader && <Loader />}
+    </>
   );
 };
 

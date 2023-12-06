@@ -15,7 +15,7 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['User', 'SubBidder'],
+  tagTypes: ['User', 'SubBidder', 'Order'],
 
   endpoints: builder => ({
     //----------------------------------------------A U T H-------------------------------------//
@@ -62,6 +62,15 @@ export const serviceApi = createApi({
         url: 'api/orders',
         method: 'Get',
       }),
+      providesTags: ['Order'],
+    }),
+    createOrder: builder.mutation({
+      query: formData => ({
+        url: 'api/create_order',
+        method: 'POST',
+        body: formData, // Accepts FormData
+      }),
+      invalidatesTags: ['Order'],
     }),
     //----------------------------------------------Order-------------------------------------//
     //----------------------------------------------Container List-------------------------------------//
@@ -158,4 +167,5 @@ export const {
   useGetTowingRatesQuery,
   useGetAuctionCityQuery,
   useGetExportPortsQuery,
+  useCreateOrderMutation,
 } = serviceApi;

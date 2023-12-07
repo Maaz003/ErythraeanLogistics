@@ -38,6 +38,15 @@ export const serviceApi = createApi({
         url: 'api/userinfo',
         method: 'Get',
       }),
+      providesTags: ['User'],
+    }),
+    updateUser: builder.mutation({
+      query: formData => ({
+        url: 'api/user_edit',
+        method: 'POST',
+        body: formData, // Accepts FormData
+      }),
+      invalidatesTags: ['User'],
     }),
     //----------------------------------------------A U T H-------------------------------------//
     //----------------------------------------------Destination Port-------------------------------------//
@@ -158,7 +167,7 @@ export const serviceApi = createApi({
     //----------------------------------------------CHECK VIN-------------------------------------//
     //----------------------------------------------ANNOUNCEMENTS-------------------------------------//
     getAnnouncement: builder.query({
-      query: vin => ({
+      query: () => ({
         url: 'api/announcement',
         method: 'Get',
       }),
@@ -187,4 +196,5 @@ export const {
   useCreateOrderMutation,
   useCheckVinQuery,
   useGetAnnouncementQuery,
+  useUpdateUserMutation,
 } = serviceApi;

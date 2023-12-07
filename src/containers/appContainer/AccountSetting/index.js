@@ -8,21 +8,29 @@ import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
 import FormScrollContainer from '@components/layout/FormScrollContainer';
 import CustomImageUpload from '@components/common/CustomImageUpload';
+import Loader from '@components/common/Loader';
+import PopUp from '@components/common/PopUp';
 
 import RNFetchBlob from 'rn-fetch-blob';
 
 //! RTK QUERY API
 import {useSelector} from 'react-redux';
+import {
+  useUpdateUserMutation,
+  useGetUserQuery,
+} from '../../../store/services/index';
 
 const AccountSetting = ({navigation, ...props}) => {
   const user = useSelector(state => state.user.user);
   console.log('User ===>', user);
 
+  const [isLoader, setIsLoader] = useState(false);
   const [state, setState] = useState({
     id: user?.id,
     name: user?.name,
     email: user?.email,
     password: '',
+    role: '02bd29e8-42a5-4948-a157-c02a6f6bc4f6',
   });
   const [picFile, setPicFile] = useState(null);
 
@@ -35,21 +43,27 @@ const AccountSetting = ({navigation, ...props}) => {
 
   // console.log('state ==>', state);
 
+  const {data, isLoading} = useGetUserQuery();
+  console.log('useGetUserQuery ==>', data, isLoading);
+
   console.log('picture ==>', picFile);
 
+  const [updateUser] = useUpdateUserMutation();
+
   const handleSave = () => {
+    setIsLoader(true);
     let formData = new FormData();
     RNFetchBlob.fs
-      .readFile(picFile.path, 'base64')
+      .readFile(picFile?.path, 'base64')
       .then(data => {
-        let fileData = `data:${picFile.mime};base64,${data}`;
-        let fileName = picFile.path.split('/').pop(); // Extracting filename
+        let fileData = `data:${picFile?.mime};base64,${data}`;
+        let fileName = picFile?.path.split('/').pop(); // Extracting filename
 
         // Create FormData
 
         formData.append('pic_file', {
           uri: fileData,
-          type: picFile.mime,
+          type: picFile?.mime,
           name: fileName,
         });
       })
@@ -57,55 +71,78 @@ const AccountSetting = ({navigation, ...props}) => {
         console.log('Error converting image to file:', error);
       });
 
-    formData.append('id', state.id);
-    formData.append('name', state.name);
-    formData.append('email', state.email);
-    formData.append('password', state.password);
+    formData.append('id', state?.id);
+    formData.append('name', state?.name);
+    formData.append('email', state?.email);
+    formData.append('password', state?.password);
+    formData.append('role', state?.role);
     console.log('formData ==>', formData);
+
+    updateUser(formData)
+      .unwrap()
+      .then(result => {
+        console.log('updateUser successful:', result);
+        setIsLoader(false);
+        PopUp({
+          heading: result?.message,
+          type: 'success',
+        });
+      })
+      .catch(error => {
+        console.error('updateUser failed:', error);
+        PopUp({
+          heading: error?.data?.message,
+          type: 'danger',
+        });
+        setIsLoader(false);
+      });
   };
 
   return (
-    <ScreenBoiler isBack={true}>
-      <FormScrollContainer>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}
-          gutterTop={10}
-          gutterLeft={15}>
-          Account Settings
-        </Text>
-        <View style={styles.mainCont}>
-          <CustomImageUpload picture={picFile} setPicture={setPicFile} />
+    <>
+      <ScreenBoiler isBack={true}>
+        <FormScrollContainer>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.065)}
+            font={'RajdhaniBold'}
+            gutterTop={10}
+            gutterLeft={15}>
+            Account Settings
+          </Text>
+          <View style={styles.mainCont}>
+            <CustomImageUpload picture={picFile} setPicture={setPicFile} />
 
-          <TextInput
-            placeholderText={'Name'}
-            value={state.name}
-            handleOnChangeTxt={text => onChangeText(text, 'name')}
-          />
-          <TextInput
-            placeholderText={'Email'}
-            value={state.email}
-            handleOnChangeTxt={text => onChangeText(text, 'email')}
-          />
-          <TextInput
-            placeholderText={'Password'}
-            isPasswordInput={true}
-            Icon={R.image.Password()}
-            value={state.password}
-            handleOnChangeTxt={text => onChangeText(text, 'password')}
-          />
+            <TextInput
+              placeholderText={'Name'}
+              value={state.name}
+              handleOnChangeTxt={text => onChangeText(text, 'name')}
+            />
+            <TextInput
+              placeholderText={'Email'}
+              value={state.email}
+              handleOnChangeTxt={text => onChangeText(text, 'email')}
+            />
+            <TextInput
+              placeholderText={'Password'}
+              isPasswordInput={true}
+              Icon={R.image.Password()}
+              value={state.password}
+              handleOnChangeTxt={text => onChangeText(text, 'password')}
+            />
 
-          <ActionButton
-            title={'Save'}
-            bgColor={'#262626'}
-            marginTop={0.04}
-            onPress={() => handleSave()}
-          />
-        </View>
-      </FormScrollContainer>
-    </ScreenBoiler>
+            <ActionButton
+              title={'Save'}
+              bgColor={'#262626'}
+              marginTop={0.04}
+              onPress={() => handleSave()}
+            />
+          </View>
+        </FormScrollContainer>
+      </ScreenBoiler>
+      {isLoader && <Loader />}
+    </>
   );
 };
 

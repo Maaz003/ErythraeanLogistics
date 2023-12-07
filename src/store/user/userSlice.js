@@ -30,6 +30,13 @@ const userSlice = createSlice({
         state.userToken = payload?.data?.access_token;
       },
     );
+    builder.addMatcher(
+      serviceApi.endpoints.getUser.matchFulfilled,
+      (state, {payload}) => {
+        console.log('getUser payload ==>', payload);
+        state.user = payload?.data;
+      },
+    );
   },
 });
 

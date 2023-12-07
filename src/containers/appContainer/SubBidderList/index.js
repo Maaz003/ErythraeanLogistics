@@ -13,6 +13,7 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import SubBidderCard from '@components/view/cards/SubBidderCard';
 import TextInput from '@components/common/TextInput';
 import Loader from '@components/common/Loader';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 //! RTK QUERY API
 import {useGetSubBidderQuery} from '../../../store/services/index';
@@ -89,6 +90,7 @@ const SubBidderList = ({navigation, ...props}) => {
             return <SubBidderCard item={item} />;
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
       </ScreenBoiler>
       {isLoading && <Loader />}

@@ -6,6 +6,7 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import Text from '@components/common/Text';
 import DropDown from '@components/common/DropDown';
 import DispatchOrderCard from '@components/view/cards/DispatchOrderCard';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 const Order = ({navigation, ...props}) => {
   const [orderOption, setOrderOption] = useState(null);
@@ -51,6 +52,7 @@ const Order = ({navigation, ...props}) => {
           );
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
+        ListEmptyComponent={<ListEmptyContainer />}
       />
     </ScreenBoiler>
   );

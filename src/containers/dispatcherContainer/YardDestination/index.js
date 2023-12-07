@@ -13,6 +13,7 @@ import Text from '@components/common/Text';
 import YardDestinationCard from '@components/view/cards/YardDestinationCard';
 import ActionSheet from '@components/common/ActionSheet';
 import TextInput from '@components/common/TextInput';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 const YardDestination = ({navigation, ...props}) => {
   const [isActionSheet, setIsActionSheet] = useState(false);
@@ -96,6 +97,7 @@ const YardDestination = ({navigation, ...props}) => {
             />
           );
         }}
+        ListEmptyComponent={<ListEmptyContainer />}
       />
       <ActionSheet
         isOpen={isActionSheet}

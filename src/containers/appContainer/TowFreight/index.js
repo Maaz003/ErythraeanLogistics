@@ -16,6 +16,7 @@ import Freight from '@components/view/cards/FreightCard';
 import TowCard from '@components/view/cards/TowCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 import Loader from '@components/common/Loader';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 //third party
 import moment from 'moment';
@@ -79,6 +80,7 @@ const TowFreight = ({navigation, ...props}) => {
             return <Freight />;
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
       </>
     );
@@ -101,6 +103,7 @@ const TowFreight = ({navigation, ...props}) => {
             return <TowCard item={item} />;
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
       </>
     );

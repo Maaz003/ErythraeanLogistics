@@ -15,6 +15,7 @@ import OrderCard from '@components/view/cards/OrderCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 import TextInput from '@components/common/TextInput';
 import Loader from '@components/common/Loader';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 //! RTK QUERY API
 import {
@@ -141,6 +142,7 @@ const Orders = ({navigation, ...props}) => {
               return <OrderCard item={item} />;
             }}
             contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+            ListEmptyComponent={<ListEmptyContainer />}
           />
         </ScrollContainer>
       </ScreenBoiler>

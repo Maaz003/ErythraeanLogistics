@@ -15,6 +15,7 @@ import OrderStatisticsCard from '@components/view/cards/OrderStatisticsCard';
 import DispatchOrderCard from '@components/view/cards/DispatchOrderCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
 import TextInput from '@components/common/TextInput';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 const Home = ({navigation, ...props}) => {
   const statistics = [
@@ -180,6 +181,7 @@ const Home = ({navigation, ...props}) => {
             );
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
       </ScrollContainer>
     </ScreenBoiler>

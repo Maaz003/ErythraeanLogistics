@@ -15,7 +15,7 @@ export const serviceApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['User', 'SubBidder', 'Order'],
+  tagTypes: ['User', 'SubBidder', 'Order', 'Notification'],
 
   endpoints: builder => ({
     //----------------------------------------------A U T H-------------------------------------//
@@ -87,6 +87,7 @@ export const serviceApi = createApi({
         url: 'api/order_notification',
         method: 'Get',
       }),
+      providesTags: ['Notification'],
     }),
     priceAgreement: builder.mutation({
       query: formData => ({
@@ -94,6 +95,7 @@ export const serviceApi = createApi({
         method: 'POST',
         body: formData,
       }),
+      invalidatesTags: ['Notification'],
     }),
     //----------------------------------------------Notification-------------------------------------//
     //----------------------------------------------Sub Bidder-------------------------------------//

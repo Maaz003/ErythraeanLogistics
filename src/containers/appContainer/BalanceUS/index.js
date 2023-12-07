@@ -7,6 +7,7 @@ import ActionButton from '@components/common/ActionButton';
 import Text from '@components/common/Text';
 import BalanceUSCard from '@components/view/cards/BalanceUSCard';
 import Loader from '@components/common/Loader';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 //! RTK QUERY API
 import {useGetBalanceUSQuery} from '../../../store/services/index';
@@ -34,6 +35,7 @@ const BalanceUS = ({navigation, ...props}) => {
             return <BalanceUSCard item={item} />;
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
       </ScreenBoiler>
       {isLoading && <Loader />}

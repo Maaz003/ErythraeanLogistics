@@ -14,6 +14,7 @@ import ContainerListCard from '@components/view/cards/ContainerListCard';
 import ActionSheet from '@components/common/ActionSheet';
 import TextInput from '@components/common/TextInput';
 import Loader from '@components/common/Loader';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 //! RTK QUERY API
 import {useGetContainerQuery} from '../../../store/services/index';
@@ -104,6 +105,7 @@ const ContainerList = ({navigation, ...props}) => {
             );
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
         <ActionSheet
           isOpen={isActionSheet}

@@ -11,6 +11,7 @@ import R from '@components/utils/R';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import Text from '@components/common/Text';
 import CarrierCard from '@components/view/cards/CarrierCard';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 const Carrier = ({navigation, ...props}) => {
   return (
@@ -56,6 +57,7 @@ const Carrier = ({navigation, ...props}) => {
           return <CarrierCard />;
         }}
         contentContainerStyle={{paddingBottom: R.unit.height(0.03)}}
+        ListEmptyComponent={<ListEmptyContainer />}
       />
     </ScreenBoiler>
   );

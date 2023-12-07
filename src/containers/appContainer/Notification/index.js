@@ -6,6 +6,8 @@ import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import NotificationCard from '@components/view/cards/NotificationCard';
 import Loader from '@components/common/Loader';
+import PopUp from '@components/common/PopUp';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 // ! RTK QUERY
 import {
@@ -80,6 +82,7 @@ const Notification = ({navigation, ...props}) => {
             );
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
       </ScreenBoiler>
       {isLoading && <Loader />}
@@ -91,6 +94,15 @@ const Notification = ({navigation, ...props}) => {
 export default Notification;
 
 const styles = StyleSheet.create({
+  listEmptyCont: {
+    alignItems: 'center',
+    paddingVertical: R.unit.height(0.05),
+  },
+  text: {
+    color: 'black',
+    fontSize: R.unit.width(0.07),
+    fontFamily: 'Rajdhani-Bold',
+  },
   circleCont: {
     width: R.unit.width(0.09),
     height: R.unit.width(0.09),

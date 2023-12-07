@@ -22,9 +22,16 @@ import ListEmptyContainer from '@components/common/ListEmptyContainer';
 import moment from 'moment';
 
 //! RTK QUERY API
-import {useGetTowingRatesQuery} from '../../../store/services/index';
+import {
+  useGetTowingRatesQuery,
+  useGetFreightRatesQuery,
+  useGetDestinationPortQuery,
+} from '../../../store/services/index';
+import {useSelector} from 'react-redux';
 
 const TowFreight = ({navigation, ...props}) => {
+  const user = useSelector(state => state.user.user);
+
   const [tab, setTab] = useState(true);
   //dropdown
   const data = [
@@ -33,10 +40,13 @@ const TowFreight = ({navigation, ...props}) => {
   ];
   const [value, setValue] = useState(1);
   //dropdown
+  const [destination_port, setDestination_port] = useState(
+    user?.destination?.destination_port_id,
+  );
 
   //time
   const [date, setDate] = useState(new Date());
-  const [getDate, setGetDate] = useState('');
+  const [getDate, setGetDate] = useState('29-11-2023');
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
@@ -52,19 +62,22 @@ const TowFreight = ({navigation, ...props}) => {
   //time
 
   const {data: towingData, isFetching} = useGetTowingRatesQuery(value);
-
-  console.log('towingData', towingData, isFetching);
+  const {data: destinationData, isLoading} = useGetDestinationPortQuery();
+  const {data: freightData, isFetching: freightisFetching} =
+    useGetFreightRatesQuery({destination_port, getDate});
 
   const FreightRate = () => {
     return (
       <>
         <DropDown
-          data={data}
-          value={value}
+          data={isLoading ? [] : destinationData?.data}
+          value={destination_port}
           placeholderText={'Select Destination Port'}
           onChange={item => {
-            setValue(item.value);
+            setDestination_port(item.id);
           }}
+          valueField={'id'}
+          labelField={'name'}
         />
         <TimeDatePicker
           date={date}
@@ -74,14 +87,7 @@ const TowFreight = ({navigation, ...props}) => {
           showDatePicker={showDatePicker}
           text={'Loading Date'}
         />
-        <FlatList
-          data={[1, 2, 3, 4, 5, 6]}
-          renderItem={({}) => {
-            return <Freight />;
-          }}
-          contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
-          ListEmptyComponent={<ListEmptyContainer />}
-        />
+        <Freight freightItem={freightData?.data} />
       </>
     );
   };
@@ -112,7 +118,7 @@ const TowFreight = ({navigation, ...props}) => {
   return (
     <>
       <ScreenBoiler>
-        <ScrollContainer>
+        <ScrollContainer paddingBottom={0.15}>
           <Text
             color={'black'}
             alignSelf={'flex-start'}

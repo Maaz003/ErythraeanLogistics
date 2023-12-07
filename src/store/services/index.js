@@ -173,6 +173,18 @@ export const serviceApi = createApi({
       }),
     }),
     //----------------------------------------------ANNOUNCEMENTS-------------------------------------//
+    //----------------------------------------------Freight Rates-------------------------------------//
+    getFreightRates: builder.query({
+      query: ({destination_port, getDate}) => ({
+        url:
+          'api/shipping_rates?id=' +
+          destination_port +
+          '&filter_date=' +
+          getDate,
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Freight Rates-------------------------------------//
   }),
 });
 
@@ -197,4 +209,5 @@ export const {
   useCheckVinQuery,
   useGetAnnouncementQuery,
   useUpdateUserMutation,
+  useGetFreightRatesQuery,
 } = serviceApi;

@@ -119,6 +119,33 @@ const CreateNewOrder = ({navigation, ...props}) => {
     const destination = destinationData?.data.find(
       x => x.id == state.destination_port,
     );
+
+    // Validation checks
+    if (
+      !state.year ||
+      !state.make ||
+      !state.model ||
+      !state.color ||
+      !state.auction ||
+      !state.auction_city ||
+      !state.lot ||
+      !destination ||
+      !state.pol ||
+      !state.vin_number ||
+      !state.type ||
+      !state.to_dismantle ||
+      !state.self_delivered ||
+      !state.note ||
+      !getDate ||
+      !getDate1
+    ) {
+      PopUp({
+        heading: 'Please fill in all required fields',
+        type: 'danger',
+      });
+      return; // Exit function if validation fails
+    }
+
     setIsLoader(true);
     const formData = new FormData();
     formData.append('customer', user?.id);

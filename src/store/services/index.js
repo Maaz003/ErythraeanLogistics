@@ -155,8 +155,15 @@ export const serviceApi = createApi({
         method: 'Get',
       }),
     }),
-
     //----------------------------------------------CHECK VIN-------------------------------------//
+    //----------------------------------------------ANNOUNCEMENTS-------------------------------------//
+    getAnnouncement: builder.query({
+      query: vin => ({
+        url: 'api/announcement',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------ANNOUNCEMENTS-------------------------------------//
   }),
 });
 
@@ -179,4 +186,5 @@ export const {
   useGetExportPortsQuery,
   useCreateOrderMutation,
   useCheckVinQuery,
+  useGetAnnouncementQuery,
 } = serviceApi;

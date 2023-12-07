@@ -22,6 +22,7 @@ import ListEmptyContainer from '@components/common/ListEmptyContainer';
 import {
   useGetOrderStatisticsQuery,
   useGetOrderQuery,
+  useGetAnnouncementQuery,
 } from '../../../store/services/index';
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -69,40 +70,52 @@ const Home = ({navigation, ...props}) => {
     },
   ];
 
-  const statistics = [
-    {
-      title: 'Approved Orders',
-      item: '02',
-      img: R.image.BagShopWhite(),
-    },
-    {
-      title: 'Dispatched Orders',
-      item: '04',
-      img: R.image.BagShopBlack(),
-    },
-    {
-      title: 'Sub Users',
-      item: '04',
-      img: R.image.User(),
-    },
-    {
-      title: 'Terminal Orders',
-      item: '02',
-      img: R.image.BagShopBlack(),
-    },
-    {
-      title: 'Loaded Orders',
-      item: '00',
-      img: R.image.BagShopWhite(),
-    },
-  ];
-
   const [isSearch, setIsSearch] = useState(false);
 
   const {data: statisticsData, isLoading} = useGetOrderStatisticsQuery();
   const {data: orderData, isLoading: orderIsLoading} = useGetOrderQuery();
+  const {data: announcementData, isLoading: announcementIsLoading} =
+    useGetAnnouncementQuery();
 
-  console.log('statisticsData ===>', statisticsData);
+  console.log('announcementData ===>', announcementData);
+
+  // Initialize counts
+  let pendingCount = 0;
+  let dispatchedCount = 0;
+  let terminalCount = 0;
+  let loadedCount = 0;
+
+  // Iterate through the array and sum the counts
+  statisticsData?.data.forEach(item => {
+    pendingCount += item.pending;
+    dispatchedCount += item.dispatched;
+    terminalCount += item.terminal;
+    loadedCount += item.loaded;
+  });
+
+  const statistics = [
+    {
+      title: 'Pending Orders',
+      item: pendingCount,
+      img: R.image.BagShopWhite(),
+    },
+    {
+      title: 'Dispatched Orders',
+      item: dispatchedCount,
+      img: R.image.BagShopBlack(),
+    },
+    {
+      title: 'Terminal Orders',
+      item: terminalCount,
+      img: R.image.BagShopWhite(),
+    },
+    {
+      title: 'Loaded Orders',
+      item: loadedCount,
+      img: R.image.BagShopBlack(),
+    },
+  ];
+
   return (
     <>
       <ScreenBoiler>
@@ -173,15 +186,42 @@ const Home = ({navigation, ...props}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.announcmentCont}>
-            <View style={styles.imgAnnouncmentStyleCont}>
-              <Image source={R.image.Announcement()} style={R.styles.img} />
-            </View>
-            <Text
-              color={'#E3E3E3'}
-              fontSize={R.unit.width(0.09)}
-              font={'RajdhaniBold'}>
-              No Announcement Yet
-            </Text>
+            <FlatList
+              data={announcementIsLoading ? [] : announcementData?.data}
+              renderItem={({item, index}) => {
+                if (item?.role == 'customer')
+                  return (
+                    <View style={styles.announcmentFlatCont}>
+                      <Text
+                        color={'black'}
+                        fontSize={R.unit.width(0.045)}
+                        font={'RajdhaniMedium'}>
+                        {index + 1}. {item?.message}
+                      </Text>
+                    </View>
+                  );
+              }}
+              ListEmptyComponent={
+                <View
+                  style={{
+                    alignItems: 'center',
+                    marginTop: R.unit.height(0.05),
+                  }}>
+                  <View style={styles.imgAnnouncmentStyleCont}>
+                    <Image
+                      source={R.image.Announcement()}
+                      style={R.styles.img}
+                    />
+                  </View>
+                  <Text
+                    color={'#E3E3E3'}
+                    fontSize={R.unit.width(0.09)}
+                    font={'RajdhaniBold'}>
+                    No Announcement Yet
+                  </Text>
+                </View>
+              }
+            />
           </View>
           <View style={styles.flexCont}>
             <Text
@@ -336,5 +376,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 7,
     marginLeft: R.unit.width(0.02),
+  },
+  announcmentFlatCont: {
+    width: R.unit.width(0.85),
+    paddingVertical: R.unit.height(0.015),
   },
 });

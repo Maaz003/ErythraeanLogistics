@@ -145,8 +145,16 @@ export const serviceApi = createApi({
         method: 'Get',
       }),
     }),
-
     //----------------------------------------------POL-------------------------------------//
+    //----------------------------------------------CHECK VIN-------------------------------------//
+    checkVin: builder.query({
+      query: vin => ({
+        url: 'api/check_vin?vin=' + vin,
+        method: 'Get',
+      }),
+    }),
+
+    //----------------------------------------------CHECK VIN-------------------------------------//
   }),
 });
 
@@ -168,4 +176,5 @@ export const {
   useGetAuctionCityQuery,
   useGetExportPortsQuery,
   useCreateOrderMutation,
+  useCheckVinQuery,
 } = serviceApi;

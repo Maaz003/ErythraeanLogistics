@@ -28,6 +28,7 @@ import {
   useGetDestinationPortQuery,
   useGetExportPortsQuery,
   useCreateOrderMutation,
+  useCheckVinQuery,
 } from '../../../store/services/index';
 import {useSelector} from 'react-redux';
 
@@ -104,9 +105,13 @@ const CreateNewOrder = ({navigation, ...props}) => {
   const {data: destinationData, isFetching: destinationIsFetching} =
     useGetDestinationPortQuery();
 
-  console.log('destinationData', destinationData);
-
   const {data: POLData, isFetching: POLIsFetching} = useGetExportPortsQuery();
+
+  const {data: vinCheck, isFetching: vinCheckIsFetching} = useCheckVinQuery(
+    state.vin_number,
+  );
+
+  console.log('vinCheck ====>', vinCheck);
 
   const [createOrder] = useCreateOrderMutation();
 
@@ -323,6 +328,11 @@ const CreateNewOrder = ({navigation, ...props}) => {
               value={state.vin_number}
               handleOnChangeTxt={text => onChangeText(text, 'vin_number')}
             />
+            {vinCheck?.status && (
+              <Text color={'red'} style={styles.errText}>
+                {vinCheck?.message}
+              </Text>
+            )}
             <DropDown
               data={Type}
               value={state.type}
@@ -390,10 +400,14 @@ const CreateNewOrder = ({navigation, ...props}) => {
             />
             <ActionButton
               title={'Create'}
-              bgColor={'#262626'}
+              bgColor={vinCheck?.status ? '#6D6D6D' : '#262626'}
               marginTop={0.04}
               width={0.95}
-              onPress={() => _handleCreateNewOrder()}
+              onPress={() => {
+                if (!vinCheck?.status) {
+                  _handleCreateNewOrder();
+                }
+              }}
             />
           </View>
         </FormScrollContainer>
@@ -438,5 +452,11 @@ const styles = StyleSheet.create({
   imgStyleCont: {
     width: R.unit.width(0.05),
     height: R.unit.width(0.05),
+  },
+  errText: {
+    alignSelf: 'flex-start',
+    marginLeft: R.unit.width(0.04),
+    marginBottom: R.unit.height(0.01),
+    marginTop: R.unit.height(0.01),
   },
 });

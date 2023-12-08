@@ -33,7 +33,6 @@ const userSlice = createSlice({
     builder.addMatcher(
       serviceApi.endpoints.getUser.matchFulfilled,
       (state, {payload}) => {
-        console.log('getUser payload ==>', payload);
         state.user = payload?.data;
       },
     );

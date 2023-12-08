@@ -25,6 +25,7 @@ export const serviceApi = createApi({
         method: 'POST',
         body: formData, // Accepts FormData
       }),
+      invalidatesTags: ['User'],
     }),
     signupUser: builder.mutation({
       query: formData => ({

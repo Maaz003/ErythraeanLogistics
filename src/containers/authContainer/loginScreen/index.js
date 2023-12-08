@@ -18,7 +18,7 @@ import PopUp from '@components/common/PopUp';
 
 //! RTK QUERY API
 import {useLoginUserMutation} from '../../../store/services/index';
-import {userLogin} from '../../../store/user/userSlice';
+import {userLogin, userLogout} from '../../../store/user/userSlice';
 import {useSelector, useDispatch} from 'react-redux';
 
 function LoginScreen({navigation, ...props}) {
@@ -30,6 +30,10 @@ function LoginScreen({navigation, ...props}) {
   //api
   const [loginUser] = useLoginUserMutation();
 
+  // !  Customer Role Id:   02bd29e8-42a5-4948-a157-c02a6f6bc4f6
+  // !  Sub Bidder Role Id: 980ce138-9f13-43bd-ab37-f7082073d938
+  // !  Dispatcher Role Id: e8f115c9-e0a0-4d67-800e-92ed1eae1ec0
+
   const handleLogin = () => {
     setIsLoader(true);
     const formData = new FormData();
@@ -39,17 +43,34 @@ function LoginScreen({navigation, ...props}) {
     loginUser(formData)
       .unwrap()
       .then(result => {
-        console.log('Login successful:', result);
+        // console.log('Login successful:', result);
         setIsLoader(false);
         dispatch(userLogin(result));
         PopUp({
           heading: 'Login Scccessfully',
           type: 'success',
         });
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'BottomNavigator'}],
-        });
+        if (
+          result?.data?.user?.roles?.[0]?.id ==
+          '02bd29e8-42a5-4948-a157-c02a6f6bc4f6'
+        ) {
+          console.log('customer');
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'BottomNavigator'}],
+          });
+        } else if (
+          result?.data?.user?.roles?.[0]?.id ==
+          '980ce138-9f13-43bd-ab37-f7082073d938'
+        ) {
+          console.log('sub bidder');
+        } else {
+          console.log('dispatcher');
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'BottomDispatcherNavigator'}],
+          });
+        }
       })
       .catch(error => {
         console.log('Login failed ===>', error);
@@ -117,8 +138,9 @@ function LoginScreen({navigation, ...props}) {
               <View style={styles.contLine} />
               <ActionButton
                 onPress={() => {
-                  navigation.navigate('SignUpScreen');
-                  console.log('Hello');
+                  // navigation.navigate('SignUpScreen');
+                  // console.log('Hello');
+                  dispatch(userLogout());
                 }}
                 title={'Sign Up'}
                 bgColor={'#7E7E7E'}

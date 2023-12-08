@@ -185,6 +185,22 @@ export const serviceApi = createApi({
       }),
     }),
     //----------------------------------------------Freight Rates-------------------------------------//
+    //----------------------------------------------DOCUMENT CHECKER-------------------------------------//
+    uploadCopart: builder.mutation({
+      query: formData => ({
+        url: 'api/upload_file_copart',
+        method: 'POST',
+        body: formData,
+      }),
+    }),
+    uploadIAAI: builder.mutation({
+      query: formData => ({
+        url: 'api/upload_file_iaai',
+        method: 'POST',
+        body: formData,
+      }),
+    }),
+    //----------------------------------------------DOCUMENT CHECKER-------------------------------------//
   }),
 });
 
@@ -210,4 +226,6 @@ export const {
   useGetAnnouncementQuery,
   useUpdateUserMutation,
   useGetFreightRatesQuery,
+  useUploadCopartMutation,
+  useUploadIAAIMutation,
 } = serviceApi;

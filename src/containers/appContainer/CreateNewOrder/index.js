@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -18,6 +18,7 @@ import {Type, VechileOperable} from '@components/constants/createOrderConstant';
 import FormScrollContainer from '@components/layout/FormScrollContainer';
 import Loader from '@components/common/Loader';
 import PopUp from '@components/common/PopUp';
+import PDFPicker from '@components/common/PDFPicker';
 
 //third party
 import moment from 'moment';
@@ -29,12 +30,13 @@ import {
   useGetExportPortsQuery,
   useCreateOrderMutation,
   useCheckVinQuery,
+  useUploadCopartMutation,
+  useUploadIAAIMutation,
 } from '../../../store/services/index';
 import {useSelector} from 'react-redux';
 
 const CreateNewOrder = ({navigation, ...props}) => {
   const user = useSelector(state => state.user.user);
-  console.log('user ==>', user);
   const [state, setState] = useState({
     year: '', //text
     make: '', //text
@@ -58,6 +60,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
     note: '', //text
   });
   const [isLoader, setIsLoader] = useState(false);
+  const [selectPDF, setSelectPDF] = useState(null);
 
   //time
   const [date, setDate] = useState(new Date());
@@ -111,8 +114,8 @@ const CreateNewOrder = ({navigation, ...props}) => {
     state.vin_number,
   );
 
-  console.log('vinCheck ====>', vinCheck);
-
+  const [uploadCopart] = useUploadCopartMutation();
+  const [uploadIAAI] = useUploadIAAIMutation();
   const [createOrder] = useCreateOrderMutation();
 
   const _handleCreateNewOrder = () => {
@@ -190,6 +193,65 @@ const CreateNewOrder = ({navigation, ...props}) => {
       });
   };
 
+  console.log('selectPDF ====>', selectPDF);
+
+  const handlePDF = () => {
+    setIsLoader(true);
+    const PDFformData = new FormData();
+    if (state.auction == 1) {
+      PDFformData.append('invoice_for_autos', {
+        uri: selectPDF[0]?.uri,
+        name: selectPDF[0]?.name,
+        type: selectPDF[0]?.type,
+      });
+      console.log('uploadCopart ==>', PDFformData);
+      uploadCopart(PDFformData)
+        .unwrap()
+        .then(result => {
+          console.log('uploadCopart successful:', result);
+          onChangeText(result?.data?.vin, 'vin_number');
+          onChangeText(result?.data?.lot_number, 'lot');
+          setIsLoader(false);
+        })
+        .catch(error => {
+          console.log('uploadCopart failed ===>', error);
+          setIsLoader(false);
+        });
+    } else {
+      PDFformData.append('pdf', {
+        uri: selectPDF[0]?.uri,
+        name: selectPDF[0]?.name,
+        type: selectPDF[0]?.type,
+      });
+      console.log('uploadIAAI ==>', PDFformData);
+      uploadIAAI(PDFformData)
+        .unwrap()
+        .then(result => {
+          console.log('uploadIAAI successful:', result);
+          onChangeText(result?.data?.vin, 'vin_number');
+          onChangeText(result?.data?.color, 'color');
+          onChangeText(result?.data?.model, 'model');
+          onChangeText(result?.data?.year, 'year');
+          onChangeText(result?.data?.make, 'make');
+          onChangeText(result?.data?.lot, 'lot');
+          setDate(result?.data?.purchased_date);
+          setIsLoader(false);
+        })
+        .catch(error => {
+          console.log('uploadIAAI failed ===>', error);
+          setIsLoader(false);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (selectPDF) {
+      handlePDF();
+    } else {
+      console.log('no hit ========================>');
+    }
+  }, [selectPDF]);
+
   return (
     <>
       <ScreenBoiler isBack={true}>
@@ -264,6 +326,11 @@ const CreateNewOrder = ({navigation, ...props}) => {
                 )}
               </TouchableOpacity>
             </View>
+            <PDFPicker
+              title={'Select PDF'}
+              pickedDocument={selectPDF}
+              setPickedDocument={setSelectPDF}
+            />
 
             <TimeDatePicker
               date={date}

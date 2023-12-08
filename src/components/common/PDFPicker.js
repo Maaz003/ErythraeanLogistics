@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View,TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
@@ -10,7 +10,7 @@ const PDFPicker = ({title, pickedDocument, setPickedDocument, ...props}) => {
   const pickDocument = async () => {
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
+        type: [DocumentPicker.types.pdf],
       });
 
       setPickedDocument(res);

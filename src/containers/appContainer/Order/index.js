@@ -30,8 +30,6 @@ const Orders = ({navigation, ...props}) => {
   const {data: statisticsData, isLoading} = useGetOrderStatisticsQuery();
   const {data: orderData, isLoading: orderIsLoading} = useGetOrderQuery();
 
-  console.log('orderData ===>', orderData?.data);
-
   return (
     <>
       <ScreenBoiler>

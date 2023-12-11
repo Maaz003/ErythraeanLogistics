@@ -19,10 +19,8 @@ import {useSelector} from 'react-redux';
 const Notification = ({navigation, ...props}) => {
   const {data, isLoading} = useGetNotificationQuery();
   const [isLoader, setIsLoader] = useState(false);
-  console.log(data, isLoading);
 
   const user = useSelector(state => state.user?.user);
-  console.log('user ==>', user);
 
   //api
   const [priceAgreement] = usePriceAgreementMutation();

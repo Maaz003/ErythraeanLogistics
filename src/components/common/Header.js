@@ -10,8 +10,7 @@ export default function Header({
   isBack,
   ...props
 }) {
-  const user = useSelector(state => state.user?.user);
-  // console.log('user ======>', user);
+  // const user = useSelector(state => state.user?.user);
 
   return (
     <View style={styles.contHeader}>

@@ -23,8 +23,6 @@ const SubBidderList = ({navigation, ...props}) => {
 
   const {data, isLoading} = useGetSubBidderQuery();
 
-  console.log('useGetSubBidderQuery ===>', data, isLoading);
-
   return (
     <>
       <ScreenBoiler isBack={true}>

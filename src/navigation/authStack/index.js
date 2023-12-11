@@ -3,14 +3,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationRef} from '@navRef';
 
-//screens
+//?screens
 import SplashScreen from '@containers/authContainer/SplashScreen';
 import LoginScreen from '@containers/authContainer/LoginScreen';
 import SignUpScreen from '@containers/authContainer/SignUpScreen';
 import Notification from '@containers/appContainer/Notification/index';
 import AccountSetting from '@containers/appContainer/AccountSetting/index';
 
-// bottom tab
+//?bottom tab
 import {BottomNavigator} from '@navigation/appStack';
 import {BottomDispatcherNavigator} from '@navigation/dispatcherStack';
 

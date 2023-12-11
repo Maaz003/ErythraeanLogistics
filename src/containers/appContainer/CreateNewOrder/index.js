@@ -170,8 +170,6 @@ const CreateNewOrder = ({navigation, ...props}) => {
     formData.append('purchase_date', getDate);
     formData.append('payment_to_auction', getDate1);
 
-    console.log('formData ===>', formData);
-
     createOrder(formData)
       .unwrap()
       .then(result => {
@@ -193,8 +191,6 @@ const CreateNewOrder = ({navigation, ...props}) => {
       });
   };
 
-  console.log('selectPDF ====>', selectPDF);
-
   const handlePDF = () => {
     setIsLoader(true);
     const PDFformData = new FormData();
@@ -204,7 +200,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
         name: selectPDF[0]?.name,
         type: selectPDF[0]?.type,
       });
-      console.log('uploadCopart ==>', PDFformData);
+
       uploadCopart(PDFformData)
         .unwrap()
         .then(result => {
@@ -223,7 +219,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
         name: selectPDF[0]?.name,
         type: selectPDF[0]?.type,
       });
-      console.log('uploadIAAI ==>', PDFformData);
+
       uploadIAAI(PDFformData)
         .unwrap()
         .then(result => {
@@ -247,8 +243,6 @@ const CreateNewOrder = ({navigation, ...props}) => {
   useEffect(() => {
     if (selectPDF) {
       handlePDF();
-    } else {
-      console.log('no hit ========================>');
     }
   }, [selectPDF]);
 

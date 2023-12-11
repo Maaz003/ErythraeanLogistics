@@ -72,7 +72,7 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
         <Text
           color={'black'}
           alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
+          fontSize={R.unit.width(0.06)}
           font={'RajdhaniBold'}>
           Vehicle Detail
         </Text>

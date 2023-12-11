@@ -6,8 +6,6 @@ import TitleImageContainerCard from './TitleImageContainerCard';
 import navigationRef from '@navRef';
 
 const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
-  console.log('ContainerListCard');
-
   return (
     <>
       <TouchableOpacity

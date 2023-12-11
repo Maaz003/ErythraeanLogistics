@@ -39,7 +39,7 @@ function LoginScreen({navigation, ...props}) {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    console.log('formData ==>', formData);
+
     loginUser(formData)
       .unwrap()
       .then(result => {
@@ -138,9 +138,7 @@ function LoginScreen({navigation, ...props}) {
               <View style={styles.contLine} />
               <ActionButton
                 onPress={() => {
-                  // navigation.navigate('SignUpScreen');
-                  // console.log('Hello');
-                  dispatch(userLogout());
+                  navigation.navigate('SignUpScreen');
                 }}
                 title={'Sign Up'}
                 bgColor={'#7E7E7E'}

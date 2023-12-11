@@ -15,7 +15,6 @@ const PDFViewer = ({uri, onPressBack}) => {
     navigationRef.navigate('AccountSetting');
   }, []);
 
-  console.log('run');
   return (
     <Modal animationType="fade" transparent={true} visible={true}>
       <View style={styles.centeredView}>

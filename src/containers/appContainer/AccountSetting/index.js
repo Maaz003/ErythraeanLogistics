@@ -22,7 +22,6 @@ import {
 
 const AccountSetting = ({navigation, ...props}) => {
   const user = useSelector(state => state.user.user);
-  console.log('User ===>', user);
 
   const [isLoader, setIsLoader] = useState(false);
   const [state, setState] = useState({
@@ -41,12 +40,7 @@ const AccountSetting = ({navigation, ...props}) => {
     }));
   };
 
-  // console.log('state ==>', state);
-
   const {data, isLoading} = useGetUserQuery();
-  console.log('useGetUserQuery ==>', data, isLoading);
-
-  console.log('picture ==>', picFile);
 
   const [updateUser] = useUpdateUserMutation();
 
@@ -76,7 +70,6 @@ const AccountSetting = ({navigation, ...props}) => {
     formData.append('email', state?.email);
     formData.append('password', state?.password);
     formData.append('role', state?.role);
-    console.log('formData ==>', formData);
 
     updateUser(formData)
       .unwrap()

@@ -13,7 +13,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import R from '@components/utils/R';
 import {Images} from '../../assets/Images/index';
 
-// //Screens
+//?Screens
 import Order from '@containers/dispatcherContainer/Order/index';
 import Home from '@containers/dispatcherContainer/Home/index';
 import YardDestination from '@containers/dispatcherContainer/YardDestination/index';
@@ -22,14 +22,14 @@ import OrderDetail from '@containers/dispatcherContainer/OrderDetail/index';
 import Carrier from '@containers/dispatcherContainer/Carrier/index';
 import CreateCarrierCompany from '@containers/dispatcherContainer/CreateCarrierCompany/index';
 
-// // dimenstion
+// ?dimenstion
 const {width, height} = Dimensions.get('window');
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const CustomTabBar = ({state, descriptors, navigation}) => {
-  // const focusedOptions = descriptors[state.routes[state.index].key].options;
+  //? const focusedOptions = descriptors[state.routes[state.index].key].options;
   const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   useEffect(() => {
@@ -141,7 +141,10 @@ const CarrierScreens = () => (
       headerShown: false,
     }}>
     <Stack.Screen name="Carrier" component={Carrier} />
-    <Stack.Screen name="CreateCarrierCompany" component={CreateCarrierCompany} />
+    <Stack.Screen
+      name="CreateCarrierCompany"
+      component={CreateCarrierCompany}
+    />
   </Stack.Navigator>
 );
 

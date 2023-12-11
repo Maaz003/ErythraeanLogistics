@@ -4,11 +4,9 @@ import R from '@components/utils/R';
 import Text from '@components/common/Text';
 
 const FreightCard = ({freightItem, ...props}) => {
-  console.log('item ===================>', freightItem);
   const [container, setContainer] = useState([]);
 
   useEffect(() => {
-    // Assuming freightItem is populated asynchronously
     if (freightItem) {
       setContainer([
         {
@@ -91,10 +89,7 @@ const FreightCard = ({freightItem, ...props}) => {
     setContainer(tempArr);
   };
 
-  console.log('container ==>', container);
-
   const isActiveData = container.find(x => x.isActive === true);
-  console.log('isActiveData ===>', isActiveData);
 
   return (
     <>

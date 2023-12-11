@@ -50,7 +50,6 @@ const ContainerList = ({navigation, ...props}) => {
   ];
 
   const {data, isLoading} = useGetContainerQuery();
-  console.log('useGetContainerQuery ===>', data);
 
   return (
     <>

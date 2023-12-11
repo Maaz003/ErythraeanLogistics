@@ -141,9 +141,7 @@ const CreateNewOrder = ({navigation, ...props}) => {
   //time
 
   const [typeCheck, setTypeCheck] = useState(2);
-  const [typeCheck1, setTypeCheck1] = useState(2);
 
-  console.log('values Dropdown ===>', values);
   return (
     <ScreenBoiler isBack={true}>
       <FormScrollContainer paddingBottom={0.15}>

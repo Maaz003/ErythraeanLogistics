@@ -77,8 +77,6 @@ const Home = ({navigation, ...props}) => {
   const {data: announcementData, isLoading: announcementIsLoading} =
     useGetAnnouncementQuery();
 
-  console.log('announcementData ===>', announcementData);
-
   // Initialize counts
   let pendingCount = 0;
   let dispatchedCount = 0;

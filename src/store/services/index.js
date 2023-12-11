@@ -8,7 +8,6 @@ export const serviceApi = createApi({
     baseUrl: baseURL,
     prepareHeaders: async (headers, {getState}) => {
       const state = getState();
-      console.log('state ===>', state.user?.userToken);
       if (state?.user?.userToken) {
         headers.append('Authorization', 'Bearer ' + state.user.userToken);
       }

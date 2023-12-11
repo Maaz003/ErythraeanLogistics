@@ -14,7 +14,6 @@ import {useGetBalanceUSQuery} from '../../../store/services/index';
 
 const BalanceUS = ({navigation, ...props}) => {
   const {data, isLoading} = useGetBalanceUSQuery();
-  console.log(data);
 
   return (
     <>

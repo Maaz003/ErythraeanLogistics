@@ -7,7 +7,7 @@ import ScrollContainer from '@components/layout/ScrollContainer';
 
 const OrderDetail = ({navigation, route, ...props}) => {
   const data = route.params.item;
-  console.log('OrderDetail ===>', data);
+
   return (
     <ScreenBoiler isBack={true}>
       <ScrollContainer paddingBottom={0.15}>

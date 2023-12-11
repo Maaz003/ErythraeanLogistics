@@ -13,7 +13,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import R from '@components/utils/R';
 import {Images} from '../../assets/Images/index';
 
-// //Screens
+//?Screens
 import Home from '../../containers/appContainer/Home/index';
 import ContainerList from '../../containers/appContainer/ContainerList/index';
 import Order from '../../containers/appContainer/Order/index';
@@ -29,7 +29,7 @@ import AccountingDetail from '../../containers/appContainer/AccountingDetail/ind
 import BalanceUS from '../../containers/appContainer/BalanceUS/index';
 import BalanceUSDetail from '../../containers/appContainer/BalanceUSDetail/index';
 
-// // dimenstion
+//?dimenstion
 const {width, height} = Dimensions.get('window');
 
 const Stack = createNativeStackNavigator();

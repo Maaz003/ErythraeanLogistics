@@ -1,6 +1,7 @@
 import R from '@components/utils/R';
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
+import {useSelector} from 'react-redux';
 
 export default function Header({
   onPressNotification,
@@ -9,6 +10,9 @@ export default function Header({
   isBack,
   ...props
 }) {
+  const user = useSelector(state => state.user?.user);
+  // console.log('user ======>', user);
+
   return (
     <View style={styles.contHeader}>
       <View style={styles.firstCont}>
@@ -49,13 +53,15 @@ export default function Header({
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.7}
-          style={styles.ImgStyleCont}
+          style={styles.ImgStyleProfileCont}
           onPress={onPressProfile}>
-          <Image
-            source={R.image.DummyImage()}
-            style={R.styles.img}
-            resizeMode={'contain'}
-          />
+          <View style={styles.imgStyleUserCont}>
+            <Image
+              source={R.image.UserBlack()}
+              style={R.styles.img}
+              resizeMode={'contain'}
+            />
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -100,5 +106,19 @@ const styles = StyleSheet.create({
     height: R.unit.width(0.055),
     // backgroundColor: 'red',
     marginRight: R.unit.width(0.02),
+  },
+  ImgStyleProfileCont: {
+    width: R.unit.width(0.1),
+    height: R.unit.width(0.1),
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: R.unit.width(1) / 2,
+    overflow: 'hidden',
+  },
+  imgStyleUserCont: {
+    width: R.unit.width(0.07),
+    height: R.unit.width(0.07),
+    // backgroundColor: 'blue',
   },
 });

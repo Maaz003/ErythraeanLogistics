@@ -2,7 +2,7 @@ import {Images} from '@assets/Images';
 import R from '@components/utils/R';
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
-import {useSelector} from 'react-redux';
+// !import {useSelector} from 'react-redux';
 
 export default function Header({
   onPressNotification,
@@ -11,7 +11,7 @@ export default function Header({
   isBack,
   ...props
 }) {
-  // const user = useSelector(state => state.user?.user);
+  // !const user = useSelector(state => state.user?.user);
 
   return (
     <View style={styles.contHeader}>
@@ -34,13 +34,6 @@ export default function Header({
         </View>
       </View>
       <View style={styles.sideCont}>
-        <TouchableOpacity activeOpacity={0.7} style={styles.IconStyleCont}>
-          <Image
-            source={R.image.Message()}
-            style={R.styles.img}
-            resizeMode={'contain'}
-          />
-        </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.7}
           style={styles.IconStyleCont}
@@ -95,7 +88,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: 'green',
-    width: R.unit.width(0.37),
+    width: R.unit.width(0.2),
     justifyContent: 'space-between',
   },
   scrollCont: {

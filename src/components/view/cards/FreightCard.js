@@ -166,7 +166,7 @@ const FreightCard = ({freightItem, ...props}) => {
                 <View style={styles.flexCont}>
                   <Text
                     color={'black'}
-                    fontSize={R.unit.width(0.045)}
+                    fontSize={R.unit.width(0.04)}
                     font={'RajdhaniMedium'}>
                     {item?.port_name}
                   </Text>
@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
     borderRadius: R.unit.width(1) / 2,
     paddingHorizontal: R.unit.width(0.03),
     paddingVertical: R.unit.width(0.015),
+    marginRight: R.unit.width(0.01),
   },
   circleCont: {
     width: R.unit.width(0.15),
@@ -282,15 +283,15 @@ const styles = StyleSheet.create({
   flexMainCont: {
     flexDirection: 'row',
     // backgroundColor: 'red',
-    width: R.unit.width(0.32),
+    width: R.unit.width(0.38),
     justifyContent: 'space-between',
   },
   chargesCont: {
     // backgroundColor: 'red',
-    width: R.unit.width(0.3),
+    // width: R.unit.width(0.3),
     marginVertical: R.unit.height(0.009),
     marginLeft: R.unit.width(0.04),
-    paddingHorizontal: R.unit.width(0.03),
+    paddingHorizontal: R.unit.width(0.02),
     paddingVertical: R.unit.width(0.01),
   },
 });

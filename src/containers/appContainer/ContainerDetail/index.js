@@ -7,13 +7,7 @@ import ScrollContainer from '@components/layout/ScrollContainer';
 
 const ContainerDetail = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler isBack={true}>
       <ScrollContainer paddingBottom={0.15}>
         <ContainerDetailCard />
       </ScrollContainer>

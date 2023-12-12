@@ -2,10 +2,9 @@ import React from 'react';
 import R from '@components/utils/R';
 import {StyleSheet, StatusBar, SafeAreaView} from 'react-native';
 import {useColorMode} from 'native-base';
-import AuthHeader from '../authHeader';
 
 const AuthBoiler = props => {
-  const {children, isHeader, isBack = false} = props;
+  const {children} = props;
   const theme = useColorMode();
   const colorMode = theme?.colorMode;
   return (

@@ -7,13 +7,7 @@ import ActionButton from '@components/common/ActionButton';
 
 const Settings = ({navigation, ...props}) => {
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <View style={styles.mainCont}>
         <ActionButton
           title={'Accounting'}
@@ -22,7 +16,7 @@ const Settings = ({navigation, ...props}) => {
           isImage={true}
           image={R.image.Calculator()}
           onPress={() => {
-            navigation.navigate('AccountSetting');
+            navigation.navigate('AccountingDetail');
           }}
         />
         <ActionButton
@@ -34,6 +28,16 @@ const Settings = ({navigation, ...props}) => {
           onPress={() => {
             navigation.navigate('SubBidderList');
           }}
+        />
+        <ActionButton
+          title={'Logout'}
+          bgColor={'#262626'}
+          marginTop={0.04}
+          isImage={true}
+          image={R.image.Logout()}
+          // onPress={() => {
+          //   navigation.navigate('SubBidderList');
+          // }}
         />
       </View>
     </ScreenBoiler>

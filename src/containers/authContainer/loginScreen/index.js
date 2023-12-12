@@ -17,7 +17,7 @@ import ActionButton from '@components/common/ActionButton';
 function LoginScreen({navigation, ...props}) {
   return (
     <AuthBoiler>
-      <AuthFormScrollContainer showAuthHeader={true}>
+      <AuthFormScrollContainer>
         <ImageBackground
           source={R.image.AuthBackground()}
           style={styles.ImageBackgroundStyle}>
@@ -50,11 +50,19 @@ function LoginScreen({navigation, ...props}) {
               Icon={R.image.Password()}
             />
             <ActionButton
-              title={'Login'}
+              title={'Login (User)'}
               bgColor={'#262626'}
               marginTop={0.04}
               onPress={() => {
                 navigation.navigate('BottomNavigator');
+              }}
+            />
+            <ActionButton
+              title={'Login (Dispatcher)'}
+              bgColor={'#262626'}
+              marginTop={0.01}
+              onPress={() => {
+                navigation.navigate('BottomDispatcherNavigator');
               }}
             />
             <View style={styles.contLine} />

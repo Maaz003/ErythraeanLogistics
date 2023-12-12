@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -13,6 +13,7 @@ import ScreenBoiler from '@components/layout/ScreenBoiler';
 import WearHouseDetailCard from '@components/view/cards/WearHouseDetailCard';
 import OrderCard from '@components/view/cards/OrderCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
+import TextInput from '@components/common/TextInput';
 
 const Orders = ({navigation, ...props}) => {
   const data = [
@@ -58,37 +59,32 @@ const Orders = ({navigation, ...props}) => {
     },
   ];
 
+  const [isSearch, setIsSearch] = useState(false);
+
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <ScrollContainer>
-        <View style={styles.flatWearHouseDetailCardCont}>
-          <Text
-            color={'black'}
-            alignSelf={'flex-start'}
-            fontSize={R.unit.width(0.065)}
-            font={'RajdhaniBold'}
-            gutterTop={10}
-            gutterBottom={10}
-            gutterLeft={10}>
-            ORDERS STATISTICS BY P.O.L
-          </Text>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={[1, 2, 3, 4, 5, 6]}
-            renderItem={({index, item}) => {
-              return (
-                <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
-              );
-            }}
-          />
-        </View>
+        <Text
+          color={'black'}
+          alignSelf={'flex-start'}
+          fontSize={R.unit.width(0.065)}
+          font={'RajdhaniBold'}
+          gutterTop={10}
+          gutterBottom={10}
+          gutterLeft={10}>
+          ORDERS STATISTICS BY P.O.L
+        </Text>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4, 5, 6]}
+          renderItem={({index, item}) => {
+            return (
+              <WearHouseDetailCard isEven={index % 2 == 0 ? true : false} />
+            );
+          }}
+          contentContainerStyle={styles.flatCont}
+        />
         <View style={styles.flexCont}>
           <Text
             color={'black'}
@@ -101,10 +97,23 @@ const Orders = ({navigation, ...props}) => {
             Orders
           </Text>
           <View style={styles.flexDirCont}>
-            <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
-              <View style={styles.imgSearchStyleCont}>
-                <Image source={R.image.Search()} style={R.styles.img} />
-              </View>
+            <TouchableOpacity
+              onPress={() => setIsSearch(!isSearch)}
+              activeOpacity={0.7}
+              style={styles.circleCont}>
+              {!isSearch ? (
+                <View style={styles.imgSearchStyleCont}>
+                  <Image source={R.image.Search()} style={R.styles.img} />
+                </View>
+              ) : (
+                <Text
+                  color={'black'}
+                  alignSelf={'center'}
+                  fontSize={R.unit.width(0.07)}
+                  font={'RajdhaniBold'}>
+                  x
+                </Text>
+              )}
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.7}
@@ -140,6 +149,18 @@ const Orders = ({navigation, ...props}) => {
             </TouchableOpacity>
           </View>
         </View>
+        {isSearch && (
+          <View style={styles.flexCont}>
+            <TextInput
+              placeholderText={'Search Order...'}
+              width={0.85}
+              marginTop={0}
+            />
+            <TouchableOpacity style={styles.imgSearchStyleCont}>
+              <Image source={R.image.Search()} style={R.styles.img} />
+            </TouchableOpacity>
+          </View>
+        )}
         <FlatList
           data={data}
           renderItem={({index, item}) => {
@@ -162,10 +183,9 @@ const Orders = ({navigation, ...props}) => {
 export default Orders;
 
 const styles = StyleSheet.create({
-  flatWearHouseDetailCardCont: {
+  flatCont: {
     paddingLeft: R.unit.width(0.03),
-    // backgroundColor: 'red',
-    height: R.unit.height(0.39),
+    paddingBottom: R.unit.height(0.03),
   },
   circleCont: {
     width: R.unit.width(0.11),

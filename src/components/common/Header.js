@@ -5,17 +5,30 @@ import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 export default function Header({
   onPressNotification,
   onPressProfile,
+  onPressBack,
+  isBack,
   ...props
 }) {
   return (
     <View style={styles.contHeader}>
-      <TouchableOpacity activeOpacity={0.7} style={styles.ImgStyleCont}>
-        <Image
-          source={R.image.AppIconWhite()}
-          style={R.styles.img}
-          resizeMode={'contain'}
-        />
-      </TouchableOpacity>
+      <View style={styles.firstCont}>
+        {isBack && (
+          <TouchableOpacity
+            onPress={onPressBack}
+            activeOpacity={0.8}
+            style={styles.imgBackStyleCont}>
+            <Image source={R.image.LeftArrow()} style={R.styles.img} />
+          </TouchableOpacity>
+        )}
+
+        <View style={styles.ImgStyleCont}>
+          <Image
+            source={R.image.AppIconWhite()}
+            style={R.styles.img}
+            resizeMode={'contain'}
+          />
+        </View>
+      </View>
       <View style={styles.sideCont}>
         <TouchableOpacity activeOpacity={0.7} style={styles.IconStyleCont}>
           <Image
@@ -56,7 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: R.unit.width(0.055),
+    paddingHorizontal: R.unit.width(0.02),
     backgroundColor: '#262626',
     // backgroundColor: 'red',
     alignSelf: 'center',
@@ -71,7 +84,7 @@ const styles = StyleSheet.create({
     width: R.unit.width(0.065),
     height: R.unit.width(0.065),
   },
-
+  firstCont: {flexDirection: 'row', alignItems: 'center'},
   sideCont: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -81,5 +94,11 @@ const styles = StyleSheet.create({
   },
   scrollCont: {
     paddingBottom: R.unit.height(0.15),
+  },
+  imgBackStyleCont: {
+    width: R.unit.width(0.055),
+    height: R.unit.width(0.055),
+    // backgroundColor: 'red',
+    marginRight: R.unit.width(0.02),
   },
 });

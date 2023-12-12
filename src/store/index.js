@@ -11,27 +11,21 @@ import {
 } from 'redux-persist';
 
 //REDUCERS
-import authReducer from './auth/authSlice';
 import userReducer from './user/userSlice';
-import socketReducer from './socket/socketSlice';
-import commonReducer from './common/commonSlice';
 
 //SERVICES
 import {serviceApi} from './services';
 import {setupListeners} from '@reduxjs/toolkit/dist/query';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
   user: userReducer,
-  socket: socketReducer,
-  common: commonReducer,
   [serviceApi.reducerPath]: serviceApi.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth', 'user', 'socket', 'common'],
+  whitelist: ['user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

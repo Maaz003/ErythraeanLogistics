@@ -1,9 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import R from '@components/utils/R';
-import Icon from '@components/common/Icon';
-import navigationRef from '@navRef';
 
 function AuthFormScrollContainer(props) {
   const {
@@ -12,7 +10,6 @@ function AuthFormScrollContainer(props) {
     children,
     keyboardShouldPersistTaps = 'always',
     paddingBottom = 0,
-    showBackControls,
   } = props;
 
   return (
@@ -26,22 +23,6 @@ function AuthFormScrollContainer(props) {
         contentContainerStyles,
         {paddingBottom: R.unit.scale(paddingBottom)},
       ]}>
-      {showBackControls && (
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => navigationRef.goBack()}
-          style={styles.header}>
-          <View style={styles.iconView}>
-            <Icon
-              type={'MaterialIcons'}
-              name={'keyboard-arrow-left'}
-              color={R.color.white}
-              size={20}
-            />
-          </View>
-        </TouchableOpacity>
-      )}
-
       {children}
     </KeyboardAwareScrollView>
   );

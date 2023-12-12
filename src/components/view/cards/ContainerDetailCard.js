@@ -163,7 +163,7 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default ContainerDetailCard;
+export default React.memo(ContainerDetailCard);
 
 const styles = StyleSheet.create({
   container: {

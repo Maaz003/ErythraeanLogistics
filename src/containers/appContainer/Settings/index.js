@@ -9,7 +9,6 @@ import ActionButton from '@components/common/ActionButton';
 import {useDispatch} from 'react-redux';
 import {userLogout} from '@store/user/userSlice';
 import {serviceApi} from '../../../store/services/index';
-// import {} from '@store/user/userSlice'
 
 const Settings = ({navigation, ...props}) => {
   const dispatch = useDispatch();

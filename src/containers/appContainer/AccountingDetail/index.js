@@ -4,6 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import R from '@components/utils/R';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ActionButton from '@components/common/ActionButton';
+import PopUp from '@components/common/PopUp';
 
 const AccountingDetail = ({navigation, ...props}) => {
   return (
@@ -25,9 +26,12 @@ const AccountingDetail = ({navigation, ...props}) => {
           marginTop={0.04}
           isImage={true}
           image={R.image.Payment()}
-          // onPress={() => {
-          //   navigation.navigate('SubBidderList');
-          // }}
+          onPress={() => {
+            PopUp({
+              heading: 'Coming Soon',
+              type: 'success',
+            });
+          }}
         />
         <ActionButton
           title={'Invoice'}
@@ -35,9 +39,12 @@ const AccountingDetail = ({navigation, ...props}) => {
           marginTop={0.04}
           isImage={true}
           image={R.image.Invoice()}
-          // onPress={() => {
-          //   navigation.navigate('SubBidderList');
-          // }}
+          onPress={() => {
+            PopUp({
+              heading: 'Coming Soon',
+              type: 'success',
+            });
+          }}
         />
       </View>
     </ScreenBoiler>

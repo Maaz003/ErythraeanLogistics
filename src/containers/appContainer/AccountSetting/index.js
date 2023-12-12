@@ -11,8 +11,6 @@ import CustomImageUpload from '@components/common/CustomImageUpload';
 import Loader from '@components/common/Loader';
 import PopUp from '@components/common/PopUp';
 
-import RNFetchBlob from 'rn-fetch-blob';
-
 //! RTK QUERY API
 import {useSelector} from 'react-redux';
 import {
@@ -47,23 +45,23 @@ const AccountSetting = ({navigation, ...props}) => {
   const handleSave = () => {
     setIsLoader(true);
     let formData = new FormData();
-    RNFetchBlob.fs
-      .readFile(picFile?.path, 'base64')
-      .then(data => {
-        let fileData = `data:${picFile?.mime};base64,${data}`;
-        let fileName = picFile?.path.split('/').pop(); // Extracting filename
+    // RNFetchBlob.fs
+    //   .readFile(picFile?.path, 'base64')
+    //   .then(data => {
+    //     let fileData = `data:${picFile?.mime};base64,${data}`;
+    //     let fileName = picFile?.path.split('/').pop(); // Extracting filename
 
-        // Create FormData
+    //     // Create FormData
 
-        formData.append('pic_file', {
-          uri: fileData,
-          type: picFile?.mime,
-          name: fileName,
-        });
-      })
-      .catch(error => {
-        console.log('Error converting image to file:', error);
-      });
+    //     formData.append('pic_file', {
+    //       uri: fileData,
+    //       type: picFile?.mime,
+    //       name: fileName,
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log('Error converting image to file:', error);
+    //   });
 
     formData.append('id', state?.id);
     formData.append('name', state?.name);

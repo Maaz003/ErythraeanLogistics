@@ -1,3 +1,4 @@
+import {Images} from '@assets/Images';
 import R from '@components/utils/R';
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
@@ -20,7 +21,7 @@ export default function Header({
             onPress={onPressBack}
             activeOpacity={0.8}
             style={styles.imgBackStyleCont}>
-            <Image source={R.image.LeftArrow()} style={R.styles.img} />
+            <Image source={Images.LeftArrow1} style={R.styles.img} />
           </TouchableOpacity>
         )}
 

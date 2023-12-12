@@ -5,7 +5,7 @@ import {navigationRef} from '@navRef';
 
 //?screens
 import SplashScreen from '@containers/authContainer/SplashScreen';
-import LoginScreen from '@containers/authContainer/LoginScreen';
+import LoginScreen from '@containers/authContainer/loginScreen';
 import SignUpScreen from '@containers/authContainer/SignUpScreen';
 import Notification from '@containers/appContainer/Notification/index';
 import AccountSetting from '@containers/appContainer/AccountSetting/index';

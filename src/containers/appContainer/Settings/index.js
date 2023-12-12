@@ -8,6 +8,7 @@ import ActionButton from '@components/common/ActionButton';
 //redux
 import {useDispatch} from 'react-redux';
 import {userLogout} from '@store/user/userSlice';
+import {serviceApi} from '../../../store/services/index';
 // import {} from '@store/user/userSlice'
 
 const Settings = ({navigation, ...props}) => {
@@ -15,6 +16,7 @@ const Settings = ({navigation, ...props}) => {
 
   const _handleLogout = () => {
     dispatch(userLogout());
+    dispatch(serviceApi.util.resetApiState());
     navigation.reset({
       index: 0,
       routes: [{name: 'SplashScreen'}],

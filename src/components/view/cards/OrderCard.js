@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     paddingVertical: R.unit.height(0.02),
     alignSelf: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

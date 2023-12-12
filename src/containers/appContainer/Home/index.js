@@ -165,6 +165,7 @@ const Home = ({navigation, ...props}) => {
               );
             }}
             contentContainerStyle={styles.flatCont}
+            ListEmptyComponent={<ListEmptyContainer />}
           />
           <View style={styles.flexCont}>
             <Text

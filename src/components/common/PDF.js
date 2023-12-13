@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {StyleSheet, View, Modal, Dimensions} from 'react-native';
+import {StyleSheet, View, Modal, Dimensions, SafeAreaView} from 'react-native';
 import Pdf from 'react-native-pdf';
 import Text from './Text';
 import Header from './Header';
@@ -17,7 +17,7 @@ const PDFViewer = ({uri, onPressBack}) => {
 
   return (
     <Modal animationType="fade" transparent={true} visible={true}>
-      <View style={styles.centeredView}>
+      <SafeAreaView style={styles.centeredView}>
         <Header
           onPressNotification={onPressNotification}
           onPressProfile={onPressProfile}
@@ -40,7 +40,7 @@ const PDFViewer = ({uri, onPressBack}) => {
           }}
           style={styles.pdf}
         />
-      </View>
+      </SafeAreaView>
     </Modal>
   );
 };

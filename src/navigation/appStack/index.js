@@ -13,7 +13,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import R from '@components/utils/R';
 import {Images} from '../../assets/Images/index';
 
-// //Screens
+//?Screens
 import Home from '../../containers/appContainer/Home/index';
 import ContainerList from '../../containers/appContainer/ContainerList/index';
 import Order from '../../containers/appContainer/Order/index';
@@ -25,8 +25,11 @@ import CreateUser from '../../containers/appContainer/CreateUser/index';
 import CreateNewOrder from '../../containers/appContainer/CreateNewOrder/index';
 import OrderDetail from '../../containers/appContainer/OrderDetail/index';
 import ContainerDetail from '../../containers/appContainer/ContainerDetail/index';
+import AccountingDetail from '../../containers/appContainer/AccountingDetail/index';
+import BalanceUS from '../../containers/appContainer/BalanceUS/index';
+import BalanceUSDetail from '../../containers/appContainer/BalanceUSDetail/index';
 
-// // dimenstion
+//?dimenstion
 const {width, height} = Dimensions.get('window');
 
 const Stack = createNativeStackNavigator();
@@ -148,6 +151,9 @@ const SettingsScreens = () => (
     <Stack.Screen name="SubBidderList" component={SubBidderList} />
     <Stack.Screen name="AccountSetting" component={AccountSetting} />
     <Stack.Screen name="CreateUser" component={CreateUser} />
+    <Stack.Screen name="AccountingDetail" component={AccountingDetail} />
+    <Stack.Screen name="BalanceUS" component={BalanceUS} />
+    <Stack.Screen name="BalanceUSDetail" component={BalanceUSDetail} />
   </Stack.Navigator>
 );
 
@@ -194,11 +200,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: R.color.white,
     width: '90%',
     borderRadius: 10,
     elevation: 2,
     height: R.unit.height(0.065),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   tabItem: {
     flex: 1,

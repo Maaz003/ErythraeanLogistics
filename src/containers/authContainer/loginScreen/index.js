@@ -13,86 +13,165 @@ import AuthFormScrollContainer from '@components/layout/AuthFormScrollContainer'
 import Text from '@components/common/Text';
 import TextInput from '@components/common/TextInput';
 import ActionButton from '@components/common/ActionButton';
+import Loader from '@components/common/Loader';
+import PopUp from '@components/common/PopUp';
+
+//! RTK QUERY API
+import {useLoginUserMutation} from '../../../store/services/index';
+import {userLogin, userLogout} from '../../../store/user/userSlice';
+import {useSelector, useDispatch} from 'react-redux';
 
 function LoginScreen({navigation, ...props}) {
-  return (
-    <AuthBoiler>
-      <AuthFormScrollContainer showAuthHeader={true}>
-        <ImageBackground
-          source={R.image.AuthBackground()}
-          style={styles.ImageBackgroundStyle}>
-          <View style={styles.appImageContainer}>
-            <Image
-              source={R.image.AppName()}
-              style={R.styles.img}
-              resizeMode={'contain'}
-            />
-          </View>
-          <View style={styles.mainContainer}>
-            <Text
-              color={'black'}
-              fontSize={R.unit.width(0.09)}
-              font={'RajdhaniBold'}>
-              Login
-            </Text>
-            <Text
-              color={'black'}
-              fontSize={R.unit.width(0.047)}
-              font={'RajdhaniSemiBold'}
-              gutterTop={8}>
-              Enter your detail below here
-            </Text>
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('developercus@yopmail.com');
+  const [password, setPassword] = useState('123456789');
+  const [isLoader, setIsLoader] = useState(false);
 
-            <TextInput placeholderText={'Username'} Icon={R.image.Name()} />
-            <TextInput
-              placeholderText={'Password'}
-              isPasswordInput={true}
-              Icon={R.image.Password()}
-            />
-            <ActionButton
-              title={'Login'}
-              bgColor={'#262626'}
-              marginTop={0.04}
-              onPress={() => {
-                navigation.navigate('BottomNavigator');
-              }}
-            />
-            <View style={styles.contLine} />
-            <ActionButton
-              onPress={() => {
-                navigation.navigate('SignUpScreen');
-                console.log('Hello');
-              }}
-              title={'Sign Up'}
-              bgColor={'#7E7E7E'}
-              // marginTop={0.04}
-            />
-            <View style={styles.flexCont}>
+  //api
+  const [loginUser] = useLoginUserMutation();
+
+  // !  Customer Role Id:   02bd29e8-42a5-4948-a157-c02a6f6bc4f6
+  // !  Sub Bidder Role Id: 980ce138-9f13-43bd-ab37-f7082073d938
+  // !  Dispatcher Role Id: e8f115c9-e0a0-4d67-800e-92ed1eae1ec0
+
+  const handleLogin = () => {
+    setIsLoader(true);
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    loginUser(formData)
+      .unwrap()
+      .then(result => {
+        // console.log('Login successful:', result);
+        setIsLoader(false);
+        dispatch(userLogin(result));
+        PopUp({
+          heading: 'Login Scccessfully',
+          type: 'success',
+        });
+        if (
+          result?.data?.user?.roles?.[0]?.id ==
+          '02bd29e8-42a5-4948-a157-c02a6f6bc4f6'
+        ) {
+          console.log('customer');
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'BottomNavigator'}],
+          });
+        } else if (
+          result?.data?.user?.roles?.[0]?.id ==
+          '980ce138-9f13-43bd-ab37-f7082073d938'
+        ) {
+          console.log('sub bidder');
+        } else {
+          console.log('dispatcher');
+          navigation.reset({
+            index: 0,
+            routes: [{name: 'BottomDispatcherNavigator'}],
+          });
+        }
+      })
+      .catch(error => {
+        console.log('Login failed ===>', error);
+        PopUp({
+          heading: error?.data?.message,
+          type: 'danger',
+        });
+        setIsLoader(false);
+      });
+  };
+
+  return (
+    <>
+      <AuthBoiler>
+        <AuthFormScrollContainer>
+          <ImageBackground
+            source={R.image.AuthBackground()}
+            style={styles.ImageBackgroundStyle}>
+            <View style={styles.appImageContainer}>
+              <Image
+                source={R.image.AppName()}
+                style={R.styles.img}
+                resizeMode={'contain'}
+              />
+            </View>
+            <View style={styles.mainContainer}>
               <Text
                 color={'black'}
-                fontSize={R.unit.width(0.065)}
+                fontSize={R.unit.width(0.09)}
                 font={'RajdhaniBold'}>
-                Sign Up With
+                Login
               </Text>
-              <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
-                <Image
-                  source={R.image.Facebook()}
-                  style={R.styles.img}
-                  resizeMode={'contain'}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
-                <Image
-                  source={R.image.Gmail()}
-                  style={R.styles.img}
-                  resizeMode={'contain'}
-                />
-              </TouchableOpacity>
+              <Text
+                color={'black'}
+                fontSize={R.unit.width(0.047)}
+                font={'RajdhaniSemiBold'}
+                gutterTop={8}>
+                Enter your detail below here
+              </Text>
+
+              <TextInput
+                placeholderText={'Username'}
+                Icon={R.image.Name()}
+                value={email}
+                handleOnChangeTxt={text => {
+                  setEmail(text);
+                }}
+              />
+              <TextInput
+                placeholderText={'Password'}
+                isPasswordInput={true}
+                Icon={R.image.Password()}
+                value={password}
+                handleOnChangeTxt={text => {
+                  setPassword(text);
+                }}
+              />
+              <ActionButton
+                title={'Login'}
+                bgColor={'#262626'}
+                marginTop={0.04}
+                onPress={handleLogin}
+              />
+
+              <View style={styles.contLine} />
+              <ActionButton
+                onPress={() => {
+                  navigation.navigate('SignUpScreen');
+                }}
+                title={'Sign Up'}
+                bgColor={'#7E7E7E'}
+                // marginTop={0.04}
+              />
+              <View style={styles.flexCont}>
+                <Text
+                  color={'black'}
+                  fontSize={R.unit.width(0.065)}
+                  font={'RajdhaniBold'}>
+                  Sign Up With
+                </Text>
+                <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
+                  <Image
+                    source={R.image.Facebook()}
+                    style={R.styles.img}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.8} style={styles.socialCont}>
+                  <Image
+                    source={R.image.Gmail()}
+                    style={R.styles.img}
+                    resizeMode={'contain'}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ImageBackground>
-      </AuthFormScrollContainer>
-    </AuthBoiler>
+          </ImageBackground>
+        </AuthFormScrollContainer>
+      </AuthBoiler>
+      {isLoader && <Loader />}
+    </>
   );
 }
 export default LoginScreen;

@@ -15,29 +15,38 @@ import TimeDatePicker from '@components/common/TimeDatePicker';
 import Freight from '@components/view/cards/FreightCard';
 import TowCard from '@components/view/cards/TowCard';
 import ScrollContainer from '@components/layout/ScrollContainer';
+import Loader from '@components/common/Loader';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
 
 //third party
 import moment from 'moment';
 
+//! RTK QUERY API
+import {
+  useGetTowingRatesQuery,
+  useGetFreightRatesQuery,
+  useGetDestinationPortQuery,
+} from '../../../store/services/index';
+import {useSelector} from 'react-redux';
+
 const TowFreight = ({navigation, ...props}) => {
+  const user = useSelector(state => state.user.user);
+
   const [tab, setTab] = useState(true);
   //dropdown
   const data = [
-    {label: 'Item 1', value: '1'},
-    {label: 'Item 2', value: '2'},
-    {label: 'Item 3', value: '3'},
-    {label: 'Item 4', value: '4'},
-    {label: 'Item 5', value: '5'},
-    {label: 'Item 6', value: '6'},
-    {label: 'Item 7', value: '7'},
-    {label: 'Item 8', value: '8'},
+    {label: 'Copart', value: 1},
+    {label: 'IAAI', value: 2},
   ];
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(1);
   //dropdown
+  const [destination_port, setDestination_port] = useState(
+    user?.destination?.destination_port_id,
+  );
 
   //time
   const [date, setDate] = useState(new Date());
-  const [getDate, setGetDate] = useState('');
+  const [getDate, setGetDate] = useState('29-11-2023');
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
@@ -52,18 +61,23 @@ const TowFreight = ({navigation, ...props}) => {
   };
   //time
 
-  console.log('date ===>', date);
+  const {data: towingData, isFetching} = useGetTowingRatesQuery(value);
+  const {data: destinationData, isLoading} = useGetDestinationPortQuery();
+  const {data: freightData, isFetching: freightisFetching} =
+    useGetFreightRatesQuery({destination_port, getDate});
 
   const FreightRate = () => {
     return (
       <>
         <DropDown
-          data={data}
-          value={value}
+          data={isLoading ? [] : destinationData?.data}
+          value={destination_port}
           placeholderText={'Select Destination Port'}
           onChange={item => {
-            setValue(item.value);
+            setDestination_port(item.id);
           }}
+          valueField={'id'}
+          labelField={'name'}
         />
         <TimeDatePicker
           date={date}
@@ -73,13 +87,7 @@ const TowFreight = ({navigation, ...props}) => {
           showDatePicker={showDatePicker}
           text={'Loading Date'}
         />
-        <FlatList
-          data={[1, 2, 3, 4, 5, 6]}
-          renderItem={({}) => {
-            return <Freight />;
-          }}
-          contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
-        />
+        <Freight freightItem={freightData?.data} />
       </>
     );
   };
@@ -90,73 +98,71 @@ const TowFreight = ({navigation, ...props}) => {
         <DropDown
           data={data}
           value={value}
-          placeholderText={'Select Destination Port'}
+          placeholderText={'Options (Copart and IAAI)'}
           onChange={item => {
             setValue(item.value);
           }}
         />
         <FlatList
-          data={[1, 2, 3, 4, 5, 6]}
-          renderItem={({}) => {
-            return <TowCard />;
+          data={isFetching ? [] : towingData?.data}
+          renderItem={({item}) => {
+            return <TowCard item={item} />;
           }}
           contentContainerStyle={{paddingBottom: R.unit.height(0.07)}}
+          ListEmptyComponent={<ListEmptyContainer />}
         />
       </>
     );
   };
 
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
-      <ScrollContainer>
-        <Text
-          color={'black'}
-          alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
-          font={'RajdhaniBold'}
-          gutterTop={10}
-          gutterBottom={10}
-          gutterLeft={10}>
-          Tow & Freight Rates
-        </Text>
-        <View style={styles.mainCont}>
-          <TouchableOpacity
-            onPress={() => {
-              setTab(true);
-            }}
-            activeOpacity={0.7}
-            style={tab ? styles.textContOn : styles.textContOff}>
-            <Text
-              color={tab ? 'white' : 'black'}
-              fontSize={R.unit.width(0.045)}
-              font={'RajdhaniMedium'}>
-              Freight Rates
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setTab(false);
-            }}
-            activeOpacity={0.7}
-            style={tab ? styles.textContOff : styles.textContOn}>
-            <Text
-              color={tab ? 'black' : 'white'}
-              fontSize={R.unit.width(0.045)}
-              font={'RajdhaniMedium'}>
-              Tow Rates
-            </Text>
-          </TouchableOpacity>
-        </View>
+    <>
+      <ScreenBoiler>
+        <ScrollContainer paddingBottom={0.15}>
+          <Text
+            color={'black'}
+            alignSelf={'flex-start'}
+            fontSize={R.unit.width(0.065)}
+            font={'RajdhaniBold'}
+            gutterTop={10}
+            gutterBottom={10}
+            gutterLeft={10}>
+            Tow & Freight Rates
+          </Text>
+          <View style={styles.mainCont}>
+            <TouchableOpacity
+              onPress={() => {
+                setTab(true);
+              }}
+              activeOpacity={0.7}
+              style={tab ? styles.textContOn : styles.textContOff}>
+              <Text
+                color={tab ? 'white' : 'black'}
+                fontSize={R.unit.width(0.045)}
+                font={'RajdhaniMedium'}>
+                Freight Rates
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setTab(false);
+              }}
+              activeOpacity={0.7}
+              style={tab ? styles.textContOff : styles.textContOn}>
+              <Text
+                color={tab ? 'black' : 'white'}
+                fontSize={R.unit.width(0.045)}
+                font={'RajdhaniMedium'}>
+                Tow Rates
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-        {tab ? FreightRate() : TowRate()}
-      </ScrollContainer>
-    </ScreenBoiler>
+          {tab ? FreightRate() : TowRate()}
+        </ScrollContainer>
+      </ScreenBoiler>
+      {isFetching && <Loader />}
+    </>
   );
 };
 

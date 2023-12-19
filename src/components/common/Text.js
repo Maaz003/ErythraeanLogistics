@@ -1,6 +1,6 @@
 import R from '@components/utils/R';
 import React from 'react';
-import {Text as Textc, Platform} from 'react-native';
+import {Text as Textc} from 'react-native';
 
 export const SIZES = {
   // global sizes
@@ -53,31 +53,6 @@ export const FONTVARIANTS = {
 };
 
 export const FONTSSTYLE = {
-  //UBUNTU FAMILY
-  UbuntuBold: {
-    fontFamily: 'Ubuntu-Bold',
-  },
-  UbuntuBoldItalic: {
-    fontFamily: 'Ubuntu-BoldItalic',
-  },
-  UbuntuItalic: {
-    fontFamily: 'Ubuntu-Italic',
-  },
-  UbuntuLight: {
-    fontFamily: 'Ubuntu-Light',
-  },
-  UbuntuLightItalic: {
-    fontFamily: 'Ubuntu-LightItalic',
-  },
-  UbuntuMedium: {
-    fontFamily: 'Ubuntu-Medium',
-  },
-  UbuntuMediumItalic: {
-    fontFamily: 'Ubuntu-MediumItalic',
-  },
-  UbuntuRegular: {
-    fontFamily: 'Ubuntu-Regular',
-  },
   //Rajdani Font
   RajdhaniBold: {
     fontFamily: 'Rajdhani-Bold',

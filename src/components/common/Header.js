@@ -1,29 +1,39 @@
+import {Images} from '@assets/Images';
 import R from '@components/utils/R';
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
+// !import {useSelector} from 'react-redux';
 
 export default function Header({
   onPressNotification,
   onPressProfile,
+  onPressBack,
+  isBack,
   ...props
 }) {
+  // !const user = useSelector(state => state.user?.user);
+
   return (
     <View style={styles.contHeader}>
-      <TouchableOpacity activeOpacity={0.7} style={styles.ImgStyleCont}>
-        <Image
-          source={R.image.AppIconWhite()}
-          style={R.styles.img}
-          resizeMode={'contain'}
-        />
-      </TouchableOpacity>
-      <View style={styles.sideCont}>
-        <TouchableOpacity activeOpacity={0.7} style={styles.IconStyleCont}>
+      <View style={styles.firstCont}>
+        {isBack && (
+          <TouchableOpacity
+            onPress={onPressBack}
+            activeOpacity={0.8}
+            style={styles.imgBackStyleCont}>
+            <Image source={Images.LeftArrow1} style={R.styles.img} />
+          </TouchableOpacity>
+        )}
+
+        <View style={styles.ImgStyleCont}>
           <Image
-            source={R.image.Message()}
+            source={R.image.AppIconWhite()}
             style={R.styles.img}
             resizeMode={'contain'}
           />
-        </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.sideCont}>
         <TouchableOpacity
           activeOpacity={0.7}
           style={styles.IconStyleCont}
@@ -36,13 +46,15 @@ export default function Header({
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.7}
-          style={styles.ImgStyleCont}
+          style={styles.ImgStyleProfileCont}
           onPress={onPressProfile}>
-          <Image
-            source={R.image.DummyImage()}
-            style={R.styles.img}
-            resizeMode={'contain'}
-          />
+          <View style={styles.imgStyleUserCont}>
+            <Image
+              source={R.image.UserBlack()}
+              style={R.styles.img}
+              resizeMode={'contain'}
+            />
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -56,7 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: R.unit.width(0.055),
+    paddingHorizontal: R.unit.width(0.02),
     backgroundColor: '#262626',
     // backgroundColor: 'red',
     alignSelf: 'center',
@@ -71,15 +83,35 @@ const styles = StyleSheet.create({
     width: R.unit.width(0.065),
     height: R.unit.width(0.065),
   },
-
+  firstCont: {flexDirection: 'row', alignItems: 'center'},
   sideCont: {
     flexDirection: 'row',
     alignItems: 'center',
     // backgroundColor: 'green',
-    width: R.unit.width(0.37),
+    width: R.unit.width(0.2),
     justifyContent: 'space-between',
   },
   scrollCont: {
     paddingBottom: R.unit.height(0.15),
+  },
+  imgBackStyleCont: {
+    width: R.unit.width(0.055),
+    height: R.unit.width(0.055),
+    // backgroundColor: 'red',
+    marginRight: R.unit.width(0.02),
+  },
+  ImgStyleProfileCont: {
+    width: R.unit.width(0.1),
+    height: R.unit.width(0.1),
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: R.unit.width(1) / 2,
+    overflow: 'hidden',
+  },
+  imgStyleUserCont: {
+    width: R.unit.width(0.07),
+    height: R.unit.width(0.07),
+    // backgroundColor: 'blue',
   },
 });

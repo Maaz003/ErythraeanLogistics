@@ -1,12 +1,16 @@
-import React from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
+import PDFViewer from '@components/common/PDF';
 
 const ContainerDetailCard = ({item, onPress, ...props}) => {
-  const ContainerDetailContainerCard = ({title, data, image}) => {
+  const ContainerDetailContainerCard = ({title, data, image, onPress}) => {
     return (
-      <View style={styles.mainCont}>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.mainCont}
+        onPress={onPress}>
         <View style={styles.imgStyleMainCont}>
           <View style={styles.imgStyleCont}>
             <Image source={image} style={R.styles.img} />
@@ -20,17 +24,27 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
             width={R.unit.width(0.4)}>
             {title}
           </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.04)}
-            font={'RajdhaniMedium'}
-            width={R.unit.width(0.4)}>
-            {data}
-          </Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            {data == 'PDF' && (
+              <View style={styles.pdfImgStyleCont}>
+                <Image source={R.image.PDF()} style={R.styles.img} />
+              </View>
+            )}
+            <Text
+              color={'black'}
+              fontSize={R.unit.width(0.04)}
+              font={data == 'PDF' ? 'RajdhaniBold' : 'RajdhaniMedium'}
+              width={R.unit.width(0.4)}>
+              {data}
+            </Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
+
+  const [pdf, setPdf] = useState('');
+  const [isPDF, setIsPDF] = useState(false);
 
   return (
     <>
@@ -47,7 +61,7 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
             color={'white'}
             fontSize={R.unit.width(0.035)}
             font={'RajdhaniSemiBold'}>
-            000066
+            {item?.id}
           </Text>
         </View>
       </View>
@@ -55,24 +69,24 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
       <View style={styles.container}>
         <ContainerDetailContainerCard
           title={'Booking Number'}
-          data={'8RKNBASD545355486'}
+          data={item?.booking_number}
           image={R.image.CirclePlus()}
         />
         <ContainerDetailContainerCard
           title={'Lines'}
-          data={'Y'}
+          data={item?.shipping_lines}
           image={R.image.Tally()}
         />
       </View>
       <View style={styles.container}>
         <ContainerDetailContainerCard
           title={'Port'}
-          data={'Y'}
+          data={item?.destination_port}
           image={R.image.Warehouse()}
         />
         <ContainerDetailContainerCard
           title={'Size'}
-          data={'45 feet / 5 auto'}
+          data={item?.container_size}
           image={R.image.Gear()}
         />
       </View>
@@ -81,89 +95,109 @@ const ContainerDetailCard = ({item, onPress, ...props}) => {
           title={'Dock Receipt'}
           data={'PDF'}
           image={R.image.Dollar()}
+          onPress={() => {
+            setIsPDF(true);
+            setPdf(item?.dock_receipt);
+          }}
         />
         <ContainerDetailContainerCard
           title={'BI Copy'}
-          data={'None'}
+          data={item?.bl_copy === null ? 'None' : item?.bl_copy}
           image={R.image.Key()}
         />
       </View>
       <View style={styles.container}>
         <ContainerDetailContainerCard
           title={'Telex Release'}
-          data={'None'}
+          data={item?.telex_release === null ? 'None' : item?.telex_release}
           image={R.image.City()}
         />
         <ContainerDetailContainerCard
           title={'Invoice from auction'}
           data={'PDF'}
           image={R.image.List()}
+          onPress={() => {
+            setIsPDF(true);
+            setPdf(item?.auction_invoices);
+          }}
         />
       </View>
       <View style={styles.container}>
         <ContainerDetailContainerCard
           title={'Expected Arrival Date'}
-          data={'None'}
+          data={
+            item?.expected_arival_date === null
+              ? 'None'
+              : item?.expected_arival_date
+          }
           image={R.image.CalendarWhite()}
         />
         <ContainerDetailContainerCard
           title={'Date of Release'}
-          data={'None'}
+          data={item?.date_of_release === null ? 'None' : item?.date_of_release}
           image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
         <ContainerDetailContainerCard
           title={'Date of Loading'}
-          data={'07-11-2023'}
-          image={R.image.CalendarWhite()}
-        />
-        <ContainerDetailContainerCard
-          title={'Container Arrival Date'}
-          data={'07-11-2023'}
-          image={R.image.CalendarStar()}
-        />
-      </View>
-      <View style={styles.container}>
-        <ContainerDetailContainerCard
-          title={'Unloading Date'}
-          data={'None'}
+          data={item?.date_of_loading}
           image={R.image.CalendarWhite()}
         />
         <ContainerDetailContainerCard
           title={'Invoice'}
           data={'PDF'}
           image={R.image.Dollar()}
+          onPress={() => {
+            setIsPDF(true);
+            setPdf(item?.customer_invoice);
+          }}
         />
+      </View>
+      <View style={styles.container}>
+        {/* <ContainerDetailContainerCard
+          title={'Unloading Date'}
+          data={'None'}
+          image={R.image.CalendarWhite()}
+        /> */}
       </View>
       <View style={styles.container}>
         <ContainerDetailContainerCard
           title={'Invoice Amount'}
-          data={'PDF'}
+          data={item?.invoice_amount == null ? 'None' : item?.invoice_amount}
           image={R.image.Dollar()}
         />
         <ContainerDetailContainerCard
           title={'Paid Ammount'}
-          data={'None'}
+          data={item?.paid_amount == null ? 'None' : item?.paid_amount}
           image={R.image.Dollar()}
         />
       </View>
       <View style={styles.container}>
-        <ContainerDetailContainerCard
+        {/* <ContainerDetailContainerCard
           title={'Validations'}
           data={'None'}
           image={R.image.InputText()}
-        />
+        /> */}
         <ContainerDetailContainerCard
           title={'Delivery Order'}
-          data={'None'}
+          data={item?.delivery_order}
           image={R.image.CalendarStar()}
         />
       </View>
+      {isPDF && (
+        <PDFViewer
+          onPressBack={() => {
+            setIsPDF(false);
+            setPdf('');
+          }}
+          uri={pdf}
+        />
+      )}
     </>
   );
 };
-export default ContainerDetailCard;
+export default React.memo(ContainerDetailCard);
 
 const styles = StyleSheet.create({
   container: {
@@ -209,10 +243,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: R.unit.width(0.03),
     paddingVertical: R.unit.width(0.015),
   },
-  line: {
-    width: R.unit.width(0.95),
-    height: R.unit.height(0.015),
-    borderRadius: 20,
-    alignSelf: 'center',
+  pdfImgStyleCont: {
+    width: R.unit.width(0.045),
+    height: R.unit.width(0.045),
+    marginRight: R.unit.width(0.018),
   },
 });

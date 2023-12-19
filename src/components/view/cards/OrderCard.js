@@ -3,12 +3,17 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import TitleImageContainerCard from './TitleImageContainerCard';
+import navigationRef from '@navRef';
 
-const OrderCard = ({item, onPress, ...props}) => {
+const OrderCard = ({item, onPress, onPressActionSheet, ...props}) => {
   return (
     <>
       <TouchableOpacity
-        onPress={onPress}
+        onPress={() => {
+          navigationRef.navigate('OrderDetail', {
+            item: item,
+          });
+        }}
         activeOpacity={0.8}
         style={[styles.mainCont]}>
         <View style={styles.flexCont}>
@@ -17,10 +22,12 @@ const OrderCard = ({item, onPress, ...props}) => {
               color={'white'}
               fontSize={R.unit.width(0.035)}
               font={'RajdhaniSemiBold'}>
-              {item.id}
+              {item?.id}
             </Text>
           </View>
-          <TouchableOpacity style={styles.circleCont}>
+          <TouchableOpacity
+            style={styles.circleCont}
+            onPress={onPressActionSheet}>
             <View style={styles.circle} />
             <View style={styles.circle} />
             <View style={styles.circle} />
@@ -29,39 +36,39 @@ const OrderCard = ({item, onPress, ...props}) => {
 
         <TitleImageContainerCard
           title={'Year'}
-          data={item.Year}
+          data={item?.year}
           image={R.image.CalendarStar()}
         />
         <TitleImageContainerCard
           title={'Make'}
-          data={item.Make}
+          data={item?.make}
           image={R.image.CalendarWhite()}
         />
         <TitleImageContainerCard
           title={'Model'}
-          data={item.Model}
+          data={item?.model}
           image={R.image.CalendarStar()}
         />
         <TitleImageContainerCard
           title={'LOT'}
-          data={item.LOT}
+          data={item?.lot}
           image={R.image.List()}
         />
         <TitleImageContainerCard
           title={'VIN'}
-          data={item.VIN}
+          data={item?.vin_number}
           image={R.image.Tally()}
         />
         <TitleImageContainerCard
           title={'Destination Port'}
-          data={item.Destination_Port}
+          data={item?.destination_port}
           image={R.image.Warehouse()}
         />
       </TouchableOpacity>
     </>
   );
 };
-export default OrderCard;
+export default React.memo(OrderCard);
 
 const styles = StyleSheet.create({
   mainCont: {
@@ -72,6 +79,7 @@ const styles = StyleSheet.create({
     paddingVertical: R.unit.height(0.02),
     alignSelf: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -104,7 +112,9 @@ const styles = StyleSheet.create({
     paddingVertical: R.unit.width(0.015),
   },
   circleCont: {
-    width: R.unit.width(0.07),
+    width: R.unit.width(0.15),
+    paddingHorizontal: R.unit.width(0.04),
+    height: R.unit.height(0.05),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -1,37 +1,33 @@
-import R from '@components/utils/R';
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {DotIndicator, UIActivityIndicator} from 'react-native-indicators';
-const Loader = props => {
-  const {size = 8, color = R.color.gray, iosLoader = false} = props;
+import {View, ActivityIndicator, StyleSheet, Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
+
+export default function index(props) {
   return (
-    <View
-      style={[
-        styles.container,
-        props?.bgColor && {
-          backgroundColor: props?.bgColor,
-        },
-      ]}>
-      {iosLoader ? (
-        <UIActivityIndicator color={color} size={size} />
-      ) : (
-        <DotIndicator color={color} size={size} />
-      )}
+    <View style={styles.overlay}>
+      <View style={styles.lModalView}>
+        <ActivityIndicator size={'large'} color="#fff" />
+      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: '#fff',
+
+  lModalView: {
+    height,
+    width,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.7)',
   },
 });
-
-export default Loader;

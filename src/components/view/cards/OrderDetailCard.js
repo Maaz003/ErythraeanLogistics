@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
+import moment from 'moment';
 
 const OrderDetailCard = ({item, onPress, ...props}) => {
   const OrderDetailContainerCard = ({title, data, image}) => {
@@ -32,74 +33,107 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
     );
   };
 
+  function getOrderStatus(id) {
+    let status;
+    switch (id) {
+      case 0:
+        status = 'Incoming/Pending';
+        break;
+      case 1:
+        status = 'Approved';
+        break;
+      case 2:
+        status = 'Dispatched';
+        break;
+      case 3:
+        status = 'Processing';
+        break;
+      case 4:
+        status = 'Canceled';
+        break;
+      case 5:
+        status = 'Waiting For Customer Approval';
+        break;
+      case 6:
+        status = 'Custom Created';
+        break;
+      default:
+        status = 'Unknown Status';
+        break;
+    }
+    return status;
+  }
+
+  const orderStatus = getOrderStatus(item?.order_status);
+
   return (
     <>
       <View style={styles.flexCont}>
         <Text
           color={'black'}
           alignSelf={'flex-start'}
-          fontSize={R.unit.width(0.065)}
+          fontSize={R.unit.width(0.06)}
           font={'RajdhaniBold'}>
           Vehicle Detail
         </Text>
         <View style={styles.idCont}>
           <Text
             color={'white'}
-            fontSize={R.unit.width(0.035)}
+            fontSize={R.unit.width(0.03)}
             font={'RajdhaniSemiBold'}>
-            000066
+            {item?.id}
           </Text>
         </View>
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Description'}
-          data={'2023 test test'}
+          data={item?.notes}
           image={R.image.InputText()}
         />
         <OrderDetailContainerCard
           title={'Color'}
-          data={'Test'}
+          data={item?.color}
           image={R.image.Palette()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'VIN Number'}
-          data={'8RKNBASD545355486'}
+          data={item?.vin_number}
           image={R.image.Tally()}
         />
         <OrderDetailContainerCard
           title={'Keys'}
-          data={'Y'}
+          data={item?.keys_present}
           image={R.image.Key()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Auction'}
-          data={'Developer'}
+          data={item?.auction}
           image={R.image.CalendarStar()}
         />
         <OrderDetailContainerCard
           title={'LOT'}
-          data={'236589'}
+          data={item?.lot}
           image={R.image.List()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Delivered To Warehouse'}
-          data={'None'}
+          data={item?.delivered_to_warehouse}
           image={R.image.Warehouse()}
         />
         <OrderDetailContainerCard
           title={'Notes'}
-          data={'None'}
+          data={item?.notes === null ? 'None' : item?.notes}
           image={R.image.Notes()}
         />
       </View>
-      <View style={styles.container}>
+      {/* <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Buyer'}
           data={'Developer Customer'}
@@ -110,52 +144,52 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
           data={'None'}
           image={R.image.Gear()}
         />
-      </View>
+      </View> */}
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Date'}
-          data={'None'}
+          data={moment(item?.created_at).format('DD-MM-YYYY')}
           image={R.image.CalendarWhite()}
         />
         <OrderDetailContainerCard
           title={'Promised to be picked up'}
-          data={'None'}
+          data={item?.processing_date}
           image={R.image.CalendarStar()}
         />
       </View>
       <View style={styles.container}>
-        <OrderDetailContainerCard
+        {/* <OrderDetailContainerCard
           title={'Promised to be delivered'}
           data={'None'}
           image={R.image.CalendarStar()}
-        />
+        /> */}
         <OrderDetailContainerCard
           title={'Title'}
-          data={'Yes'}
+          data={item?.title_status}
           image={R.image.InputText()}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Date Received'}
-          data={'07-11-2023'}
+          data={item?.approved_date}
           image={R.image.CalendarWhite()}
         />
         <OrderDetailContainerCard
           title={'Order Status'}
-          data={'Approved'}
+          data={orderStatus}
           image={R.image.CalendarStar}
         />
       </View>
       <View style={styles.container}>
         <OrderDetailContainerCard
           title={'Terminal Status'}
-          data={'Waiting'}
+          data={item?.terminal_status}
           image={R.image.Tally()}
         />
         <OrderDetailContainerCard
           title={'P.O.L'}
-          data={'TX'}
+          data={item?.destination_port}
           image={R.image.City()}
         />
       </View>
@@ -283,7 +317,7 @@ const OrderDetailCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default OrderDetailCard;
+export default React.memo(OrderDetailCard);
 
 const styles = StyleSheet.create({
   container: {

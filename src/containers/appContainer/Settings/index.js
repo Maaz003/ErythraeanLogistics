@@ -5,15 +5,25 @@ import R from '@components/utils/R';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import ActionButton from '@components/common/ActionButton';
 
+//redux
+import {useDispatch} from 'react-redux';
+import {userLogout} from '@store/user/userSlice';
+import {serviceApi} from '../../../store/services/index';
+
 const Settings = ({navigation, ...props}) => {
+  const dispatch = useDispatch();
+
+  const _handleLogout = () => {
+    dispatch(userLogout());
+    dispatch(serviceApi.util.resetApiState());
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'SplashScreen'}],
+    });
+  };
+
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
+    <ScreenBoiler>
       <View style={styles.mainCont}>
         <ActionButton
           title={'Accounting'}
@@ -22,7 +32,7 @@ const Settings = ({navigation, ...props}) => {
           isImage={true}
           image={R.image.Calculator()}
           onPress={() => {
-            navigation.navigate('AccountSetting');
+            navigation.navigate('AccountingDetail');
           }}
         />
         <ActionButton
@@ -34,6 +44,14 @@ const Settings = ({navigation, ...props}) => {
           onPress={() => {
             navigation.navigate('SubBidderList');
           }}
+        />
+        <ActionButton
+          title={'Logout'}
+          bgColor={'#262626'}
+          marginTop={0.04}
+          isImage={true}
+          image={R.image.Logout()}
+          onPress={() => _handleLogout()}
         />
       </View>
     </ScreenBoiler>

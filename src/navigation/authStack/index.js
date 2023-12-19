@@ -3,15 +3,16 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationRef} from '@navRef';
 
-//screens
+//?screens
 import SplashScreen from '@containers/authContainer/SplashScreen';
-import LoginScreen from '@containers/authContainer/loginScreen';
+import LoginScreen from '@containers/authContainer/LoginScreen';
 import SignUpScreen from '@containers/authContainer/SignUpScreen';
 import Notification from '@containers/appContainer/Notification/index';
 import AccountSetting from '@containers/appContainer/AccountSetting/index';
 
-// bottom tab
+//?bottom tab
 import {BottomNavigator} from '@navigation/appStack';
+import {BottomDispatcherNavigator} from '@navigation/dispatcherStack';
 
 const AuthStack = () => {
   const Stack = createNativeStackNavigator();
@@ -28,6 +29,10 @@ const AuthStack = () => {
         <Stack.Screen name="AccountSetting" component={AccountSetting} />
         {/* bottom tab */}
         <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
+        <Stack.Screen
+          name="BottomDispatcherNavigator"
+          component={BottomDispatcherNavigator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

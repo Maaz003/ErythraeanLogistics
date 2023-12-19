@@ -4,7 +4,7 @@ import {serviceApi} from '../services';
 const initialState = {
   user: undefined,
   userToken: undefined,
-  paymentMethod: undefined,
+  isLogin: false,
 };
 
 const userSlice = createSlice({
@@ -12,17 +12,14 @@ const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     userLogin: (state, {payload}) => {
-      state.user = payload.user;
-      state.userToken = payload.token;
+      state.user = payload?.data?.user;
+      state.userToken = payload?.data?.access_token;
+      state.isLogin = true;
     },
-    updateUser: (state, {payload}) => {
-      state.user = payload;
-    },
-    userDefaultPaymentMethod: (state, {payload}) => {
-      state.paymentMethod = payload;
-    },
-    updateUserToken: (state, {payload}) => {
-      state.userToken = payload;
+    userLogout: state => {
+      state.user = undefined;
+      state.userToken = undefined;
+      state.isLogin = false;
     },
   },
   extraReducers: builder => {
@@ -30,24 +27,18 @@ const userSlice = createSlice({
       serviceApi.endpoints.loginUser.matchFulfilled,
       (state, {payload}) => {
         state.user = payload?.data?.user;
-        state.userToken = payload?.data?.credentials?.token;
+        state.userToken = payload?.data?.access_token;
       },
     );
     builder.addMatcher(
-      serviceApi.endpoints.logout.matchFulfilled,
+      serviceApi.endpoints.getUser.matchFulfilled,
       (state, {payload}) => {
-        state.user = undefined;
-        state.userToken = undefined;
+        state.user = payload?.data;
       },
     );
   },
 });
 
-export const {
-  userLogin,
-  updateUser,
-  updateUserToken,
-  userDefaultPaymentMethod,
-} = userSlice.actions;
+export const {userLogin, userLogout} = userSlice.actions;
 
 export default userSlice.reducer;

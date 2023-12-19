@@ -1,8 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-const baseURL = 'https://jsonplaceholder.typicode.com/';
-
-const maxContentLength = 10;
+const baseURL = 'https://erythraean.thebackendprojects.com/';
 
 export const serviceApi = createApi({
   reducerPath: 'serviceApi',
@@ -11,131 +9,198 @@ export const serviceApi = createApi({
     prepareHeaders: async (headers, {getState}) => {
       const state = getState();
       if (state?.user?.userToken) {
-        headers.set('token', `${state?.user?.userToken}`);
+        headers.append('Authorization', 'Bearer ' + state.user.userToken);
       }
       return headers;
     },
   }),
-  tagTypes: ['User', 'MCoach', 'MCoaches', 'Chats', 'Notifications', 'Posts'],
+  tagTypes: ['User', 'SubBidder', 'Order', 'Notification'],
 
   endpoints: builder => ({
     //----------------------------------------------A U T H-------------------------------------//
     loginUser: builder.mutation({
-      query: data => ({
-        url: 'login',
+      query: formData => ({
+        url: 'api/auth/login',
         method: 'POST',
-        body: data,
+        body: formData, // Accepts FormData
       }),
+      invalidatesTags: ['User'],
     }),
     signupUser: builder.mutation({
-      query: data => ({
-        url: 'signup',
+      query: formData => ({
+        url: 'api/auth/signup',
         method: 'POST',
-        body: data,
+        body: formData, // Accepts FormData
       }),
     }),
-    forgetPassword: builder.mutation({
-      query: data => ({
-        url: 'auth/forgotPassword',
-        method: 'POST',
-        body: data,
-      }),
-    }),
-    matchOtp: builder.mutation({
-      query: data => ({
-        url: 'auth/match-otp',
-        method: 'PATCH',
-        body: data,
-      }),
-    }),
-    resendOtp: builder.mutation({
-      query: data => ({
-        url: 'auth/resend-otp',
-        method: 'PATCH',
-        body: data,
-      }),
-    }),
-    resetNewPassword: builder.mutation({
-      query: data => ({
-        url: 'auth/confirm-password',
-        method: 'PATCH',
-        body: data,
-      }),
-    }),
-    logout: builder.mutation({
+    getUser: builder.query({
       query: () => ({
-        url: 'logout',
-        method: 'POST',
+        url: 'api/userinfo',
+        method: 'Get',
       }),
+      providesTags: ['User'],
     }),
-
-    //-------------USER END POINTS-----------------//
-
     updateUser: builder.mutation({
-      query: data => ({
-        url: 'users/updateMe',
-        method: 'PATCH',
-        body: data,
+      query: formData => ({
+        url: 'api/user_edit',
+        method: 'POST',
+        body: formData, // Accepts FormData
       }),
       invalidatesTags: ['User'],
     }),
-
-    getUpdatedUser: builder.query({
-      query: () => 'users/me',
-      invalidatesTags: ['User'],
-    }),
-
-    updateUserPassword: builder.mutation({
-      query: ({url, data}) => ({
-        url: url,
-        method: 'PATCH',
-        body: data,
+    //----------------------------------------------A U T H-------------------------------------//
+    //----------------------------------------------Destination Port-------------------------------------//
+    getDestinationPort: builder.query({
+      query: () => ({
+        url: 'api/destination',
+        method: 'Get',
       }),
     }),
-
-    refreshUserToken: builder.mutation({
-      query: () => ({}),
-      invalidatesTags: ['User', 'Employees'],
-    }),
-
-    //---------------------- CHAT END POINTS ------------------------//
-    getChatsList: builder.query({
-      query: ({status, page, search}) =>
-        `chats/?status=${status}&page=${page}&limit=8&search=${search}`,
-      providesTags: ['Chats'],
-    }),
-
-    getChatsOfRoom: builder.query({
-      query: ({room, page, search}) =>
-        `chats/?room=${room}&page=${page}&limit=8&search=${search}`,
-      providesTags: ['Chats'],
-    }),
-
-    chatSeen: builder.mutation({
-      query: data => ({
-        url: `chat/seen/${data}`,
-        method: 'PATCH',
+    //----------------------------------------------Destination Port-------------------------------------//
+    //----------------------------------------------Statistics-------------------------------------//
+    getOrderStatistics: builder.query({
+      query: () => ({
+        url: 'api/order_statistics',
+        method: 'Get',
       }),
-      invalidatesTags: ['Chats'],
     }),
-
-    createSingleChat: builder.mutation({
-      query: data => ({
-        url: 'createGroupChat',
+    //----------------------------------------------Statistics-------------------------------------//
+    //----------------------------------------------Order-------------------------------------//
+    getOrder: builder.query({
+      query: () => ({
+        url: 'api/orders',
+        method: 'Get',
+      }),
+      providesTags: ['Order'],
+    }),
+    createOrder: builder.mutation({
+      query: formData => ({
+        url: 'api/create_order',
         method: 'POST',
-        body: data,
+        body: formData, // Accepts FormData
       }),
-      invalidatesTags: ['Chats'],
+      invalidatesTags: ['Order'],
+    }),
+    //----------------------------------------------Order-------------------------------------//
+    //----------------------------------------------Container List-------------------------------------//
+    getContainer: builder.query({
+      query: () => ({
+        url: 'api/container',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Container List-------------------------------------//
+    //----------------------------------------------Notification-------------------------------------//
+    getNotification: builder.query({
+      query: () => ({
+        url: 'api/order_notification',
+        method: 'Get',
+      }),
+      providesTags: ['Notification'],
+    }),
+    priceAgreement: builder.mutation({
+      query: formData => ({
+        url: 'api/price_agreement',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: ['Notification'],
+    }),
+    //----------------------------------------------Notification-------------------------------------//
+    //----------------------------------------------Sub Bidder-------------------------------------//
+    getSubBidder: builder.query({
+      query: () => ({
+        url: 'api/sub_bidders',
+        method: 'Get',
+      }),
+      providesTags: ['SubBidder'],
+    }),
+    createSubBidder: builder.mutation({
+      query: formData => ({
+        url: 'api/create_sub_bidder',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: ['SubBidder'],
+    }),
+    //----------------------------------------------Sub Bidder-------------------------------------//
+    //----------------------------------------------Balance US-------------------------------------//
+    getBalanceUS: builder.query({
+      query: () => ({
+        url: 'api/balance_us',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Balance US-------------------------------------//
+    //----------------------------------------------Towing Rates-------------------------------------//
+    getTowingRates: builder.query({
+      query: id => ({
+        url: 'api/towing_rates?auction_company_id=' + id,
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Towing Rates-------------------------------------//
+    //----------------------------------------------Auction-------------------------------------//
+    getAuctionCity: builder.query({
+      query: id => ({
+        url: 'api/get_auction_city?id=' + id,
+        method: 'Get',
+      }),
     }),
 
-    createGroupChat: builder.mutation({
-      query: data => ({
-        url: 'createGroupChat',
-        method: 'POST',
-        body: data,
+    //----------------------------------------------Auction-------------------------------------//
+    //----------------------------------------------POL-------------------------------------//
+    getExportPorts: builder.query({
+      query: () => ({
+        url: 'api/export_ports',
+        method: 'Get',
       }),
-      invalidatesTags: ['Chats'],
     }),
+    //----------------------------------------------POL-------------------------------------//
+    //----------------------------------------------CHECK VIN-------------------------------------//
+    checkVin: builder.query({
+      query: vin => ({
+        url: 'api/check_vin?vin=' + vin,
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------CHECK VIN-------------------------------------//
+    //----------------------------------------------ANNOUNCEMENTS-------------------------------------//
+    getAnnouncement: builder.query({
+      query: () => ({
+        url: 'api/announcement',
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------ANNOUNCEMENTS-------------------------------------//
+    //----------------------------------------------Freight Rates-------------------------------------//
+    getFreightRates: builder.query({
+      query: ({destination_port, getDate}) => ({
+        url:
+          'api/shipping_rates?id=' +
+          destination_port +
+          '&filter_date=' +
+          getDate,
+        method: 'Get',
+      }),
+    }),
+    //----------------------------------------------Freight Rates-------------------------------------//
+    //----------------------------------------------DOCUMENT CHECKER-------------------------------------//
+    uploadCopart: builder.mutation({
+      query: formData => ({
+        url: 'api/upload_file_copart',
+        method: 'POST',
+        body: formData,
+      }),
+    }),
+    uploadIAAI: builder.mutation({
+      query: formData => ({
+        url: 'api/upload_file_iaai',
+        method: 'POST',
+        body: formData,
+      }),
+    }),
+    //----------------------------------------------DOCUMENT CHECKER-------------------------------------//
   }),
 });
 
@@ -143,15 +208,24 @@ export const {
   //AUTH ENDPOINTS
   useLoginUserMutation,
   useSignupUserMutation,
-  useForgetPasswordMutation,
-  useMatchOtpMutation,
-  useResendOtpMutation,
-  useResetNewPasswordMutation,
-  useLogoutMutation,
-
-  // ! CHATS
-  useGetChatsListQuery,
-  useChatSeenMutation,
-
-  useAddCheckInMutation,
+  useGetUserQuery,
+  useGetDestinationPortQuery,
+  useGetOrderStatisticsQuery,
+  useGetOrderQuery,
+  useGetContainerQuery,
+  useGetNotificationQuery,
+  usePriceAgreementMutation,
+  useGetSubBidderQuery,
+  useCreateSubBidderMutation,
+  useGetBalanceUSQuery,
+  useGetTowingRatesQuery,
+  useGetAuctionCityQuery,
+  useGetExportPortsQuery,
+  useCreateOrderMutation,
+  useCheckVinQuery,
+  useGetAnnouncementQuery,
+  useUpdateUserMutation,
+  useGetFreightRatesQuery,
+  useUploadCopartMutation,
+  useUploadIAAIMutation,
 } = serviceApi;

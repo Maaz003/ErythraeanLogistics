@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,55 +11,88 @@ import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import ScreenBoiler from '@components/layout/ScreenBoiler';
 import SubBidderCard from '@components/view/cards/SubBidderCard';
+import TextInput from '@components/common/TextInput';
+import Loader from '@components/common/Loader';
+import ListEmptyContainer from '@components/common/ListEmptyContainer';
+
+//! RTK QUERY API
+import {useGetSubBidderQuery} from '../../../store/services/index';
 
 const SubBidderList = ({navigation, ...props}) => {
+  const [isSearch, setIsSearch] = useState(false);
+
+  const {data, isLoading} = useGetSubBidderQuery();
+
   return (
-    <ScreenBoiler
-      onPressNotification={() => {
-        navigation.navigate('Notification');
-      }}
-      onPressProfile={() => {
-        navigation.navigate('AccountSetting');
-      }}>
-      <View style={styles.flexCont}>
-        <Text
-          color={'black'}
-          fontSize={R.unit.width(0.06)}
-          font={'RajdhaniBold'}>
-          Sub Bidder List
-        </Text>
-        <View style={styles.flexDirCont}>
-          <TouchableOpacity activeOpacity={0.7} style={styles.circleCont}>
-            <View style={styles.imgSearchStyleCont}>
-              <Image source={R.image.Search()} style={R.styles.img} />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('CreateUser');
-            }}
-            activeOpacity={0.7}
-            style={styles.orderCont}>
-            <View style={styles.imgPlusStyleCont}>
-              <Image source={R.image.Plus()} style={R.styles.img} />
-            </View>
-            <Text
-              color={'white'}
-              fontSize={R.unit.width(0.04)}
-              font={'RajdhaniSemiBold'}>
-              Add Sub Bidder
-            </Text>
-          </TouchableOpacity>
+    <>
+      <ScreenBoiler isBack={true}>
+        <View style={styles.flexCont}>
+          <Text
+            color={'black'}
+            fontSize={R.unit.width(0.06)}
+            font={'RajdhaniBold'}>
+            Sub Bidder List
+          </Text>
+          <View style={styles.flexDirCont}>
+            <TouchableOpacity
+              onPress={() => setIsSearch(!isSearch)}
+              activeOpacity={0.7}
+              style={styles.circleCont}>
+              {!isSearch ? (
+                <View style={styles.imgSearchStyleCont}>
+                  <Image source={R.image.Search()} style={R.styles.img} />
+                </View>
+              ) : (
+                <Text
+                  color={'black'}
+                  alignSelf={'center'}
+                  fontSize={R.unit.width(0.07)}
+                  font={'RajdhaniBold'}>
+                  x
+                </Text>
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('CreateUser');
+              }}
+              activeOpacity={0.7}
+              style={styles.orderCont}>
+              <View style={styles.imgPlusStyleCont}>
+                <Image source={R.image.Plus()} style={R.styles.img} />
+              </View>
+              <Text
+                color={'white'}
+                fontSize={R.unit.width(0.04)}
+                font={'RajdhaniSemiBold'}>
+                Add Sub Bidder
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <FlatList
-        data={[1, 2, 3, 4, 5, 6]}
-        renderItem={({index, item}) => {
-          return <SubBidderCard />;
-        }}
-        contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
-      />
-    </ScreenBoiler>
+        {isSearch && (
+          <View style={styles.flexCont}>
+            <TextInput
+              placeholderText={'Search Sub Bidder...'}
+              width={0.85}
+              marginTop={0}
+            />
+            <TouchableOpacity style={styles.imgSearchStyleCont}>
+              <Image source={R.image.Search()} style={R.styles.img} />
+            </TouchableOpacity>
+          </View>
+        )}
+        <FlatList
+          data={isLoading ? [] : data?.data}
+          renderItem={({index, item}) => {
+            return <SubBidderCard item={item} />;
+          }}
+          contentContainerStyle={{paddingBottom: R.unit.height(0.15)}}
+          ListEmptyComponent={<ListEmptyContainer />}
+        />
+      </ScreenBoiler>
+      {isLoading && <Loader />}
+    </>
   );
 };
 

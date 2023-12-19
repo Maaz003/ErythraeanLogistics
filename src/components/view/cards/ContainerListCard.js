@@ -3,12 +3,17 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import R from '@components/utils/R';
 import Text from '@components/common/Text';
 import TitleImageContainerCard from './TitleImageContainerCard';
+import navigationRef from '@navRef';
 
-const ContainerListCard = ({item, onPress, ...props}) => {
+const ContainerListCard = ({item, onPress, onPressActionSheet, ...props}) => {
   return (
     <>
       <TouchableOpacity
-        onPress={onPress}
+        onPress={() => {
+          navigationRef.navigate('ContainerDetail', {
+            item: item,
+          });
+        }}
         activeOpacity={0.8}
         style={[styles.mainCont]}>
         <View style={styles.flexCont}>
@@ -17,10 +22,12 @@ const ContainerListCard = ({item, onPress, ...props}) => {
               color={'white'}
               fontSize={R.unit.width(0.035)}
               font={'RajdhaniSemiBold'}>
-              000066
+              {item.id}
             </Text>
           </View>
-          <TouchableOpacity style={styles.circleCont}>
+          <TouchableOpacity
+            style={styles.circleCont}
+            onPress={onPressActionSheet}>
             <View style={styles.circle} />
             <View style={styles.circle} />
             <View style={styles.circle} />
@@ -28,25 +35,25 @@ const ContainerListCard = ({item, onPress, ...props}) => {
         </View>
 
         <TitleImageContainerCard
-          data={'25496865'}
+          data={item?.booking_number}
           image={R.image.List()}
           title={'Booking Number'}
         />
 
         <TitleImageContainerCard
-          data={'Salalah Oman'}
+          data={item?.destination_port}
           image={R.image.Warehouse()}
           title={'Port'}
         />
 
         <TitleImageContainerCard
-          data={'45 feet / 5 auto'}
+          data={item?.container_size}
           image={R.image.Tally()}
           title={'Size'}
         />
 
         <TitleImageContainerCard
-          data={'8RKNBASD545355486'}
+          data={item?.date_of_loading}
           image={R.image.CalendarStar()}
           title={'Date of Loading'}
         />
@@ -54,7 +61,7 @@ const ContainerListCard = ({item, onPress, ...props}) => {
     </>
   );
 };
-export default ContainerListCard;
+export default React.memo(ContainerListCard);
 
 const styles = StyleSheet.create({
   mainCont: {
@@ -97,7 +104,9 @@ const styles = StyleSheet.create({
     paddingVertical: R.unit.width(0.015),
   },
   circleCont: {
-    width: R.unit.width(0.07),
+    width: R.unit.width(0.15),
+    paddingHorizontal: R.unit.width(0.04),
+    height: R.unit.height(0.05),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

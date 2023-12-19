@@ -22,7 +22,7 @@ const TowCard = ({item, onPress, ...props}) => {
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            ABILENE
+            {item?.city}
           </Text>
         </View>
         {/* City */}
@@ -33,106 +33,21 @@ const TowCard = ({item, onPress, ...props}) => {
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            TX
+            {item?.openport?.state}
           </Text>
           <Text
             color={'black'}
             fontSize={R.unit.width(0.045)}
             font={'RajdhaniMedium'}>
-            520.00
+            {item?.dispatch_cost}
           </Text>
         </View>
         {/* TX */}
-
-        {/* NY */}
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            NY
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            None
-          </Text>
-        </View>
-        {/* NY */}
-
-        {/* GA */}
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            GA
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            None
-          </Text>
-        </View>
-        {/* GA */}
-
-        {/* CA */}
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            CA
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            None
-          </Text>
-        </View>
-        {/* CA */}
-
-        {/* WA */}
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            WA
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            None
-          </Text>
-        </View>
-        {/* WA */}
-
-        {/* Chicago - IL */}
-        <View style={styles.flexCont}>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            Chicago - IL
-          </Text>
-          <Text
-            color={'black'}
-            fontSize={R.unit.width(0.045)}
-            font={'RajdhaniMedium'}>
-            None
-          </Text>
-        </View>
-        {/* Chicago - IL */}
       </TouchableOpacity>
     </>
   );
 };
-export default TowCard;
+export default React.memo(TowCard);
 
 const styles = StyleSheet.create({
   mainCont: {

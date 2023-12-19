@@ -1,7 +1,6 @@
 import R from '@components/utils/R';
 import {Toast} from 'native-base';
 import {StyleSheet, View} from 'react-native';
-import Icon from './Icon';
 import Text from './Text';
 
 const PopUp = props => {
@@ -51,21 +50,15 @@ const PopUp = props => {
               backgroundColor: popUpTypes[type].bgColor,
               ...styles.textView,
             }}>
-            <View
+            {/* <View
               style={{
                 backgroundColor: popUpTypes[type].textColor,
                 ...styles.iconView,
-              }}>
-              <Icon
-                type={'Ionicons'}
-                name={popUpTypes[type].icon}
-                color={R.color.white}
-                size={15}
-              />
-            </View>
+              }}
+            /> */}
             <Text
-              variant={'body4'}
-              font={'PoppinsRegular'}
+              fontSize={R.unit.width(0.04)}
+              font={'RajdhaniRegular'}
               color={popUpTypes[type].textColor}
               align={'left'}
               numberOfLines={5}

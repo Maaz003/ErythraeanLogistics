@@ -4,12 +4,25 @@ import {StyleSheet, Image, View, ImageBackground} from 'react-native';
 import R from '@components/utils/R';
 import AuthBoiler from '@components/layout/AuthBoiler/index.';
 import AuthFormScrollContainer from '@components/layout/AuthFormScrollContainer';
+import {useSelector} from 'react-redux';
 
 function SplashScreen({navigation, ...props}) {
+  const isLogin = useSelector(state => state.user.isLogin);
+
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('LoginScreen');
-    }, 5000);
+      if (isLogin) {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'BottomNavigator'}],
+        });
+      } else {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'LoginScreen'}],
+        });
+      }
+    }, 2000);
   }, []);
 
   return (
